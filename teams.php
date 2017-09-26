@@ -27,7 +27,7 @@ $tasks_query_ammount = mysqli_num_rows($task_query_retrieve);
                 if(isset($_SESSION['id']) && (($_SESSION['id'] == 25) || $_SESSION['id'] == 6 || $_SESSION['id'] == 26))
                 {
                 ?>
-                <form action="footballmixto/operatory.php" method="POST">
+                <form action="operatory.php" method="POST">
                 <input hidden name="id" value="<?=$task_query_row['id'];?>"></input>
                 <button style="background-color:<?=$color?>;border-color:<?=$color;?>" name="team" value="1" >1</button>
                 <button style="background-color:<?=$color?>;border-color:<?=$color;?>" name="team" value="2" >2</button>
