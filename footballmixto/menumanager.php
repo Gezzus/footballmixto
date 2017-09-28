@@ -40,7 +40,13 @@ if(isset($_SESSION['id']))
 {
  	?>
 		<a class="btn" style="border-width:1px;border-color:black;border-radius:5px" href="logout.php">Logout</a>
- 	<?php
+ 		<?php
+ 		if(isAdmin($_SESSION['id'],$link))
+ 		{
+ 			?>
+ 				<a class="btn" style="border-width:1px;border-color:black;border-radius:5px" href="delete.php?id=all">Delete All</a>
+ 			<?php
+ 		}
 }
 
 
