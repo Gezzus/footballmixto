@@ -24,7 +24,7 @@ $tasks_query_ammount = mysqli_num_rows($task_query_retrieve);
                      <b>Schedule: </b><?php echo $task_query_row["schedule"]?>
                 </p>
                 <?php
-                if(isset($_SESSION['id']) && (($_SESSION['id'] == 25) || $_SESSION['id'] == 6 || $_SESSION['id'] == 26))
+                if(isset($_SESSION['id']) && isAdmin($_SESSION['id'],$activeLink))
                 {
                 ?>
                 <form action="operatory.php" method="POST">
