@@ -16,7 +16,7 @@ include("header.html");
     <input style="width: 45%;"type="password" class="form-control" name="password" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
-  <a type="submit" class="btn btn-primary" href="loginAttempt.php">Back</a>
+  <a type="submit" class="btn btn-primary" href="index.php">Back</a>
 </form>
 
 
