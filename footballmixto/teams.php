@@ -12,12 +12,28 @@ $tasks_query_ammount = mysqli_num_rows($task_query_retrieve);
 
 
  for ($i=0; $i < $tasks_query_ammount; $i++) { 
-    ?>
+
+                if($team == "0")
+                {
+                    if($task_query_row["sex"] == "Male")
+                    {
+                        $color = "lightblue";
+                    }
+                    if($task_query_row["sex"] == "Female")
+                    {
+                        $color = "pink";
+                    }
+                    if($task_query_row["sex"] == "Im offended by this")
+                    {
+                        $color = "lightgreen";
+                    }
+                } ?>  
                 <div class="container" style="width:<?=$size;?>;background-color:<?=$color;?>;border-radius:5px;margin:2px;margin-left:<?=$marginleft?>!important">
                 <font size="2">
                 <h6 class="" style="background-color:<?=$color;?>;border-color:<?=$color;?>;margin-top:5px!important;margin-bottom:0px!important;"><b><?php echo $task_query_row["name"]?></b></h6>
                 
-                <br> 
+                <br>
+                
                 <p class="" style="background-color:<?=$color;?>;border-color:<?=$color;?>">
                      <b>Skill: </b><?php echo $task_query_row["skill"]?>    <br>
                      <b>Sex: </b><?php echo $task_query_row["sex"]?>        <br>
