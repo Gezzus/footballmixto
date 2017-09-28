@@ -13,8 +13,20 @@ function active_session()
 	}
 }
 
-?>
-<?php
+function isAdmin($thisId,$activelink)
+{
+	$task_retrieve = "SELECT * FROM Credentials WHERE id=$thisId";
+	$task_query_retrieve = mysqli_query($activelink,$task_retrieve);
+	$task_query_row = mysqli_fetch_assoc($task_query_retrieve);
+	if($task_query_row["admin"] == 1){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
+
+
 if(!isset($_SESSION['id']))
 {
  	?>
@@ -30,6 +42,7 @@ if(isset($_SESSION['id']))
 		<a class="btn" style="border-width:1px;border-color:black;border-radius:5px" href="logout.php">Logout</a>
  	<?php
 }
+
 
 
 
