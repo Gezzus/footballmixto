@@ -1,6 +1,6 @@
 
 <?php
-//	include("connect.php");
+  include("connect.php");
   include("header.html");
   include("handler.js");
 	session_start();

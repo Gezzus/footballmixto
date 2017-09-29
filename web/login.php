@@ -1,8 +1,15 @@
 <html>
 <?php
-//include("connect.php");
+include("connect.php");
 include("header.html");
 include("handler.js");
+
+  session_start();
+
+  if(isset($_SESSION["id"]))
+  {
+    header("location:index.php");
+  }
 ?>
 
 <body style="background-color:#95A3B3">
