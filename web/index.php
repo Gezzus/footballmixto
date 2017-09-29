@@ -2,141 +2,53 @@
 include("connect.php");
 session_start();
 include("header.html");
-include("teams.php");
+include("menumanager.php");
 ?>
 
 <html>
-<body>
+<body style="background-color:#95A3B3">
 
-	<div class="container-fluid" style="border-radius:5px;margin:2px">		
-			  <div class="row" style="width:100%;padding-top:1%p;adding-left:1%">
-			  	<div class="column">
-			  	<h6 class="alert p-0 m-0 alert-primary" style="background-color:white!important;border-color:white!important;margin-top:5px!important;margin-bottom:0px!important"><b>Work in progress (Menu)</b></h6>
-               <?php include("menumanager.php"); ?>
+<div class="row">
+	<div class=col-2 style="background-color: #4A8FE7;height: 100%">
+		<div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;background-color:white;width:100%;padding:2%;padding-top:0;margin:2%;">
+		    <h5 style="width: 95%;padding-top:15px">Avafutbol | Menu</h5>
+		<button style="width: 5%;height:2%;float:right;background-color:white;border:none;padding-top:2%;margin-top:2%";><</button>
+		</div>
+		<hr style="padding:0px;margin:0px">
+		<div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:white;width:100%;padding:2%;margin:2%;">
+		<ul style="list-style-type:none">
+			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="index.php"> News</a></li>
+			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="login.php"> Login</a></li>
+			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="register.php"> Register</a></li>
+			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="teams.php"> Teams</a></li>
+			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="events.php"> Events</a></li>
+			
+		</ul>
 
-			  </div>
-			  </div>
-			  <hr>
-			  <div class="row" style="width:100%;padding-top:1%;padding-left:1%;">
-				  <div class="col">
-				  <h5>Teamless: </h5>
-				  <hr style="margin:0px">
-					  <div class="row">
-					  	<?php retrieveTeam('0',"20%",$link,"#FFA69E"); ?>
-					  </div>
-				  </div>
+		</div>
+	</div>
 
-
-
-				  <div class="col-md-3" >
-
-				  
-				 	<div class="row" style="border:1px solid;border-radius:5px;border-color:black;padding:5px;">
-				  <font size="2">
-						<h5 class="alert-heading">Join us!</h5>
-						<label class="mb-0">Use the following form to subscribe to our football matches.</label>
-						<hr style="padding:2px">
-							<?php 
-						  if(active_session() == 1)
-						  {
-						  ?>
-						<form action="add.php" method="POST" class="form-group" >
-						<div class="row alert alert-primary>">
-							<label class="alert-heading" style="width:100%" ><b>Your name: </b></label>
-							<input type="input" name="name" class="alert alert-secondary" style="width:75%; padding:0.2rem;"></input>
-							<label class="alert-heading" style="width:100%" ><b>Skill level:</b></label>
-							<select name="skill" class="form-control form-control-sm" style="width:60%">
-								<option>I know how to play.</option>
-								<option>Im ok.</option>
-								<option>I know what a ball is.</option>
-								<option>I suck.</option>
-							</select>
-							<label class="alert-heading" style="width:100%" ><b>Sex:</b></label>
-							<select name="sex" class="form-control form-control-sm" style="width:60%">
-								<option>Male</option>
-								<option>Female</option>
-								<option>Im offended by this</option>
-							</select>
-							<h12 class="alert-heading"  style="width:100%" ><b>Availability:</b></h12>
-							<select name="schedule" class="form-control form-control-sm" style="width:60%">
-								<option>I dont care</option>
-								<option>19:00</option>
-								<option>19:30</option>
-								<option>20:00</option>
-							</select><hr>
-							<button type="input" class="btn btn-secondary" style="float:left;background-color:white;color:black!important"><small>Add</small></button>
-						</div>
-						</form>
-						<?php
-
-						}
-						else
-						{
-							?>
-							<h5 class="alert alert-secondary"> Log-In to see the subscription form</h5>
-							<?php
-						}
-						?>
-					</font>
-					</div>
-					<div class="row" style="border:1px solid;border-radius:5px;border-color:black;padding:5px;">
-					<div class="container ">
-					<h5>We are currently:</h5><br>
-					
-					<p>
-					<b>Women:</b><?php retrieve('Female',$link) ?><br>
-					<b>Men:</b><?php retrieve('Male',$link) ?><br>
-					</p>
-					</div>
-					</div>
-				  </div>  <!-- Col 4 Div -->
-
-
-				  </div> <!-- Row Div -->
-				  <hr>
-				  <h5>Teams: </h5>
-				  
-				  <hr style="margin:0px">
-				   <div class="row" style="width:100%;padding-top:1%;padding-left:1%;">
-				  <div class="col-md-5"  style="border:1px solid;border-radius:5px;border-color:black;margin:5px;">
-				  <h5 class="alert-heading">Team 1: </h5>
-				  <hr style="margin:0px">
-					  <div class="row" >
-					  	<?php retrieveTeam('1',"30%",$link,"#ebf5ee","2"); ?>
-
-					  </div>
-					  <br>
-				  </div>
-				  <div class="col-md-5"  style="border:1px solid;border-radius:5px;border-color:black;margin:5px;">
-				  <h5 class="alert-heading">Team 2: </h5>
-				<hr style="margin:0px">
-
-					  <div class="row" >
-					  	<?php retrieveTeam('2',"30%",$link,"#ffe8c2","2"); ?>
-					  </div>
-					  <br>
-				  </div>
-				  <div class="col-md-5"  style="border:1px solid;border-radius:5px;border-color:black;margin:5px;">
-				  <h5 class="alert-heading">Team 3: </h5>
-				  <hr style="margin:0px">
-					  <div class="row" >
-					  	<?php retrieveTeam('3',"30%",$link,"#9CAFB7","2"); ?>
-					  </div>
-					  <br>
-				  </div>
-				  <div class="col-md-5"  style="border:1px solid;border-radius:5px;border-color:black;margin:5px;">
-				  <h5 class="alert-heading">Team 4: </h5>
-				  <hr style="margin:0px">
-					  <div class="row" >
-					  	<?php retrieveTeam('4',"30%",$link,"#ea7d75","2"); ?>
-					  </div>
-					  <br>
-				  </div>
-				  </div>
-				  
-		</div> <!-- Container Div -->
-
-
+		<div class=col>
+		 	<div class="row" style="width:100%;padding-top:1%;padding-left:1%;">
+                  <div class="col" style="height:90%;border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:white">
+                  <h5>News: </h5>
+                  <hr style="margin:0px">
+                      <div class="row">
+                        
+                      </div>
+             	  </div>	
+            
+                  <div class="col-2" style="height:90%;border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:white">
+                  <h5> Content: </h5>
+                  <hr style="margin:0px">
+                      <div class="row">
+                        ASDASD
+                      </div>
+             	  </div>	
+            </div>
+    
+		</div> <!-- Col Div -->
+</div><!-- Row Div -->
 
 </body>
 </html>
