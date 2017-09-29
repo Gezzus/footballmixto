@@ -35,7 +35,7 @@ include("handler.js");
 
 </div> <!-- Container -->
 <?php
- include("graph.html")
+ include("svg/graph.html")
 ?>
 </body>
 
