@@ -16,13 +16,16 @@ include("menumanager.php");
 		</div>
 		<hr style="padding:0px;margin:0px">
 		<div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:white;width:100%;padding:2%;margin:2%;">
-		<ul style="list-style-type:none">
+		<ul style="width:100%;list-style-type:none">
 			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="index.php"> News</a></li>
+			<hr style="padding:0px;margin:0px">
 			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="login.php"> Login</a></li>
+			<hr style="padding:0px;margin:0px">
 			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="register.php"> Register</a></li>
-			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="teams.php"> Teams</a></li>
+			<hr style="padding:0px;margin:0px">
+			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="about.php"> About</a></li>
+			<hr style="padding:0px;margin:0px">
 			<li>><a style="border-width:1px;border-color:black;border-radius:5px;color:black" href="events.php"> Events</a></li>
-			
 		</ul>
 
 		</div>
