@@ -4,23 +4,6 @@ use futbolmixto;
 
 SET FOREIGN_KEY_CHECKS=0;
 
-CREATE TABLE gender (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    defaultColor VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE KEY (name)
-);
-
-CREATE TABLE genderByGameType (
-    genderId INT NOT NULL,
-    gameTypeId INT NOT NULL,
-    amount INT NOT NULL,
-    UNIQUE KEY (genderId, gameTypeId),
-    FOREIGN KEY (genderId) REFERENCES gender(id),
-    FOREIGN KEY (gameTypeId) REFERENCES gameType(id)
-);
-
 CREATE TABLE game (
     id INT NOT NULL AUTO_INCREMENT,
     `date` DATETIME NOT NULL,
@@ -33,6 +16,23 @@ CREATE TABLE gameType (
     type VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (type)
+);
+
+CREATE TABLE gender (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    defaultColor VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY (name)
+);
+
+CREATE TABLE genderByGameType (
+    gameTypeId INT NOT NULL,
+    genderId INT NOT NULL,
+    amount INT NOT NULL,
+    UNIQUE KEY (gameTypeId, genderId),
+    FOREIGN KEY (gameTypeId) REFERENCES gameType(id),
+    FOREIGN KEY (genderId) REFERENCES gender(id)
 );
 
 CREATE TABLE player (
@@ -72,9 +72,11 @@ CREATE TABLE user (
     userName VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     roleId INT NOT NULL,
+    playerId INT NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (userName),
-    FOREIGN KEY (roleId) REFERENCES role(id)
+    FOREIGN KEY (roleId) REFERENCES role(id),
+    FOREIGN KEY (playerId) REFERENCES player(id)
 );
 
 SET FOREIGN_KEY_CHECKS=1;
