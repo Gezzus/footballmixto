@@ -1,8 +1,8 @@
 <html>
+<head>
 <?php
 include("connect.php");
 include("header.html");
-include("handler.js");
 
   session_start();
 
@@ -11,6 +11,8 @@ include("handler.js");
     header("location:index.php");
   }
 ?>
+<script src="handler.js"></script>
+</head>
 
 <body style="background-color:#95A3B3">
 
@@ -29,7 +31,6 @@ include("handler.js");
       <small class="form-text text-muted">Username must be unique.</small><br>
       <label>Password:</label>
       <input id="password" style="background:#D8E1FF;border-color:#5D2E8C" type="password" class="form-control" name="password" placeholder="Password">
-      <small class="form-text text-muted">Use a random password.</small>
       
     <hr>
       <button type="submit" style="background-color:white;border-width:1px;border-color: #5D2E8C;border-radius: 3px">Submit</button>  

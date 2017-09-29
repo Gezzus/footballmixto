@@ -1,7 +1,4 @@
-<script>
-  function redirect(thisLocation)
-  {
+function redirect(thisLocation){
     window.location.replace(thisLocation);
   }
 
-</script>
