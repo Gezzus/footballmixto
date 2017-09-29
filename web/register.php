@@ -1,8 +1,8 @@
-
+<html>
+<head>
 <?php
   include("connect.php");
   include("header.html");
-  include("handler.js");
 	session_start();
 
   if(isset($_SESSION["id"]))
@@ -11,8 +11,9 @@
   }
 
 ?>
+<script src="handler.js"></script>
+</head>
 
-<html>
 <body style="background-color:#95A3B3">
 
 <div class="container-fluid" style="margin-top:10%;">
