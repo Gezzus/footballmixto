@@ -40,9 +40,11 @@ CREATE TABLE player (
     firstName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
     nickName VARCHAR(255) DEFAULT NULL,
+    genderId INT DEFAULT NULL,
     levelId INT DEFAULT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (nickName),
+    FOREIGN KEY (genderId) REFERENCES gender(id),
     FOREIGN KEY (levelId) REFERENCES playerLevel(id)
 );
 
@@ -65,6 +67,24 @@ CREATE TABLE skill (
     name VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (name)
+);
+
+CREATE TABLE team (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    defaultColor VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY (name)
+);
+
+CREATE TABLE pickPlayer (
+    gameId INT NOT NULL,
+    playerId INT NOT NULL,
+    teamId INT NOT NULL,
+    UNIQUE KEY (gameId, playerId),
+    FOREIGN KEY (gameId) REFERENCES game(id),
+    FOREIGN KEY (playerId) REFERENCES player(id),
+    FOREIGN KEY (teamId) REFERENCES team(id)
 );
 
 CREATE TABLE user (

@@ -22,3 +22,8 @@ INSERT INTO playerLevel (level) VALUES ('I suck');
 
 INSERT INTO role (name) VALUES ('player');
 INSERT INTO role (name) VALUES ('admin');
+
+INSERT INTO team (name, defaultColor) VALUES ('Team 1', '#E1CC4F');
+INSERT INTO team (name, defaultColor) VALUES ('Team 2', '#BDECB6');
+INSERT INTO team (name, defaultColor) VALUES ('Team 3', '#78858B');
+INSERT INTO team (name, defaultColor) VALUES ('Team 4', '#B44C43');
