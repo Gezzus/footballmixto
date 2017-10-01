@@ -11,6 +11,8 @@ function active_session()
 	{
 	return("1");
 	}
+	else
+		{return("1");}
 }
 
 function isAdmin($thisId,$activelink)
@@ -27,7 +29,7 @@ function isAdmin($thisId,$activelink)
 }
 
 
-if(!isset($_SESSION['id']))
+/*if(!isset($_SESSION['id']))
 {
  	?>
 		<a class="btn" style="border-width:1px;border-color:black;border-radius:5px" href="login.php">Login</a>
@@ -47,8 +49,7 @@ if(isset($_SESSION['id']))
  				<a class="btn" style="border-width:1px;border-color:black;border-radius:5px" href="delete.php?id=all">Delete All</a>
  			<?php
  		}
-}
-
+}*/
 
 
 
