@@ -1,7 +1,7 @@
 <html>
 <head>
 <?php
-include("connect.php");
+include("src/connect.php");
 include("header.html");
 
   session_start();
@@ -11,7 +11,6 @@ include("header.html");
     header("location:index.php");
   }
 ?>
-<script src="handler.js"></script>
 </head>
 
 <body style="background-color:#95A3B3">
@@ -24,17 +23,16 @@ include("header.html");
     <h5 class="form-text text-muted" style="padding-top:15px">Avafutbol | Welcome</h5>
     <h6 class="form-text text-muted" style="padding-top:15px">Login</h5>
     <hr>
-      <form id="login_form" method="POST" action="loginAttempt.php">
+      <form id="login_form" method="POST" action="src/login.php">
      
       <label>Username:</label>
       <input id="username" style="background:#D8E1FF;border-color:#5D2E8C" type="text" class="form-control" name="username" placeholder="Username">
-      <small class="form-text text-muted">Username must be unique.</small><br>
       <label>Password:</label>
       <input id="password" style="background:#D8E1FF;border-color:#5D2E8C" type="password" class="form-control" name="password" placeholder="Password">
       
     <hr>
       <button type="submit" style="background-color:white;border-width:1px;border-color: #5D2E8C;border-radius: 3px">Submit</button>  
-      <button type="button" onclick="redirect('index.php?id=returned')" style="background-color:white;border-width:1px;border-color: #5D2E8C;border-radius: 3px">Back</button>
+      <a type="buton" href="index.php?id=returned"><input type="button" style="background-color:white;border:1px solid;border-color: #5D2E8C;border-radius: 3px;"  value="Back"/></a>
       
       </form>
     </div> <!-- Col -->
