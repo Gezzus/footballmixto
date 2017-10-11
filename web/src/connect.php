@@ -4,7 +4,7 @@ function connect(){
 $host_db = "localhost";
 $usuario_db = "test";
 $pass_db = "test";
-$base_db = "Users";
+$base_db = "futbolmixto";
 if (!($link=mysqli_connect($host_db, $usuario_db, $pass_db)))
 	{
 	echo "Failed to connect.";

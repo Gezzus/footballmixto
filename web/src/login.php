@@ -1,23 +1,26 @@
 <?php
-	include("connect.php");
-	session_start();
 
-$user_name = $_POST["username"];
-$user_password = $_POST["password"];
-#$pass = "SELECT MD5(password) FROM Credentials WHERE MATCH('username') AGAINST($candidateName)";-
-$u = "SELECT * FROM Credentials WHERE username='".$user_name."' AND password=MD5('".$user_password."')";
-$result = mysqli_query($link,$u);
+include("connect.php");
+session_start();
 
-	$row = mysqli_fetch_assoc($result);
-	if(mysqli_num_rows($result) == 0){
+$received_username =  filter_var($_POST["username"],FILTER_SANITIZE_STRING);
+$received_password  = filter_var($_POST["password"],FILTER_SANITIZE_STRING);
+
+
+$user_query_locate = "SELECT * FROM user WHERE userName='".$received_username."' AND password=MD5('".$received_password."')";
+$user_query_locate_result = mysqli_query($link,$user_query_locate);
+
+	$user_query_locate_row = mysqli_fetch_assoc($user_query_locate_result);
+	if(mysqli_num_rows($user_query_locate_result) == 0){
 		header("location:login.php?id=1");
 	}
 	else{
-		$_SESSION['id'] = $row["id"];
-		$_SESSION['username'] = $row["username"];
-		mysqli_query($link,"UPDATE Credentials SET last_login=NOW() WHERE id=".$row["id"]);
-		header("location:index.php");
+		$_SESSION['id'] = $user_query_locate_row["id"];
+		$_SESSION['username'] = $user_query_locate_row["username"];
+		mysqli_query($link,"UPDATE user SET lastLogin=NOW() WHERE id=".$user_query_locate_row["id"]);
+		header("location:../index.php");
 	}
 
 	
 ?>
+
