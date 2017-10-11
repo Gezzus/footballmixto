@@ -12,7 +12,7 @@ $user_query_locate_result = mysqli_query($link,$user_query_locate);
 
 	$user_query_locate_row = mysqli_fetch_assoc($user_query_locate_result);
 	if(mysqli_num_rows($user_query_locate_result) == 0){
-		header("location:login.php?id=1");
+		header("location:../login.php?id=1");
 	}
 	else{
 		$_SESSION['id'] = $user_query_locate_row["id"];

@@ -37,7 +37,6 @@ $user_query_exists_amount = mysqli_num_rows($user_query_exists_result);
 
 if($user_query_exists_amount == 0){
 	$player_query_create = "INSERT INTO player(firstName,lastName,nickName,genderId,levelId) VALUES('".$received_firstname."','".$received_lastname."','".$received_nickname."','".$received_genderId."','".$received_levelId."')";
-	echo $player_query_create."<br>";
 			if(mysqli_query($link,$player_query_create)){
 				$player_query_lastid = mysqli_insert_id($link);
 
@@ -52,14 +51,16 @@ if($user_query_exists_amount == 0){
 						}
 						else{
 						echo "0:".mysqli_error($link);
+						header("location:../register.php");
 						}
 			}
 			else{
 				echo "1:".mysqli_error($link);
+				header("location:../register.php");
 			}
  }
 else{
-echo "2:".mysqli_error($link);
+	header("location:../register.php");
 }
 	
 
