@@ -9,32 +9,31 @@ include("src/game.php");
 
 
 <?php
-	$Events = new events;
-  
-    $testAttendants = [1,2,3,6];
-
-    $Events->games[0] = new game(1,"11/10/17",$testAttendants);
-
+	$Events = new events($link);
 
 	function organizeEvents($receivedEvents)
 	{
 		for ($i=0; $i < count($receivedEvents); $i++) { 
 			echo "<div class='col-5' style='border:1px solid;border-color:#5D2E8C;border-radius:5px;background-color:white;padding:2%;margin:2%;'
-><p>Date:".$receivedEvents[$i]->date."<br>Type:".$receivedEvents[$i]->id."</p><a href='event.php?id=".$receivedEvents[$i]->id."'><input type='button' style='background-color:white;border:1px solid;border-color: #5D2E8C;border-radius: 3px;' value='See Event'/></a>
+><p>Date: ".$receivedEvents[$i]->date."<br>Type: ".$receivedEvents[$i]->properties['type_desc']."</p><a href='event.php?id=".$receivedEvents[$i]->id."'><input type='button' style='background-color:white;border:1px solid;border-color: #5D2E8C;border-radius: 3px;' value='See Event'/></a>
       </div>";
 		}
+		//echo var_dump($receivedEvents);
+
 	}
 
 
-	
-    //echo $Events->retrieve()." ";
 
 ?>
 
 <html>
 <body style="background-color:#E8E8E8">
 <div class="container-fluid">
+
 <div class="row">
+
+
+
 
 	<div class="col-2" style="background-color: #313131;height:100%">
 		<hr style="padding:0px;margin:0px;border-top:1px solid rgba(255, 255, 255, 0.1)">
@@ -56,12 +55,16 @@ include("src/game.php");
 			<?php } ?>
 
 		</div>
-
-	</div>
-
-
+	
+		
+	</div> <!-- Header div -->
 		<div class="col">
-		 	<div class="row" style="width:100%;padding-top:1%;padding-left:1%;">
+			<div class="row"">
+			<div class="col" style="height:4%;width:100%;background-color:white">
+			<a href="event/create" style="float:right;margin-top:1%;font-size: 70%" >Add new</a>
+			</div>
+			</div>
+		 	<div class="row">
                   <div class="col" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:2%;padding:2%;background-color:white">
                   	<h5>Upcoming matches: </h5>
                   	<hr style="margin:0px;margin-bottom:10px">
@@ -75,7 +78,7 @@ include("src/game.php");
                   <div class="col-2" style="height:20%;border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:2%;padding:2%;background-color:white">
                   <h5> About: </h5>
                   <hr style="margin:0px;margin-bottom:5%">
-                      	
+                    	
              	  </div>
              	  	  
             </div>

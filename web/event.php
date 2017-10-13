@@ -17,12 +17,18 @@ include("src/game.php");
 			<div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
 				<a style="" href="index.php">Events</a></li>
 			</div>
-			<div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
-				<a style="" href="login.php">Login</a></li>
-			</div>
-			<div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
-				<a style="" href="register.php">Register</a></li>
-			</div>
+			<?php if(active_session() == 0){ ?>
+      <div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
+        <a style="" href="login.php">Login</a>
+      </div>
+      <div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
+        <a style="" href="register.php">Register</a>
+      </div>
+      <?php } else{ ?>
+        <div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
+        <a style="" href="src/logout.php">Logout</a>
+        </div>
+      <?php } ?>
 		</div>
 	</div>
 
