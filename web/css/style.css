@@ -75,6 +75,10 @@ body{
 	background-color:#E8E8E8;
 }
 
+body.landing{
+	background-color:#95A3B3;
+}
+
 ul{
 	width:100%;
 }
@@ -107,9 +111,46 @@ select.content{
 	border-radius: 3px;
 }
 
+select.landing{
+	background:#D8E1FF;
+	border-color:#5D2E8C;
+	border-radius:5%;
+}
+option.landing{
+	background:#D8E1FF;
+	border-color:#5D2E8C;
+	border-radius:5%;
+}
+
 button.content{
 	background-color:white;
 	border-width:1px;
 	border-color: #5D2E8C;
 	border-radius: 3px;
+}
+
+div.landing{
+	border:1px solid;
+	border-color:#5D2E8C;
+	border-radius:5px;
+	margin:10px;
+	background-color:#FFFFFF;
+}
+
+div.landing2{
+	background-color:white;
+	border-width:1px;
+	border-color: #5D2E8C;
+	border-radius: 3px;
+	margin-left:50%;
+	margin-right:50%;
+}
+
+input.landing{
+	background:#D8E1FF;
+	border-color:#5D2E8C;
+}
+
+a.landing{
+
 }
