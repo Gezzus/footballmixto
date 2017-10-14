@@ -20,7 +20,7 @@
   <div class="row justify-content-center">
     <div class="col"></div>
     <div class="col-4" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:white">
-    <h5 class="form-text text-muted" style="padding-top:15px">Avafutbol | Welcome</h5>
+    <h5 class="form-text text-muted" style="padding-top:15px">Fúlbo | Welcome</h5>
     <h6 class="form-text text-muted" style="padding-top:15px">Register</h5>
     <hr>
       <form id="login_form" method="POST" action="src/register.php">

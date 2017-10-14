@@ -1,0 +1,115 @@
+
+
+div.content{
+
+	border:1px solid;
+	border-color:#5D2E8C;
+	border-radius:5px;
+	margin:2%;
+	padding:1%;
+	background-color:white;
+}
+
+a.top{
+	float:right;
+	margin-top:1%;
+	font-size: 70%;
+}
+
+div.top{
+	height:4%;
+	width:100%;
+	background-color:#FFFFFF;
+	border-bottom:1px solid rgba(255, 255, 255, 0.1);
+}
+
+a.menubutton
+{
+	color:black;
+	width:100%;
+}
+button.menubutton{
+	border:1px solid;
+	border-color:#5D2E8C;
+	border-radius:5px;
+	margin:10px;
+	background-color:#E8E8E8;
+	width:90%;
+	padding:2%;
+	margin:2%;
+	/*color:black;
+	width:100%*/
+}
+
+div.myfooter{
+	position:absolute;
+	bottom:0;
+	margin:0;
+	padding:0;
+}
+footer.myfooter{
+	background-color:#E8E8E8;height:1%;
+}
+
+p.myfooter{
+	font-size:70%;
+}
+
+div.menu{
+ background-color: #313131;
+ height:100%;
+ padding-left:1.5%;
+}
+
+hr.menu{
+	padding:0px;
+	margin:0px;
+	border-top:1px solid rgba(255, 255, 255, 0.1);
+}
+hr.content{
+	margin:0px;
+	margin-bottom:10px;
+}
+
+body{
+	background-color:#E8E8E8;
+}
+
+ul{
+	width:100%;
+}
+
+li{
+	list-style-type: none;
+	list-style-type: none;
+	border:1px solid rgba(0,0,0,.1);
+}
+
+div.team{
+	margin:1%;
+	border:1px solid rgba(0,0,0,.1);
+}
+
+input.content{
+	width:100%;
+	margin:0%;
+	border:1px solid rgba(0,0,0,.1);
+	border-radius: 3px;
+}
+
+
+select.content{
+	width:30%;
+	margin:1%;
+	background-color:white;
+	border-width:1px;
+	border:1px solid rgba(0,0,0,.1);
+	border-radius: 3px;
+}
+
+button.content{
+	background-color:white;
+	border-width:1px;
+	border-color: #5D2E8C;
+	border-radius: 3px;
+}

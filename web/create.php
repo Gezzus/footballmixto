@@ -3,30 +3,13 @@ include("src/connect.php");
 session_start();
 include("header.html");
 include("src/menumanager.php");
-include("src/events.php");
 include("src/game.php");
 ?>
 
 
 <?php
-	$Events = new events;
-	$Events->build($link);
-
-	function organizeEvents($receivedEvents)
-	{
-		for ($i=0; $i < count($receivedEvents); $i++) { 
-			echo "<div class='col-3' style='border:1px solid;border-color:#5D2E8C;border-radius:5px;background-color:white;padding:2%;margin:2%;'
-><p>Date: ".$receivedEvents[$i]->date."<br>Type: ".$receivedEvents[$i]->properties['type_desc']."</p><a href='event.php?id=".$receivedEvents[$i]->id."'><input type='button' style='background-color:white;border:1px solid;border-color: #5D2E8C;border-radius: 3px;' value='See Event'/></a>
-      </div>";
-		}
-		//echo var_dump($receivedEvents);
-
-	}
-
-
 
 ?>
-
 
 <html>
 <head>
@@ -72,15 +55,15 @@ include("src/game.php");
 		<div class="col">
 			<div class="row"">
 			<div class="col top">
-			<a href="create.php" class="top" >Add new</a>
+			<a href="index.php" class="top" >Back</a>
 			</div>
 			</div>
 		 	<div class="row">
                   <div class="col-8 content">
-                  	<h5>Upcoming matches: </h5>
+                  	<h5>Create event: </h5>
                   	<hr class="content">
                       <div class="row" style="padding-left:3.5%">
-                        	<?= organizeEvents($Events->games); ?>
+                        	
                       </div>
 
 

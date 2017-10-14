@@ -7,134 +7,138 @@ include("src/menumanager.php");
 include("src/game.php");
 ?>
 
+<?php 
+  $event = new game();
+  $event->retrieve($_GET['id'],$link);
+?>
+
+
 <html>
-<body style="background-color:#E8E8E8">
+<head>
+ <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
 <div class="container-fluid">
+
 <div class="row">
-	<div class="col-2" style="background-color: #313131;height: 100%">
-		<hr style="padding:0px;margin:0px;border-top:1px solid rgba(255, 255, 255, 0.1)">
-		<div class="col" style="width:100%;padding:2%;margin:1%;">
-			<div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
-				<a style="" href="index.php">Events</a></li>
-			</div>
-			<?php if(active_session() == 0){ ?>
-      <div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
-        <a style="" href="login.php">Login</a>
+
+	
+    <div class="col-2 menu">
+    <hr class="menu">
+      <div class="row">
+        <a class="menubutton" href="index.php">
+          <button class="menubutton">Events</button>
+        </a>
       </div>
-      <div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
-        <a style="" href="register.php">Register</a>
+      <?php if(active_session() == 0){ ?>
+      <div class="row">
+        <a class="menubutton" href="login.php">
+          <button class="menubutton">Login</button>
+        </a>
+      </div>
+      <div class="row">
+        <a class="menubutton" href="register.php">
+          <button class="menubutton">Register</button>
+        </a>
       </div>
       <?php } else{ ?>
-        <div class="row" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:#E8E8E8;width:90%;padding:2%;margin:2%;">
-        <a style="" href="src/logout.php">Logout</a>
+        <div class="row">
+        <a class="menubutton" href="logout.php">
+          <button class="menubutton">Logout</button>
+        </a>
         </div>
       <?php } ?>
-		</div>
-	</div>
+
+  
+    
+    </div> <!-- Menu div -->
+
+
+
 
 		<div class="col">
-		 	<div class="row" style="width:100%;padding-top:1%;">
-                  <div class="col" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:2%;padding:1%;background-color:white">
-                  <h5>Event information: (10 vs 10) Fútbol Match</h5>
-                  <hr style="margin:0px;margin-bottom:10px">
+
+      <div class="row"">
+      <div class="col top">
+      <a href="" class="top" >Options</a>
+      </div>
+      </div>
+
+
+		 	<div class="row">
+                  <div class="col content">
+                  <h5>Event information: <?=$event->properties['type_desc'];?> Fútbol Match</h5>
+                  <hr class="content">
 
                   	  <div class="row" style="margin:0px;width:25%;">
-                  	  	<ul class="list-group" style="width:100%">
-						  <li style="list-style-type: none;list-style-type: none;border:1px solid rgba(0,0,0,.1);">When: 11/10/17</li>
-						  <li style="list-style-type: none;border:1px solid rgba(0,0,0,.1);">Where: Placeholder</li>
-						  <li style="list-style-type: none;border:1px solid rgba(0,0,0,.1);">Organizer: Placeholder</li>
-						</ul>
+                        <ul class="list-group" style="">
+            						  <li>When:<?=$event->properties['date']?></li>
+            						  <li>Where: Placeholder</li>
+            						  <li>Organizer: Placeholder</li>
+            						</ul>
                   	  </div>
 
-                      <div class="row" style="">
+              <div class="row">
                       
-  						<div class="col" style="margin:1%;border:1px solid rgba(0,0,0,.1)">
-  							<h6>Team Alpha</h6>
-  							<hr style="margin:0px;margin-bottom:10px;">
-
-  							<div class="row" style="margin:1%;border:1px solid rgba(0,0,0,.1);background:pink">
-  								<label>Person1</label>
-  							</div>
-
-
-  							<div class="row" style="margin:1%;border:1px solid rgba(0,0,0,.1);background:lightblue">
-								<label>Person1</label>
-  							</div>
-
-  							<div class="row" style="margin:1%;border:1px solid rgba(0,0,0,.1);background:pink">
-  								<label>Person1</label>
-  							</div>
-
-  							<div class="row" style="margin:1%;border:1px solid rgba(0,0,0,.1);background:pink">
-  								<label>Person1</label>
-  							</div>
-
-  							<div class="row" style="margin:1%;border:1px solid rgba(0,0,0,.1);background:lightblue">
-  								<label>Person1</label>
-  							</div>
+        						<div class="col team">
+        							<h6>Team 1</h6>
+        							<hr class="content">
+          							<div class="row team" style="background: lightblue">
+          								<label>Person1</label>
+          							</div>
 
 
-  						</div>
-                      
-  						<div class="col" style="margin:1%;border:1px solid rgba(0,0,0,.1)">
-  							<h6>Team Beta</h6>
-  							<hr style="margin:0px;margin-bottom:10px">
-  						</div>
-  						<div class="col" style="margin:1%;border:1px solid rgba(0,0,0,.1)"> 
-  							<h6>Team Gamma</h6>
-  							<hr style="margin:0px;margin-bottom:10px">
-  						</div>
-  						<div class="col" style="margin:1%;border:1px solid rgba(0,0,0,.1)">
-  							<h6>Team Delta</h6>
-  							<hr style="margin:0px;margin-bottom:10px">
-  						</div>
-  						<div class="col" style="margin:1%;border:1px solid rgba(0,0,0,.1)">
-  							<h6>Teamless</h6>
-  							<hr style="margin:0px;margin-bottom:10px">
-  						</div>
+        						</div>
+                    <div class="col team">
+                      <h6>Team 2</h6>
+                      <hr class="content">
+                        <div class="row team" style="background: lightblue">
+                          <label>Person1</label>
+                        </div>
 
-                      </div>
 
-             	  </div>	
-             	  <div class="col-3" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:2%;padding:1%;background-color:white;height:20%">
-             	  	<div class="col-1">
-             	  	</div>
-					
-					<div class="col">
-					             	  	
+                    </div>
+                            
+  						
+              </div>
+
+              </div>	
+             	<div class="col-3 content">
              	  	<h5>Add an outsider:</h5>
-             	  	<form style="position:center">
-             	  		<label style="margin:0px">Name:</label><br>
-             	  		<input type="text" style="width:100%;margin:0px;border:1px solid rgba(0,0,0,.1)" ></input>
-             	  		<br>
-             	  		<label>Sex: </label>
-             	  		<select name="sex" style="width:30%;margin:1%;background-color:white;border-width:1px;border:1px solid rgba(0,0,0,.1);border-radius: 3px">
+             	  	<form>
+             	  		<label>Name:</label>
+             	  		<input class="content" type="text" placeholder="Your friend's name"></input>
+             	  		<label>Sex:</label>
+             	  		<select class="content" name="sex">
                                 <option>Male</option>
                                 <option>Female</option>
-                        </select><br>
-                        <button type="submit" style="background-color:white;border-width:1px;border-color: #5D2E8C;border-radius: 3px">Submit</button>
+                    </select><br>
+                    <button class="content" type="submit">Submit</button>
              	  	</form>
              	  	</div>
-             	  	<div class="col-1">
-             	  	</div>
-             	  	
+
              	  </div>
             
                  	
             </div>
+
+
+
+
+
             <div class="row">
-            	<div class="col" style="position:absolute;bottom:0;margin:0;" >
-            		<footer class="footer" style="background-color:#E8E8E8;height:1%;";>
-					<div style=""><p style="font-size:80%;">Made with ♥ by a bunch of people from Avature</p></div>
-					</footer> 
-            	</div>
+              <div class="col myfooter">
+                <footer class="myfooter">
+                    <p class="myfooter">Made with ♥ by a bunch of people from Avature</p>
+                </footer> 
+              </div>
             </div>
     
 		</div> <!-- Col Div -->
 
+
 </div><!-- Row Div -->
 
-</div>
 </body>
 </html>
 

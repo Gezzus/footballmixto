@@ -19,7 +19,7 @@ include("header.html");
 
   <div class="row justify-content-center">
     <div class="col"></div>
-    <div class="col-3" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:white">
+    <div class="col-4" style="border:1px solid;border-color:#5D2E8C;border-radius:5px;margin:10px;background-color:white">
     <h5 class="form-text text-muted" style="padding-top:15px">Fúlbo | Welcome</h5>
     <h6 class="form-text text-muted" style="padding-top:15px">Login</h5>
     <hr>
