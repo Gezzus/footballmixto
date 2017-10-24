@@ -93,6 +93,7 @@ CREATE TABLE user (
     password VARCHAR(255) NOT NULL,
     roleId INT NOT NULL,
     playerId INT NOT NULL,
+    lastLogin DATE NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (userName),
     FOREIGN KEY (roleId) REFERENCES role(id),

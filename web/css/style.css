@@ -93,6 +93,11 @@ div.team{
 	margin:1%;
 	border:1px solid rgba(0,0,0,.1);
 }
+label.team{
+	margin:1%;
+	border:1px solid rgba(0,0,0,.1);
+}
+
 
 input.content{
 	width:100%;

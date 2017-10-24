@@ -51,12 +51,12 @@ if($user_query_exists_amount == 0){
 						}
 						else{
 						echo "0:".mysqli_error($link);
-						header("location:../register.php");
+						#header("location:../register.php");
 						}
 			}
 			else{
 				echo "1:".mysqli_error($link);
-				header("location:../register.php");
+				#header("location:../register.php");
 			}
  }
 else{

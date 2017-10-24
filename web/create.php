@@ -58,22 +58,33 @@ include("src/game.php");
 			<a href="index.php" class="top" >Back</a>
 			</div>
 			</div>
-		 	<div class="row">
-                  <div class="col-8 content">
+		 	<div class="row" style="padding-bottom: 0;margin-bottom:0">
+                  <div class="col-3 content">
                   	<h5>Create event: </h5>
                   	<hr class="content">
                       <div class="row" style="padding-left:3.5%">
-                        	
+                        <form style="width:90%" method="POST" action="src/add.php">
+                        	<label>Event name: </label>
+                        	<input type="text" name="type"><br>
+                        	<label>Type: </label>
+                        	<input type="text" name="type"><br>
+                        	<label>Date: </label>
+                        	<input type="text" name="date"><br>
+                        	<button style="padding-top:2%" class="content">Add</button>
+                        </form>	
                       </div>
 
 
              	  </div>	
             
-                  <div class="col-3">
-                
+                  
+             	  	  
+            </div>
+            <div class="row"  style="padding-top: 0;margin-top:0">
+            	<div class="col-3 content" style="height:5%">
+                	<center><h5>More stuff comming soon</h5></center>
                     	
              	  </div>
-             	  	  
             </div>
             
 

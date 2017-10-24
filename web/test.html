@@ -1,0 +1,352 @@
+H2:<h3> About the Kenexa BrassRing Integration</h3>
+
+
+
+<p>Avature’s integration with Kenexa BrassRing provides smooth communication between both systems. It allows you to access one system from the other; individually and massively export people to Kenexa; and individually import people and {jobs$} to Avature.</p>
+
+<p>If you are interested in this integration, please contact our Sales team.</p>
+
+<h43>PrerequisitesCompany Configuration</h43>
+
+<p>Provide your If you are interested in this integration, please contact our Sales team. We An Avature consultant will configure your Kenexa username/password to your Avature consultant, who will configure it in Avature. You can only access Avature from Kenexa if the username in both systems is the same.</p>
+
+<p>Your Avature consultant also configures in Avature, as well as custom fields, and{$job} ?templates? , and workflow actions for the integration. You can only access Avature from Kenexa, if the username in both systems is the same. To track a candidate’s progress through Kenexa’s <strong>HR Status</strong>, a special configuration is needed; ask your Sales Representative to learn more about it and its cost. If you want Avature to show the candidate’s original source, contact your Kenexa Representative.</p>
+
+
+
+H2:<h3> Access One System from the Other</h3>
+
+
+
+<h3h4>Access Avature from Kenexa</h3h4>
+
+<p> From Kenexa, you can access your Avature {$jobs}, people and dashboard.</p>
+
+<p>If you have this the integration on your configurationconfigured, your Kenexa welcome page is divided into panels. One of them shows your Avature dashboard.; Wwhen you click an item in it, a new browser tab opens with the ?the dashboard ? opens in a new browser tabdashboard in Avature. From Kenexa, you can only access your Avature {$jobs}, people and dashboard.</p>
+
+<p>You can also access Avature from any talent record in Kenexa, by clicking <strong>Kenexa Social Source record: Add</strong> (which will create a new record in Avature and open it) or <strong>Kenexa Social Source record: View</strong> (which will direct you to an existing person record in Avature).</p>
+
+
+
+<h3h4>Access Kenexa from Avature</h3h4>
+
+<p>When in Avature, click the Kenexa icon in the person or {$job} record. T; this icon appears in the record header for all records imported from Kenexa. This opens the corresponding talent record or requisition in a new tab.</p>
+
+
+
+<h3>H2: Export People from Avature into Kenexa</h3>
+
+
+
+<p>You can send people and their attachments from Avature to Kenexa either manually or automatically. Before attempting to export, verify confirm that that the record has the country, as well as an email or a home phone, as Kenexa requires at least one of them.</p>
+
+<p>If you send the same person more than once, Kenexa updates the profile instead of creating a new record.</p>
+
+<p>All people you send to Kenexa are tagged as <span class="blueText"><em>exported to 2xb</em></span> i. In Avature., Yyou can use this tag to filter exported records. See Tags, specially the Finding Records With a Specific Tag section, for moree (placeholder) for more.</p>
+
+<p>You can see the status of exports in an External APIs Export Report. See (placeholder)Reports: External APIs Export, specially the Reporting Exports to External APIs section, for more information.</p>
+
+<p>When linking a client to a requisition, remember to notify them if your country has limitations ?on unconsented linking? .</p>
+
+
+
+h3:<h4> Export Manually</h4>
+
+<p>To send people to Kenexa in mass, go to a people list in Avature and ?select up to 20 records? you want to export. Then, click <strong>Actions > Export to ATS-Kenexa</strong>.</p>
+
+<p>To send people to Kenexa individually, go to athe desired person record in Avature. Then, click <strong>?Actions? Person > Export to ATS-Kenexa</strong>, and choose how you want to export: You can export them unlinked or link them either linked to a requisition or a working folder, or ??. If you choose to link the records, Avature shows all the requisitions and working folders available for you in Kenexa. You can link a person to as many of them as you want. select Select the IDs of the requisitions or working folders, and export. Y cul sera el desarrollo de la exportacin no linkeada a working folder o req?Avature shows all the requisitions and working folders available for you in Kenexa. You can link a person to as many of them as you want. </p>
+
+
+
+H3:<h4 >Export Automatically</h4>
+
+<p>Depending on your workflow configuration, you may have a step that automatically exports people records to Kenexa.</p>
+
+<p>First, verify confirm the candidate is linked to a ?{$job$} ? in Avature that also exists in Kenexa.</p>
+
+<p>Change the workflow step to export the candidate, which automatically ?linking? links them the candidate to the corresponding requisition in Kenexa. </p>
+
+<p>Depending on your configuration, candidates may also reach the Kenexa BrassRing export step as a consequence of other actions in the workflow, ?such as a scheduled task? ..</p>
+
+
+
+
+
+<h3> Information You See in Kenexa</h3>
+
+<p>After the export, the candidate record in Kenexa shows you a combination of the following information, according to your configuration:</p>
+
+<table width="100%" cellpadding="0" cellspacing="10" border="0">
+
+<tr>
+
+<td width="50%" valign="top">
+
+<ul><li>First name</ul></li>
+
+<ul><li>Middle name</ul></li>
+
+<ul><li>Last name</ul></li>
+
+<ul><li>Company</ul></li>
+
+<ul><li?>{$Job} name? </ul></li>
+
+<ul><li>Phone</ul></li>
+
+<ul><li>Email</ul></li>
+
+<ul><li>Website</ul></li>
+
+<ul><li>Address</ul></li>
+
+<ul><li>Cover letter</ul></li>
+
+<ul><li>Kenexa resume key</ul></li>
+
+</td>
+
+<td width="50%" valign="top">
+
+<ul><li>Employment - Organization name</ul></li>
+
+<ul><li>Employment - Position name</ul></li>
+
+<ul><li>Employment - Position description</ul></li>
+
+<ul><li>Employment - Position start year</ul></li>
+
+<ul><li>Employment - Position end year</ul></li>
+
+<ul><li>Employment - Position name</ul></li>
+
+<ul><li>Employment - Position start year</ul></li>
+
+<ul><li>Education - Degree date</ul></li>
+
+<ul><li>Education - Degree name</ul></li>
+
+<ul><li>Education - Degree type</ul></li>
+
+<ul><li>Education - School name</ul></li>
+
+<ul><li>Education - Measure value</ul></li>
+
+</td>
+
+</tr>
+
+</table><br />
+
+<p>If the degree date is missing, none of the education information will be sent. In the employment information, if one or more of the following are missing, the whole block won’t be exported: organization name, position name, or position description is missing.</p>
+
+?<p>To see the whole resume as a file, click <strong>Resume/CV</strong> or <strong>Attachments: Add/View</strong>. Kenexa also creates an entry in its <strong>Action Log</strong> with a link to the resume file.</p>?
+
+
+
+
+
+
+
+H2: Import People from Kenexa into Avature
+
+
+
+<p>There are two ways of sending people to Avature. Before you attempt importing, verify that the candidate has a first and a last name.</p>
+
+<p>To import a candidate record to Avature: </p>
+
+<p><ul>
+
+<li>Go to <strong>Candidates > My candidates</strong>. Select the person you want to import into Avature, and click <strong>Actions > Add to Social Source</strong>.</li>
+
+<li>Go to the person’s talent record and click <strong>Kenexa Social record: Add</strong>.</li>
+
+</ul></p>
+
+?<p>You can edit these Avature records while in Kenexa, through the <strong>Edit URL</strong>.</p>?
+
+<h3>Information You See in Avature</h3>
+
+<p>Avature creates a new person record for every candidate imported from Kenexa. According to your configuration, candidates the imported person records can appear marked as possible duplicates if they have the same or similar name, or they share a piece of contact information with an existing person record. For more information on duplicates, see ?(placeholder)Detecting and Merging Duplicate Records for more. ? </.</p>
+
+<p>All imported candidates have a Kenexa Candidate as a tag and Kenexa ATS Candidate as the source. The tag lets you filter them for easy grouping; ; (see Tags, specially the Finding Records With a Specific Tag section (placeholder) for more). If you want to see leads’ the candidates' original sources in Avature, contact your Kenexa Representative.</ p>
+
+<p>These records have a combination of the following information, according to your configuration:</p>
+
+??
+
+<table width="100%" cellpadding="0" cellspacing="10" border="0">
+
+<tr>
+
+<td width="50%" valign="top">
+
+<ul><li>First name</ul></li>
+
+<ul><li>Middle name</ul></li>
+
+<ul><li>Last name</ul></li>
+
+<ul><li>Phone</ul></li>
+
+<ul><li>Email</ul></li>
+
+<ul><li>Website</ul></li>
+
+<ul><li>Address</ul></li>
+
+<ul><li>Source</ul></li>
+
+<ul><li>Cover letter</ul></li>
+
+<ul><li>Employment - Organization name</ul></li>
+
+<ul><li>Employment - Position end year</ul></li>
+
+</td>
+
+<td width="50%" valign="top">
+
+<ul><li>Employment - Position description</ul></li>
+
+<ul><li>Employment - Position start year</ul></li>
+
+<ul><li>Employment - Position name</ul></li>
+
+<ul><li>Education - Degree date</ul></li>
+
+<ul><li>Education - Measure system</ul></li>
+
+<ul><li>Education - Degree name</ul></li>
+
+<ul><li>Education - Degree type</ul></li>
+
+<ul><li>Education - School name</ul></li>
+
+<ul><li>Education - School type</ul></li>
+
+<ul><li>Education - Measure value</ul></li>
+
+</td>
+
+</tr>
+
+</table><br />
+
+<table width="100%" cellpadding="0" cellspacing="10" border="0">
+
+<tr>
+
+<td width="50%" valign="top">
+
+<ul><li>First name</ul></li>
+
+<ul><li>Middle name</ul></li>
+
+<ul><li>Last name</ul></li>
+
+<ul><li>Company</ul></li>
+
+?<ul><li>{$Job} title</ul></li>?
+
+<ul><li>Phone</ul></li>
+
+<ul><li>Email</ul></li>
+
+<ul><li>Website</ul></li>
+
+<ul><li>Address</ul></li>
+
+<ul><li>Source</ul></li>
+
+<ul><li>Cover letter</ul></li>
+
+</td>
+
+<td width="50%" valign="top">
+
+<ul><li>Employment - Organization name</ul></li>
+
+<ul><li>Employment - Position end year</ul></li>
+
+<ul><li>Employment - Position description</ul></li>
+
+<ul><li>Employment - Position start year</ul></li>
+
+<ul><li>Employment - Position end year</ul></li>
+
+<ul><li>Employment - Position name</ul></li>
+
+<ul><li>Employment - Position start year</ul></li>
+
+<ul><li>Education - Degree date</ul></li>
+
+<ul><li>Education - Measure system</ul></li>
+
+<ul><li>Education - Degree name</ul></li>
+
+<ul><li>Education - Degree type</ul></li>
+
+<ul><li>Education - School name</ul></li>
+
+<ul><li>Education - School type</ul></li>
+
+<ul><li>Education - Measure value</ul></li>
+
+</td>
+
+</tr>
+
+</table><br />
+
+
+
+
+
+147:<h3> Import {$Jobs} from Kenexa into Avature</h3>
+
+<p>Importing your Kenexa {$jobs}requisitions in Kenexa includes them in youcreates them asr Avature {$job} records and helps you invite people to apply.</p>
+
+<p>In Kenexa, go to <strong>Reqs > View my reqs > Open</strong>. This displays a screen with all your available open requisitions. Select one and click <strong>Actions > Manage campaign</strong>.</p>
+
+<p>?An Avature pop up opens, displaying the {$job} in edit mode? ; optionally, add more information, and then save.</p>
+
+<p>You can edit these Avature records while in Kenexa, through the <strong>Edit URL</strong>.</p>
+
+
+
+<h43>Information You See in Avature</h43>
+
+<p>Each {$job} you send to Avature includes the <strong>Kenexa campaign ID</strong> in its title, preventing Avature from creating duplicates.</p>
+
+<p>In the ?{$job$} ? record you see a combination of the following information depending on your configuration:</p>
+
+<table width="100%" cellpadding="0" cellspacing="10" border="0">
+
+<tr>
+
+<td width="50%" valign="top">
+
+<ul><li>{$Job} name</ul></li>
+
+<ul><li>Requisition ID</ul></li>
+
+</td>
+
+<td width="50%" valign="top">
+
+<ul><li>Requisition code</ul></li>
+
+<ul><li>Description</ul></li>
+
+<ul><li>Application URLs</ul></li>
+
+</td>
+
+</tr>
+
+</table><br />
+
+<p>You can invite leads people to apply to a ?{$job$} ? by sending them the <strong>Application URLs</strong>. According to your configuration, email templates may have these links in the body. See (placeholder) for more.</p>
+

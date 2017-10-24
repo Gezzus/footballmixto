@@ -15,12 +15,15 @@ include("src/game.php");
 	function organizeEvents($receivedEvents)
 	{
 		for ($i=0; $i < count($receivedEvents); $i++) { 
-			echo "<div class='col-3' style='border:1px solid;border-color:#5D2E8C;border-radius:5px;background-color:white;padding:2%;margin:2%;'
+		echo "<div class='col-3' style='border:1px solid;border-color:#5D2E8C;border-radius:5px;background-color:white;padding:2%;margin:2%;'
 ><p>Date: ".$receivedEvents[$i]->date."<br>Type: ".$receivedEvents[$i]->properties['type_desc']."</p><a href='event.php?id=".$receivedEvents[$i]->id."'><input type='button' style='background-color:white;border:1px solid;border-color: #5D2E8C;border-radius: 3px;' value='See Event'/></a>
       </div>";
 		}
-		//echo var_dump($receivedEvents);
-
+		/*echo var_dump($receivedEvents);
+		echo "<br><a class='menubutton' href=''>
+					<button class='menubutton' style='width:20%'>See Event</button>
+				</a><hr><br>";
+	*/
 	}
 
 
