@@ -4,6 +4,10 @@ session_start();
 include("header.html");
 include("src/game.php");
 
+if(isset($_GET["error"]) && $_GET["error"] == 3){
+    echo "<script type='text/javascript'>alert('Please log in');</script>";
+}
+
 ?>
 
 
@@ -51,7 +55,9 @@ include("src/game.php");
 		<div class="col">
 			<div class="row"">
 			<div class="col top">
+			<? if(active_session() == 1){ ?>
 			<a href="create.php" class="top" >Add new</a>
+			<? } ?>
 			</div>
 			</div>
 		 	<div class="row">

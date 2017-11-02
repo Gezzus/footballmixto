@@ -6,6 +6,12 @@ include("header.html");
 include("src/game.php");
 
 $game = game_retrieve($_GET['id'],$link);
+
+if(active_session() == 0){
+  header("location:index.php?error=3");
+  
+}
+
 ?>
 
 
