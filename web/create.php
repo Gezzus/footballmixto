@@ -2,7 +2,7 @@
 include("src/connect.php");
 session_start();
 include("header.html");
-include("src/menumanager.php");
+
 include("src/game.php");
 ?>
 
