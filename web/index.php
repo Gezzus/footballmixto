@@ -2,7 +2,6 @@
 include("src/connect.php");
 session_start();
 include("header.html");
-include("src/menumanager.php");
 include("src/game.php");
 
 ?>
@@ -56,7 +55,7 @@ include("src/game.php");
 			</div>
 			</div>
 		 	<div class="row">
-                  <div class="col-8 content">
+                  <div class="col-8 team content">
                   	<h5>Upcoming matches: </h5>
                   	<hr class="content">
                       <div class="row" style="padding-left:3.5%">

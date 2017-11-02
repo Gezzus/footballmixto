@@ -80,7 +80,7 @@ include("menumanager.php");
         $games_ammount = mysqli_num_rows($games);
 
         for ($i=0; $i < $games_ammount; $i++) { ?>
-            <div class='col-3 content'">
+            <div class='col-3 team content'">
                 <label style="width:100%"><b>Date:</b><br><?= $games_row["date"] ?></label>
                 <label style="width:100%"><b>Description:</b><br><?= $games_row["type"]  ?></label>
                 <hr class="content">
