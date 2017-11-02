@@ -58,7 +58,7 @@ include("src/game.php");
                         	<input class="content" type="text" name="name"><br>-->
                         	<label class="content">Type: </label>
                         	<select style="width:100%" class="content" name="type">
-                        		<option value='1'>5 vs 5 (2 Fields)</option>
+                        		<option value='2'>5 vs 5 (2 Fields)</option>
                         		<!--<option value='2'>5 vs 5 (1 Field)</option>
                         		<option value='3'>8 vs 8</option>
                         		<option value='4'>9 vs 9</option>
