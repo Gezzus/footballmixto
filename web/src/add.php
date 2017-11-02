@@ -33,35 +33,34 @@ if($player_query_exists_amount == 0){
 				$player_query_lastid = mysqli_insert_id($link);
 				$player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$_POST["gameId"]."','".$player_query_lastid."','5')";
 				if(mysqli_query($link,$player_event_add)){
-					$backlocation = "location:../event.php?id=".$_POST["gameId"];
+					$backlocation = "location:../game.php?id=".$_POST["gameId"];
 					header($backlocation);
 					echo mysqli_error($link);
-					echo $backlocation;
+					#echo $backlocation;
 				}
 			}
 			else {
-				$backErrorlocation = "location:../event.php?id=".$_POST["gameId"]."&error=1";
+				$backErrorlocation = "location:../game.php?id=".$_POST["gameId"]."&error=1";
 				#header($backErrorlocation);
 				echo mysqli_error($link);
-				echo $backErrorlocation;
+				#echo $backErrorlocation;
 			}
 	}
 	else
 	{
-		echo "Did i get in here?";
 		$player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$_POST["gameId"]."','".$player_query_exists_row["id"]."','5')";
 		echo $player_event_add."<br>";
 		if(mysqli_query($link,$player_event_add)){
-					$backlocation = "location:../event.php?id=".$_POST["gameId"];
+					$backlocation = "location:../game.php?id=".$_POST["gameId"];
 					header($backlocation);
 					echo mysqli_error($link);
-					echo $backlocation;
+					#echo $backlocation;
 				}
 				else {
-					$backErrorlocation = "location:../event.php?id=".$_POST["gameId"]."&error=1";
+					$backErrorlocation = "location:../game.php?id=".$_POST["gameId"]."&error=1";
 					#header($backErrorlocation);
 					echo mysqli_error($link);
-					echo $backErrorlocation;
+					#echo $backErrorlocation;
 				}
 	}
 

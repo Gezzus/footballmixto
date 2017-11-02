@@ -7,6 +7,7 @@ SET FOREIGN_KEY_CHECKS=0;
 CREATE TABLE game (
     id INT NOT NULL AUTO_INCREMENT,
     `date` DATETIME NOT NULL,
+    status INT NOT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (`date`)
 );
@@ -85,6 +86,7 @@ CREATE TABLE pickPlayer (
     FOREIGN KEY (gameId) REFERENCES game(id),
     FOREIGN KEY (playerId) REFERENCES player(id),
     FOREIGN KEY (teamId) REFERENCES team(id)
+    
 );
 
 CREATE TABLE user (

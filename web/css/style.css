@@ -16,6 +16,21 @@ a.top{
 	font-size: 70%;
 }
 
+button.top{
+	cursor: pointer;
+	float:right;
+	margin-top:10%;
+	font-size: 70%;
+	border: none;
+	background-color: transparent;
+	color: #007bff;
+}
+button.team{
+	margin:1%!important;
+	border:1px solid rgba(0,0,0,.1)!important;
+	font-size: 70%;
+}
+
 div.top{
 	height:4%;
 	width:100%;
@@ -56,7 +71,7 @@ p.myfooter{
 }
 
 div.menu{
- background-color: #313131;
+ background-color: #232B3C;
  height:100%;
  padding-left:1.5%;
 }

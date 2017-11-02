@@ -6,7 +6,7 @@ function player_change_team($active_link,$received_game_id,$received_player_id,$
             $player_changeteam_query = mysqli_query($active_link,$player_changeteam);
             #echo $player_changeteam."<br>";
             echo mysqli_error($active_link);
-            header("location:../event.php?id=".$received_game_id);
+            header("location:../game.php?id=".$received_game_id);
         }
 
 

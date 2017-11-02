@@ -32,7 +32,7 @@
       <input class="form-control landing" name="username" placeholder="Username">
       <small class="form-text text-muted">Username must be unique.</small>
       <label>Password:</label>
-      <input class="form-control landing" name="password" placeholder="Password">
+      <input class="form-control landing" type="password" name="password" placeholder="Password">
       <small class="form-text text-muted">Use a random password.</small>
       <label>Nickname:</label>
       <input class="form-control landing" name="nickname" placeholder="Shorty">
