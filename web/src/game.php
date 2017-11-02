@@ -41,7 +41,7 @@ include("menumanager.php");
         {
             $game_retrieve_attendants = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId WHERE game.id=".$received_game_id;
             $game_retrieve_attendants_query = mysqli_query($activelink,$game_retrieve_attendants);
-            $game_retrieve_attendants_row = mysqli_fetch_assoc($game_retrieve_attendants_query);
+            #$game_retrieve_attendants_row = mysqli_fetch_assoc($game_retrieve_attendants_query);
             $game_retrieve_attendants_amount = mysqli_num_rows($game_retrieve_attendants_query);
 
              if ($game_retrieve_attendants_amount == 0){
@@ -206,6 +206,26 @@ include("menumanager.php");
             default:
                 break;
         }
+
+     }
+
+     function game_retrieve_attribute_ammount($received_game_id,$activelink,$attribute,$attribute_value){
+
+        $attendants = query_retrieve_attendants($received_game_id,$activelink);
+        $attendant_row = mysqli_fetch_assoc($attendants);
+
+        $attendants_amount = 0;
+        #$attendant = mysqli_fetch_assoc($attendants);
+        for ($i=0; $i < mysqli_num_rows($attendants); $i++) { 
+         
+           if($attendant_row[$attribute] == $attribute_value)
+           {
+             $attendants_amount++;
+           }
+           $attendant_row = mysqli_fetch_assoc($attendants);
+        }
+
+        return $attendants_amount;
 
      }
 
