@@ -24,38 +24,11 @@ if(active_session() == 0){
 <div class="container-fluid">
 
 <div class="row">
-    <div class="col-2 menu">
-    <hr class="menu">
-      <div class="row">
-        <a class="menubutton" href="index.php">
-          <button class="menubutton">Events</button>
-        </a>
-      </div>
-      <?php if(active_session() == 0){ ?>
-      <div class="row">
-        <a class="menubutton" href="login.php">
-          <button class="menubutton">Login</button>
-        </a>
-      </div>
-      <div class="row">
-        <a class="menubutton" href="register.php">
-          <button class="menubutton">Register</button>
-        </a>
-      </div>
-      <?php } else{ ?>
-        <div class="row">
-        <a class="menubutton" href="src/logout.php">
-          <button class="menubutton">Logout</button>
-        </a>
-        </div>
-      <?php } ?>
 
-  
-    
-    </div> <!-- Menu div -->
+    <? include("menubar.php"); ?>
 
     <div class="col">
-      <div class="row"">
+      <div class="row">
           <div class="col top">
           </div>
 		      <div class="col-1 top">
@@ -73,7 +46,7 @@ if(active_session() == 0){
 		  </div>
 
       <div class="row">
-        <div class="col team content">
+        <div class="col content">
             <h5>Event information: Fútbol Match</h5>
             <hr class="content">
 
@@ -86,7 +59,7 @@ if(active_session() == 0){
                 <? game_organize_teams($_GET['id'],$link,$_SESSION['id']) ?>
         </div> 
         <div class="col-3" style="border: none;margin-top:1%;margin-bottom:0px;margin-left:0px;margin-right:2%;padding: 0px;">   
-                <div class="col team content">
+                <div class="col content">
              	  	<h5>Add an outsider:</h5>
              	  	<form method="POST" action="src/add.php">
              	  		<label>Name:</label>
@@ -96,11 +69,11 @@ if(active_session() == 0){
                                 <option>Male</option>
                                 <option>Female</option>
                     </select><br>
-                    <button class="content" type="submit">Submit</button>
+                    <button class="content team" type="submit">Submit</button>
                     <input name="gameId" hidden value="<?=$_GET['id']?>"></input>
              	  	</form>
              	</div>
-              <div class="col team content">
+              <div class="col content">
               <h5>Current players:</h5>
                   
                   <label>Male: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","1")?></label><br>
@@ -110,7 +83,7 @@ if(active_session() == 0){
     </div>
 
     <div class="row">
-       <div class="col team content">
+       <div class="col content">
                 <h6>Teamless</h6>
                 <hr class="content"> 
                 <? organize_team($_GET['id'],'5',$link,'0',$_SESSION['id']); ?>
@@ -118,13 +91,7 @@ if(active_session() == 0){
     </div>
               
 
-            <div class="row">
-              <div class="col myfooter">
-                <footer class="myfooter">
-                    <p class="myfooter">Made with ♥ by a bunch of people from Avature</p>
-                </footer> 
-              </div>
-            </div>
+            
     
 		</div> <!-- Col Div -->
 </div>

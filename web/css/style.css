@@ -2,14 +2,21 @@
 
 div.content{
 
-	border:1px solid;
-	border-color:#5D2E8C;
+	border:1px solid #CCCCCC;
 	border-radius:5px;
 	margin:2%;
 	padding:1%;
 	background-color:white;
 }
+div.team{
+	margin:1%;
+	min-height: 25%
+}
 
+div.player{
+	margin-top: 1%;
+	margin-bottom: 1%;
+}
 a.top{
 	float:right;
 	margin-top:1%;
@@ -72,18 +79,23 @@ p.myfooter{
 
 div.menu{
  background-color: #232B3C;
- height:100%;
  padding-left:1.5%;
+ min-height: 100%;
+
 }
 
 hr.menu{
 	padding:0px;
 	margin:0px;
-	border-top:1px solid rgba(255, 255, 255, 0.1);
+	border-top:1px solid #FFFFFF;
 }
 hr.content{
 	margin:0px;
 	margin-bottom:10px;
+}
+
+h3.menu{
+	color: white;ñ
 }
 
 body{
@@ -104,10 +116,7 @@ li{
 	border:1px solid rgba(0,0,0,.1);
 }
 
-div.team{
-	margin:1%;
-	border:1px solid rgba(0,0,0,.1);
-}
+
 label.team{
 	margin:1%;
 	border:1px solid rgba(0,0,0,.1);

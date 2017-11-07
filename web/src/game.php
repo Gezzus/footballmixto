@@ -80,11 +80,11 @@ include("menumanager.php");
         $games_ammount = mysqli_num_rows($games);
 
         for ($i=0; $i < $games_ammount; $i++) { ?>
-            <div class='col-3 team content'">
+            <div class='col-3 player content'">
                 <label style="width:100%"><b>Date:</b><br><?= $games_row["date"] ?></label>
                 <label style="width:100%"><b>Description:</b><br><?= $games_row["type"]  ?></label>
                 <hr class="content">
-                <a href="game.php?id=<?=$games_row['game.id']?>"><button class="content">See event</button></a>
+                <a href="game.php?id=<?=$games_row['game.id']?>"><button class="content team">See event</button></a>
             </div><?
             $games_row = mysqli_fetch_assoc($games);
         }
@@ -102,7 +102,7 @@ include("menumanager.php");
 
         $team_ammount = mysqli_num_rows($team_query);
 
-        ?><div class="row"><?
+        ?><div class="row" style="width:98%;margin-left: 1%"><?
         
         for ($i=0; $i < $team_ammount; $i++) {
             $team_row = mysqli_fetch_assoc($team_query);
@@ -118,7 +118,8 @@ include("menumanager.php");
 
             if($received_option == '0'){
             ?>
-                <div class='col-2 team' style="width:100%;background-color:<?= $team_color ?>">
+               
+                <div class='col-2 content player' style="margin:1%;background-color:<?= $team_color ?>">
                 <label><?=$team_row["player.nickName"];?></label>
                 <form method='POST' action='src/operatory.php?action=teamchange&id=<?=$received_game_id?>'>
                 <?
@@ -129,14 +130,16 @@ include("menumanager.php");
                   <button class='content team' name='team' value='2'>2</button>
                   <button class='content team' name='team' value='3'>3</button>
                   <button class='content team' name='team' value='4'>4</button>
+                  <button class='content team' name='team' value='D'>D</button>
                 </form>
                 
                 <?
                 }
         }  
         else if($received_option == '1'){
-            ?>
-                <div class='col team' style="width:100%;background-color:#eeeeee">
+            ?>  
+
+                <div class='col player content' style="background-color:#eeeeee">
                 <label><?=$team_row["player.nickName"];?></label>
                 <?
                 if(isAdmin($received_user_id,$activelink)){
@@ -148,11 +151,12 @@ include("menumanager.php");
             <?
                 }
             }
-        ?>
-        </div>  
-        <?
+                 ?>
+                </div>  
+                <?
         }
         ?>
+
         </div>
         <?
     }
@@ -180,22 +184,22 @@ include("menumanager.php");
 
                 <div class="row">
                 
-                <div class="col team">
+                <div class="col team content">
                 <h6>Team 1</h6>
                 <hr class="content"> 
                 <? organize_team($received_game_id,'1',$activelink,'1',$received_user_id); ?>
                 </div>
-                <div class="col team">
+                <div class="col team content">
                 <h6>Team 2</h6>
                 <hr class="content"> 
                 <? organize_team($received_game_id,'2',$activelink,'1',$received_user_id); ?>
                 </div>
-                <div class="col team">
+                <div class="col team content">
                 <h6>Team 3</h6>
                 <hr class="content"> 
                 <? organize_team($received_game_id,'3',$activelink,'1',$received_user_id); ?>
                 </div>
-                <div class="col team">
+                <div class="col team content">
                 <h6>Team 4</h6>
                 <hr class="content">
                 <? organize_team($received_game_id,'4',$activelink,'1',$received_user_id); ?> 

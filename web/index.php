@@ -21,37 +21,8 @@ if(isset($_GET["error"]) && $_GET["error"] == 3){
 <div class="row">
 
 
+<? include("menubar.php"); ?>
 
-
-	<div class="col-2 menu">
-		<hr class="menu">
-			<div class="row">
-				<a class="menubutton" href="index.php">
-					<button class="menubutton">Events</button>
-				</a>
-			</div>
-			<? if(active_session() == 0){ ?>
-			<div class="row">
-				<a class="menubutton" href="login.php">
-					<button class="menubutton">Login</button>
-				</a>
-			</div>
-			<div class="row">
-				<a class="menubutton" href="register.php">
-					<button class="menubutton">Register</button>
-				</a>
-			</div>
-			<? } else{ ?>
-				<div class="row">
-				<a class="menubutton" href="src/logout.php">
-					<button class="menubutton">Logout</button>
-				</a>
-				</div>
-			<? } ?>
-
-	
-		
-	</div> <!-- Menu div -->
 		<div class="col">
 			<div class="row"">
 			<div class="col top">
