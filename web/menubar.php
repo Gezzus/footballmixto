@@ -4,24 +4,29 @@
 			<hr class="menu">
 			<div class="row">
 				<a class="menubutton" href="index.php">
-					<button class="menubutton">Events</button>
+					<button class="menubutton team">Events</button>
 				</a>
 			</div>
 			<? if(active_session() == 0){ ?>
 			<div class="row">
 				<a class="menubutton" href="login.php">
-					<button class="menubutton">Login</button>
+					<button class="menubutton team">Login</button>
 				</a>
 			</div>
 			<div class="row">
 				<a class="menubutton" href="register.php">
-					<button class="menubutton">Register</button>
+					<button class="menubutton team">Register</button>
 				</a>
 			</div>
 			<? } else{ ?>
 				<div class="row">
+				<a class="menubutton" href="chat.php">
+					<button class="menubutton team">Chat</button>
+				</a>
+				</div>
+				<div class="row">
 				<a class="menubutton" href="src/logout.php">
-					<button class="menubutton">Logout</button>
+					<button class="menubutton team">Logout</button>
 				</a>
 				</div>
 			<? } ?>

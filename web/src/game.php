@@ -95,6 +95,8 @@ include("menumanager.php");
         $team_query = query_retrieve_team($received_game_id,$received_team_id,$activelink);
                # echo var_dump($team_query);
         
+        $game_query = query_retrieve_game($received_game_id,$activelink);
+        $game_row = mysqli_fetch_assoc($game_query);
 
         if ($team_query == "Error"){
             return "No players yet";
@@ -126,11 +128,45 @@ include("menumanager.php");
                 if(isAdmin($received_user_id,$activelink)){
                 ?>
                  <input name='id' value="<?=$team_row['pickPlayer.playerId']?>" hidden></input>
-                  <button class='content team' name='team' value='1'>1</button>
-                  <button class='content team' name='team' value='2'>2</button>
-                  <button class='content team' name='team' value='3'>3</button>
-                  <button class='content team' name='team' value='4'>4</button>
-                  <button class='content team' name='team' value='D'>D</button>
+                  <?
+                    switch ($game_row['type']){
+                        case '5 vs 5 (2 fields)':
+                            ?>
+                            <button class='content team' name='team' value='1'>1</button>
+                            <button class='content team' name='team' value='2'>2</button>
+                            <button class='content team' name='team' value='3'>3</button>
+                            <button class='content team' name='team' value='4'>4</button>
+                            <button class='content team' name='team' value='D'>D</button>
+                            <?
+                        break;
+                        case '5 vs 5 (1 field)':
+                            ?>
+                            <button class='content team' name='team' value='1'>1</button>
+                            <button class='content team' name='team' value='2'>2</button>
+                            <button class='content team' name='team' value='D'>D</button>
+                            <?
+                        break;
+                        case '9 vs 9':
+                            ?>
+                            <button class='content team' name='team' value='1'>1</button>
+                            <button class='content team' name='team' value='2'>2</button>
+                            <button class='content team' name='team' value='D'>D</button>
+                            <?
+                        break;
+                        case '8 vs 8':
+                            ?>
+                            <button class='content team' name='team' value='1'>1</button>
+                            <button class='content team' name='team' value='2'>2</button>
+                            <button class='content team' name='team' value='D'>D</button>
+                            <?
+                        break;
+                        case 'Gull':
+                            ?>
+                            <button class='content team' name='team' value='1'>1</button>
+                            <?
+                        break;
+                    }
+                  ?>
                 </form>
                 
                 <?
@@ -207,6 +243,65 @@ include("menumanager.php");
                 </div><?
                 break;
             
+                case '5 vs 5 (1 field)':
+                     ?>
+                <div class="row">
+                <div class="col team content">
+                <h6>Team 1</h6>
+                <hr class="content"> 
+                <? organize_team($received_game_id,'1',$activelink,'1',$received_user_id); ?>
+                </div>
+                <div class="col team content">
+                <h6>Team 2</h6>
+                <hr class="content"> 
+                <? organize_team($received_game_id,'2',$activelink,'1',$received_user_id); ?>
+                </div>
+                </div><?
+                break;
+
+                case '8 vs 8':
+                     ?>
+                <div class="row">
+                <div class="col team content">
+                <h6>Team 1</h6>
+                <hr class="content"> 
+                <? organize_team($received_game_id,'1',$activelink,'1',$received_user_id); ?>
+                </div>
+                <div class="col team content">
+                <h6>Team 2</h6>
+                <hr class="content"> 
+                <? organize_team($received_game_id,'2',$activelink,'1',$received_user_id); ?>
+                </div>
+                </div><?
+                break;
+
+                case '9 vs 9':
+                     ?>
+                <div class="row">
+                <div class="col team content">
+                <h6>Team 1</h6>
+                <hr class="content"> 
+                <? organize_team($received_game_id,'1',$activelink,'1',$received_user_id); ?>
+                </div>
+                <div class="col team content">
+                <h6>Team 2</h6>
+                <hr class="content"> 
+                <? organize_team($received_game_id,'2',$activelink,'1',$received_user_id); ?>
+                </div>
+                </div><?
+                break;
+
+                case 'Gull':
+                     ?>
+                <div class="row">
+                <div class="col team content">
+                <h6>Drunken peasants</h6>
+                <hr class="content"> 
+                <? organize_team($received_game_id,'1',$activelink,'1',$received_user_id); ?>
+                </div>
+                </div><?
+                break;
+
             default:
                 break;
         }

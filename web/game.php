@@ -47,7 +47,7 @@ if(active_session() == 0){
 
       <div class="row">
         <div class="col content">
-            <h5>Event information: Fútbol Match</h5>
+            <h5>Event information:</h5>
             <hr class="content">
 
                 <div class="row" style="margin:-4px;width:30%;">
