@@ -18,6 +18,14 @@ $received_gameTime =  filter_var($_POST["time"],FILTER_SANITIZE_STRING);
 		#echo $game_add."<br>";
 		if(mysqli_query($link,$game_add)){
 					$backlocation = "location:../index.php";
+
+
+
+			
+
+
+
+
 					header($backlocation);
 				}
 				else {

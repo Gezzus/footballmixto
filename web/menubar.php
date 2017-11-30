@@ -20,8 +20,13 @@
 			</div>
 			<? } else{ ?>
 				<div class="row">
-				<a class="menubutton" href="chat.php">
-					<button class="menubutton team">Chat</button>
+				<a class="menubutton" href="randomizer.php">
+					<button class="menubutton team">Randomizer</button>
+				</a>
+				</div>
+				<div class="row">
+				<a class="menubutton" href="profile.php">
+					<button class="menubutton team">My profile</button>
 				</a>
 				</div>
 				<div class="row">

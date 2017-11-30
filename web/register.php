@@ -44,11 +44,10 @@
       </select>
       <label>Skill:</label>
       <select class="landing" name="skill">
-          <option class="landing">1</option>
-          <option class="landing">2</option>
-          <option class="landing">3</option>
-          <option class="landing">4</option>
-          <option class="landing">5</option>
+          <option class="landing" value="1">I know how to play</option>
+          <option class="landing" value="3">I know what a ball is</option>
+          <option class="landing" value="4">I suck</option>
+          <option class="landing" value="2">I'm ok</option>
       </select>
     <hr>
       <button class="content" type="submit">Submit</button>  

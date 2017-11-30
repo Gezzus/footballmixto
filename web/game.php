@@ -76,8 +76,8 @@ if(active_session() == 0){
               <div class="col content">
               <h5>Current players:</h5>
                   
-                  <label>Male: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","1")?></label><br>
-                  <label>Female: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","2")?></label>
+                  <label>Male: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","2")?></label><br>
+                  <label>Female: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","1")?></label>
               </div>
       </div> <!-- End of both col -->
     </div>

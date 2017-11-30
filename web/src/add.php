@@ -41,7 +41,7 @@ if($player_query_exists_amount == 0){
 			}
 			else {
 				$backErrorlocation = "location:../game.php?id=".$_POST["gameId"]."&error=1";
-				#header($backErrorlocation);
+				header($backErrorlocation);
 				echo mysqli_error($link);
 				#echo $backErrorlocation;
 			}
@@ -58,7 +58,7 @@ if($player_query_exists_amount == 0){
 				}
 				else {
 					$backErrorlocation = "location:../game.php?id=".$_POST["gameId"]."&error=1";
-					#header($backErrorlocation);
+					header($backErrorlocation);
 					echo mysqli_error($link);
 					#echo $backErrorlocation;
 				}

@@ -24,7 +24,7 @@ include("menumanager.php");
         }
 
         function query_retrieve_team($received_game_id,$received_team_id,$activelink){
-           $game_retrieve_team = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId WHERE game.id='".$received_game_id."' AND pickPlayer.teamId='".$received_team_id."'";
+           $game_retrieve_team = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId',user.id as 'user.id' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId LEFT JOIN user ON player.id=user.playerId WHERE game.id='".$received_game_id."' AND pickPlayer.teamId='".$received_team_id."'";
             $game_retrieve_team_query = mysqli_query($activelink,$game_retrieve_team);
             #$game_retrieve_attendants_row = mysqli_fetch_assoc($game_retrieve_attendants_query);
             $game_retrieve_team_amount = mysqli_num_rows($game_retrieve_team_query);
@@ -39,7 +39,7 @@ include("menumanager.php");
 
          function query_retrieve_attendants($received_game_id,$activelink)
         {
-            $game_retrieve_attendants = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId WHERE game.id=".$received_game_id;
+            $game_retrieve_attendants = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId', user.id as 'user.id' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId LEFT JOIN user ON player.id=user.playerId WHERE game.id=".$received_game_id;
             $game_retrieve_attendants_query = mysqli_query($activelink,$game_retrieve_attendants);
             #$game_retrieve_attendants_row = mysqli_fetch_assoc($game_retrieve_attendants_query);
             $game_retrieve_attendants_amount = mysqli_num_rows($game_retrieve_attendants_query);
@@ -53,9 +53,9 @@ include("menumanager.php");
 
         }
 
-    function query_games_retrieve_all($activelink)
+    function query_games_retrieve_all($status,$limit,$activelink)
     {
-        $games_retrieve = "SELECT game.id as 'game.id',game.typeId,game.date,gameType.type as 'type' FROM game LEFT JOIN gameType ON game.typeId=gameType.id WHERE status=0";
+        $games_retrieve = "SELECT game.id as 'game.id',game.typeId,game.date,gameType.type as 'type' FROM game LEFT JOIN gameType ON game.typeId=gameType.id WHERE status='".$status."' LIMIT ".$limit;
             $games_retrieve_query = mysqli_query($activelink,$games_retrieve);
             //$games_retrieve_query_row = mysqli_fetch_assoc($events_retrieve_query);
             $games_retrieve_query_amount = mysqli_num_rows($games_retrieve_query);
@@ -68,9 +68,9 @@ include("menumanager.php");
     }
 
 
-     function organize_games($activelink)
+     function organize_games($status,$limit,$activelink)
      {
-        $games  = query_games_retrieve_all($activelink);
+        $games  = query_games_retrieve_all($status,$limit,$activelink);
         if ($games == "Error")
         {
             return "There are no games available";
@@ -123,6 +123,7 @@ include("menumanager.php");
                
                 <div class='col-2 content player' style="margin:1%;background-color:<?= $team_color ?>">
                 <label><?=$team_row["player.nickName"];?></label>
+                <img class="" height="15" width="15" src="attachments/<?=$team_row['id']?>"></img>
                 <form method='POST' action='src/operatory.php?action=teamchange&id=<?=$received_game_id?>'>
                 <?
                 if(isAdmin($received_user_id,$activelink)){
@@ -171,28 +172,34 @@ include("menumanager.php");
                 
                 <?
                 }
-        }  
+                ?>
+                </div>
+        <?}  
         else if($received_option == '1'){
             ?>  
 
+                <div class="row" style="width:100%;margin-left:1%">
                 <div class='col player content' style="background-color:#eeeeee">
-                <label><?=$team_row["player.nickName"];?></label>
-                <?
-                if(isAdmin($received_user_id,$activelink)){
-                ?>
-                <form method="POST" action="src/operatory.php?action=teamchange&id=<?=$received_game_id?>">
-                <input name="id" hidden value="<?=$team_row['pickPlayer.playerId']?>"></input>
-                <button class="content team" name='team' value='5' type="submit">R</button>
-                </form>
-            <?
-                }
-            }
-                 ?>
-                </div>  
-                <?
+                        <img class="profileimage2" height="30" width="30" src="attachments/<?if(is_null($team_row['user.id'])){ echo '0';}else{  echo $team_row['user.id'];}?>"></img>
+                        <label><?=$team_row["player.nickName"];?></label>
+                        <?
+                        if(isAdmin($received_user_id,$activelink)){
+                        ?>
+                        <form method="POST" action="src/operatory.php?action=teamchange&id=<?=$received_game_id?>">
+                        <input name="id" hidden value="<?=$team_row['pickPlayer.playerId']?>"></input>
+                        
+                        <button class="content team" name='team' value='5' type="submit">R</button>
+                        </form>
+                    <?
+                        }
+                        ?>
+                    </div>
+                    </div>
+                        <?
+                    }
+                         
         }
         ?>
-
         </div>
         <?
     }
