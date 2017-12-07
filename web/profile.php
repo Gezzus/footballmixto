@@ -37,28 +37,27 @@ include("src/menumanager.php");
                                <label><img class="profileimage" height="100" width="100" src="<?="attachments/".$_SESSION['id'] ?>">
                                <input name="image" class="profileimage" type="file">
                                </img></label><br>
-                               <label><font size="2" color="grey">Upload a small picture... please.</font></label>
+                               <label><font size="2" color="grey">Click up here to upload a picture.<br>Upload a small picture... please.<br>Changes wont take effect until you press "Update".</font></label>
                             </div>
                             
+                             <button class="content team" type="input">Upload Picture</button>
+                            </form>
+                            <hr style="margin:1%">
+                            
+                            <form action="src/profile.php" method="POST" style="width:100%">
 
-
-                            <hr>
                             <label class="content">Nickname: </label>
-                            <input class="content" style="width:70%" type="text" value=<?= $_SESSION['id']?>>
-                            <br>
-                            <label class="content">Password: </label>
-                            <input class="content" style="width:70%" type="password" value=<?= $_SESSION['id']?>>
+                            <input class="content" style="width:70%" type="text" value=<?= $_SESSION['nickname']?>>
                             <br>
                             <label class="content">Skill</label>
-                            <select class="content" style="width:70%" type="text" value=<?= $_SESSION['id']?>>
+                            <select class="content" style="width:70%" type="text" value=<?#= $_SESSION['id']?>>
                             </select>
 
+                            
+                             <button class="content team" type="input">Update Profile</button>
+                            </form>
                             <hr>
                             
-                            <button class="content team" type="input">Send</button>
-
-                            </form>
-
 
 
                       </div>

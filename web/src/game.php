@@ -24,7 +24,7 @@ include("menumanager.php");
         }
 
         function query_retrieve_team($received_game_id,$received_team_id,$activelink){
-           $game_retrieve_team = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId',user.id as 'user.id' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId LEFT JOIN user ON player.id=user.playerId WHERE game.id='".$received_game_id."' AND pickPlayer.teamId='".$received_team_id."'";
+           $game_retrieve_team = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId', player.levelId as 'player.levelId', user.id as 'user.id' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId LEFT JOIN user ON player.id=user.playerId WHERE game.id='".$received_game_id."' AND pickPlayer.teamId='".$received_team_id."'";
             $game_retrieve_team_query = mysqli_query($activelink,$game_retrieve_team);
             #$game_retrieve_attendants_row = mysqli_fetch_assoc($game_retrieve_attendants_query);
             $game_retrieve_team_amount = mysqli_num_rows($game_retrieve_team_query);
@@ -106,7 +106,8 @@ include("menumanager.php");
 
         ?><div class="row" style="width:98%;margin-left: 1%"><?
         
-        for ($i=0; $i < $team_ammount; $i++) {
+    for ($i=0; $i < $team_ammount; $i++)
+    {
             $team_row = mysqli_fetch_assoc($team_query);
             switch ($team_row["player.genderId"]) {
                 case 1:
@@ -122,9 +123,10 @@ include("menumanager.php");
             ?>
                
                 <div class='col-2 content player' style="margin:1%;background-color:<?= $team_color ?>">
-                <label><?=$team_row["player.nickName"];?></label>
-                <img class="" height="15" width="15" src="attachments/<?=$team_row['id']?>"></img>
-                <form method='POST' action='src/operatory.php?action=teamchange&id=<?=$received_game_id?>'>
+                 <img class="profileimage2" height="30" width="30" src="attachments/<?if(is_null($team_row['user.id'])){ echo '0';}else{  echo $team_row['user.id'];}?>"></img>
+                 <label><?=$team_row["player.nickName"];?></label>
+                <label style="float:right"><font size="1">Level:<?=$team_row["player.levelId"];?></font></label>
+                <form style="margin:0px;padding:0px" method='POST' action='src/operatory.php?action=teamchange&id=<?=$received_game_id?>'>
                 <?
                 if(isAdmin($received_user_id,$activelink)){
                 ?>
@@ -161,7 +163,7 @@ include("menumanager.php");
                             <button class='content team' name='team' value='D'>D</button>
                             <?
                         break;
-                        case 'Gull':
+                        case 'Asado fin de año 2017':
                             ?>
                             <button class='content team' name='team' value='1'>1</button>
                             <?
@@ -174,7 +176,7 @@ include("menumanager.php");
                 }
                 ?>
                 </div>
-        <?}  
+        <? }
         else if($received_option == '1'){
             ?>  
 
@@ -182,27 +184,30 @@ include("menumanager.php");
                 <div class='col player content' style="background-color:#eeeeee">
                         <img class="profileimage2" height="30" width="30" src="attachments/<?if(is_null($team_row['user.id'])){ echo '0';}else{  echo $team_row['user.id'];}?>"></img>
                         <label><?=$team_row["player.nickName"];?></label>
+                       
                         <?
                         if(isAdmin($received_user_id,$activelink)){
                         ?>
-                        <form method="POST" action="src/operatory.php?action=teamchange&id=<?=$received_game_id?>">
-                        <input name="id" hidden value="<?=$team_row['pickPlayer.playerId']?>"></input>
+                        <form style="margin:0px;padding:0px;float:right" method="POST" action="src/operatory.php?action=teamchange&id=<?=$received_game_id?>">
+                        <input style="float:right" name="id" hidden value="<?=$team_row['pickPlayer.playerId']?>"></input>
                         
                         <button class="content team" name='team' value='5' type="submit">R</button>
                         </form>
                     <?
                         }
-                        ?>
+                        
+                    ?>
+                     <label style="float:center"><font size="1">Level:<?=$team_row["player.levelId"];?></font></label>
                     </div>
                     </div>
-                        <?
+                    <?php
                     }
-                         
-        }
+                     
+            } #supposedly for closing, but does not highlight
         ?>
         </div>
-        <?
-    }
+        <?php 
+        }
 
      function game_retrieve($received_game_id,$activelink){
 
@@ -299,14 +304,15 @@ include("menumanager.php");
                 break;
 
                 case 'Gull':
-                     ?>
+                ?>
                 <div class="row">
                 <div class="col team content">
                 <h6>Drunken peasants</h6>
                 <hr class="content"> 
                 <? organize_team($received_game_id,'1',$activelink,'1',$received_user_id); ?>
                 </div>
-                </div><?
+                </div>
+                <?php
                 break;
 
             default:

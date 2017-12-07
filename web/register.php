@@ -10,6 +10,10 @@
     header("location:index.php");
   }
 
+  if(isset($_GET["id"]) && $_GET["id"] == 3){
+    echo "<script type='text/javascript'>alert('Please use a different Username or Nickname');</script>";
+}
+
 ?>
 
  <link rel="stylesheet" type="text/css" href="css/style.css">

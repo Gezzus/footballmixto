@@ -9,5 +9,5 @@ print_r($_FILES['image']);
 
 file_put_contents($_SESSION['id'],file_get_contents($_FILES['image']['tmp_name']));
 
-header("location:../index.php");
+header("location:../profile.php");
 ?>

@@ -1,0 +1,2 @@
+<? header("location:../profile.php");
+?>

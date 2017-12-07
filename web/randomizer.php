@@ -13,6 +13,11 @@ if(isset($_SESSION["winners"]) && (!isset($_GET['add']))){
     $_SESSION['winners'] = null;
 }
 
+if(!isset($_SESSION['id']))
+{
+  header("location:index.php?&error=3");
+}
+
 ?>
 
 

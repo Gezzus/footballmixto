@@ -12,6 +12,17 @@ if(active_session() == 0){
   
 }
 
+if(isset($_GET["error"]) && $_GET["error"] == 3){
+    echo "<script type='text/javascript'>alert('Valen ansiosa! No esta terminado');</script>";
+}
+
+if(isset($_GET["error"]) && $_GET["error"] == 1){
+    echo "<script type='text/javascript'>alert('You are already subscribed to this event');</script>";
+}
+
+
+
+
 ?>
 
 
@@ -28,22 +39,7 @@ if(active_session() == 0){
     <? include("menubar.php"); ?>
 
     <div class="col">
-      <div class="row">
-          <div class="col top">
-          </div>
-		      <div class="col-1 top">
-            <form method="POST" action="src/join.php">
-            <button href="index.php" class="top">Join Event</button>
-            <input hidden value="<?=$_GET['id']?>" name="gameId"></input>
-            </form>
-          </div>
-          <div class="col-1 top">
-            <form method="POST" action="src/deletegame.php">
-            <button href="index.php" class="top">Delete Event</button>
-            <input hidden value="<?=$_GET['id']?>" name="id"></input>
-            </form>
-          </div>
-		  </div>
+      <? include("topbar.php"); ?>
 
       <div class="row">
         <div class="col content">

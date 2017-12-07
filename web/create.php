@@ -17,11 +17,8 @@ include("src/game.php");
 	<? include("menubar.php"); ?>
 
 		<div class="col">
-			<div class="row"">
-			<div class="col top">
-			<a href="index.php" class="top" >Cancel</a>
-			</div>
-			</div>
+			<? include("topbar.php"); ?>
+
 		 	<div class="row" style="padding-bottom: 0;margin-bottom:0">
                   <div class="col-3 content">
                   	<h5>Create event: </h5>
@@ -30,13 +27,13 @@ include("src/game.php");
                         <form style="" method="POST" action="src/addgame.php">
                         	<!--<label class="content">Event name: </label>
                         	<input class="content" type="text" name="name"><br>-->
-                        	<label class="content">Type: </label>
-                        	<select style="width:100%" class="content" name="type">
+                        	<label class="content">Type: </label><br>
+                        	<select style="width:60%" class="content" name="type">
                         		<option value='2'>5 vs 5 (2 Fields)</option>
                         		<option value='1'>5 vs 5 (1 Field)</option>
                         		<option value='3'>8 vs 8</option>
                         		<option value='4'>9 vs 9</option>
-                        		<option value='5'>Gull</option>
+                        		<option value='5'>Asado fin de año 2017</option>
                         	</select>
                         	<hr>
                         	<div class="row">

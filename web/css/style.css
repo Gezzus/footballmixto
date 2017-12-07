@@ -45,7 +45,14 @@ button.team{
 	margin:1%!important;
 	border:1px solid rgba(0,0,0,.1)!important;
 	font-size: 70%;
+
 }
+
+button.team:hover
+{
+	background-color: #CCCCCC;
+}
+
 
 div.top{
 	height:4%;
