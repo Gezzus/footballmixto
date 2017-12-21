@@ -34,7 +34,7 @@ if(!isset($_SESSION['id']))
 <? include("menubar.php"); ?>
 
 		<div class="col">
-			<div class="row"">
+			<div class="row">
 			<div class="col top">
 
 			</div>

@@ -342,4 +342,60 @@ include("menumanager.php");
      }
 
 
+     function query_addplayer($activelink,$game_id,$nickname,$gender_id)
+     {
+
+        $received_nickname = filter_var($nickname,FILTER_SANITIZE_STRING);
+        $player_query_exists = "SELECT id,nickName FROM player WHERE nickName='".$received_nickname."'";
+        $player_query_exists_result = mysqli_query($activelink,$player_query_exists);
+        echo mysqli_error($activelink);
+        $player_query_exists_row = mysqli_fetch_assoc($player_query_exists_result);
+        $player_query_exists_amount = mysqli_num_rows($player_query_exists_result);
+
+        switch ($gender_id){
+            case "1":
+            {
+                $received_genderId = 1;
+                break;
+            }
+            case "0":
+            {
+                $received_genderId = 2;
+                break;
+            }
+        }
+
+        if($player_query_exists_amount == 0){
+        $player_query_create = "INSERT INTO player(nickName,genderId,levelId) VALUES('".$received_nickname."','".$received_genderId."','1')";
+                if(mysqli_query($activelink,$player_query_create)){
+                    $player_query_lastid = mysqli_insert_id($activelink);
+                    $player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$game_id."','".$player_query_lastid."','5')";
+                    if(mysqli_query($activelink,$player_event_add)){
+                        return "200";
+                    }
+                    else{
+                        return "500";
+                    }
+                }
+                else {
+                   return "500";
+                }
+        }
+        else
+        {
+            $player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$game_id."','".$player_query_exists_row["id"]."','5')";
+            echo $player_event_add."<br>";
+            if(mysqli_query($activelink,$player_event_add)){
+                        return "200";
+                    }
+                    else {
+                      return "500";
+                    }
+        }
+
+    }
+
+
+
+
 ?>

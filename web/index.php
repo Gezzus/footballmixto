@@ -40,15 +40,7 @@ if(isset($_GET["error"]) && $_GET["error"] == 3){
               	  	  
       </div>
      
-      <div class="row">
-        <div class="col myfooter">
-        <footer class="myfooter">
-        <p class="myfooter">Made with ♥ by a bunch of people from Avature</p>
-        </footer> 
-        </div>
-      </div>
-
-    		
+      <? include("menufooter.php"); ?>
     	
 		</div>
 

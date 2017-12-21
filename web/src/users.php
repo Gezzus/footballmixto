@@ -61,6 +61,17 @@
 		}
 	}
 
+	function retrieve_players_display_select($activelink){
+		$players = retrieve_players($activelink);
+		for ($i=0; $i < mysqli_num_rows($players); $i++) { 
+			$players_row = mysqli_fetch_assoc($players);
+			?>
+			<option value="<?= $players_row['id']?>"><?= $players_row['nickName']?></option>
+			<?
+			}
+
+	}
+
 	function players_display($players,$activelink)
 	{
 		$exploded_players = explode(",",$players);
@@ -72,6 +83,13 @@
 		?>
 			<input name="pool" value="<?= implode(",",$exploded_players) ?>" hidden></input>
 		<?
+	}
+
+	function  player_display_NickName($activelink,$id)
+	{
+		$player = retrieve_player($activelink,$id);
+		$player_row = mysqli_fetch_assoc($player);
+		return $player_row['nickName'];
 	}
 
 	function winner_display($players_string,$activelink)

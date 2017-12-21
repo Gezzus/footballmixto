@@ -23,6 +23,8 @@ a.top{
 	font-size: 70%;
 }
 
+
+
 button.top{
 	cursor: pointer;
 	float:right;
@@ -61,20 +63,31 @@ div.top{
 	border-bottom:1px solid rgba(255, 255, 255, 0.1);
 }
 
-a.menubutton
-{
+a.menubutton{
 	color:black;
 	width:100%;
 }
+
+a.squarebutton{
+
+}
+
+button.squarebutton{
+	border:1px solid;
+	border-color:#5D2E8C;
+	border-radius:5px;
+	background-color:#E8E8E8;
+	height:30px;
+}
+
 button.menubutton{
 	border:1px solid;
 	border-color:#5D2E8C;
 	border-radius:5px;
-	margin:10px;
 	background-color:#E8E8E8;
-	width:90%;
 	padding:2%;
 	margin:2%;
+	width:90%;
 	/*color:black;
 	width:100%*/
 }
@@ -95,9 +108,14 @@ p.myfooter{
 
 div.menu{
  background-color: #232B3C;
- padding-left:1.5%;
+ width:1.5%;
  min-height: 100%;
+}
 
+
+div.menu2{
+ background-color: #232B3C;
+ min-height: 100%;
 }
 
 hr.menu{

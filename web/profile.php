@@ -49,11 +49,7 @@ include("src/menumanager.php");
                             <label class="content">Nickname: </label>
                             <input class="content" style="width:70%" type="text" value=<?= $_SESSION['nickname']?>>
                             <br>
-                            <label class="content">Skill</label>
-                            <select class="content" style="width:70%" type="text" value=<?#= $_SESSION['id']?>>
-                            </select>
-
-                            
+                       
                              <button class="content team" type="input">Update Profile</button>
                             </form>
                             <hr>

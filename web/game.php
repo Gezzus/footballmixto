@@ -75,6 +75,15 @@ if(isset($_GET["error"]) && $_GET["error"] == 1){
                   <label>Male: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","2")?></label><br>
                   <label>Female: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","1")?></label>
               </div>
+              <div class="col content">
+              <h5>Doodle URL:</h5>
+              <form action="src/crawler.php" method="POST">
+                <input name="doodleUrl" class="team content">
+                <input hidden name="game_id" value="<?= $_GET['id'] ?>">
+                <button class="team content">Load</button>
+              </form>
+              </div>
+              
       </div> <!-- End of both col -->
     </div>
 
