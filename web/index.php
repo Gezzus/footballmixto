@@ -29,7 +29,7 @@ if(isset($_GET["error"]) && $_GET["error"] == 3){
 		<div class="col">
 			<? include("topbar.php"); ?>
 		 	<div class="row">
-                  <div class="col-8 team content">
+                  <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
                   	<h5>Upcoming matches: </h5>
                   	<hr class="content">
                       <div class="row" style="padding-left:3.5%">
@@ -39,7 +39,20 @@ if(isset($_GET["error"]) && $_GET["error"] == 3){
              	    </div>	
               	  	  
       </div>
-     
+
+      <div class="row">
+                  <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
+                    <h5>Old matches: </h5>
+                    <hr class="content">
+                      <div class="row" style="padding-left:3.5%">
+                          <?= organize_games(1,999,$link); ?>
+                      </div>
+
+                  </div>  
+                      
+      </div>
+      <br>
+     <br>
       <? include("menufooter.php"); ?>
     	
 		</div>

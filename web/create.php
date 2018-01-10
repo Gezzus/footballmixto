@@ -25,15 +25,14 @@ include("src/game.php");
                   	<hr class="content">
                       <div class="row"  style="padding:1%">
                         <form style="" method="POST" action="src/addgame.php">
-                        	<!--<label class="content">Event name: </label>
-                        	<input class="content" type="text" name="name"><br>-->
+
                         	<label class="content">Type: </label><br>
                         	<select style="width:60%" class="content" name="type">
                         		<option value='2'>5 vs 5 (2 Fields)</option>
                         		<option value='1'>5 vs 5 (1 Field)</option>
                         		<option value='3'>8 vs 8</option>
                         		<option value='4'>9 vs 9</option>
-                        		<option value='5'>Asado fin de año 2017</option>
+                        		<option value='5'>Social Event</option>
                         	</select>
                         	<hr>
                         	<div class="row">
@@ -47,7 +46,7 @@ include("src/game.php");
                         	</div>
                         	</div>
                         	<hr>
-                        	<button style="padding-top:2%" class="content team">Add</button>
+                        	<button class="content team">Add</button>
                         </form>	
                       </div>
 
@@ -57,7 +56,7 @@ include("src/game.php");
                   
              	  	  
             </div>
-            <div class="row"  style="padding-top: 0;margin-top:0">
+            <div class="row">
             	<div class="col-3 content" style="height:5%">
                 	<center><h5>More stuff comming soon</h5></center>
                     	

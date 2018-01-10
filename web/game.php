@@ -13,7 +13,7 @@ if(active_session() == 0){
 }
 
 if(isset($_GET["error"]) && $_GET["error"] == 3){
-    echo "<script type='text/javascript'>alert('Valen ansiosa! No esta terminado');</script>";
+    echo "<script type='text/javascript'>alert('This doesn/'t do shit... yet);</script>";
 }
 
 if(isset($_GET["error"]) && $_GET["error"] == 1){
@@ -42,7 +42,7 @@ if(isset($_GET["error"]) && $_GET["error"] == 1){
       <? include("topbar.php"); ?>
 
       <div class="row">
-        <div class="col content">
+        <div class="col content" style="background-color: rgba(255, 255, 255, 0.6)">
             <h5>Event information:</h5>
             <hr class="content">
 
@@ -54,8 +54,8 @@ if(isset($_GET["error"]) && $_GET["error"] == 1){
                 </div> 
                 <? game_organize_teams($_GET['id'],$link,$_SESSION['id']) ?>
         </div> 
-        <div class="col-3" style="border: none;margin-top:1%;margin-bottom:0px;margin-left:0px;margin-right:2%;padding: 0px;">   
-                <div class="col content">
+        <div class="col-3 content" style=";background-color: rgba(255, 255, 255, 0.6)">   
+                <div class="col content" style="margin:0px">
              	  	<h5>Add an outsider:</h5>
              	  	<form method="POST" action="src/add.php">
              	  		<label>Name:</label>
@@ -69,13 +69,13 @@ if(isset($_GET["error"]) && $_GET["error"] == 1){
                     <input name="gameId" hidden value="<?=$_GET['id']?>"></input>
              	  	</form>
              	</div>
-              <div class="col content">
+              <div class="col content" style="margin:0px">
               <h5>Current players:</h5>
                   
                   <label>Male: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","2")?></label><br>
                   <label>Female: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","1")?></label>
               </div>
-              <div class="col content">
+              <div class="col content" style="margin:0px">
               <h5>Doodle URL:</h5>
               <form action="src/crawler.php" method="POST">
                 <input name="doodleUrl" class="team content">
@@ -87,13 +87,16 @@ if(isset($_GET["error"]) && $_GET["error"] == 1){
       </div> <!-- End of both col -->
     </div>
 
+    <?if(query_retrieve_team($_GET['id'],'5',$link) != "Error"){?>
     <div class="row">
-       <div class="col content">
+       <div class="col content" style="background-color:rgba(255, 255, 255, 0.6)">
                 <h6>Teamless</h6>
                 <hr class="content"> 
                 <? organize_team($_GET['id'],'5',$link,'0',$_SESSION['id']); ?>
                 </div>
     </div>
+    <? } ?>
+
               
 
             

@@ -73,7 +73,7 @@ if(!isset($_SESSION['id']))
                     <? if(isset($_SESSION['winners']) == 1 ){ ?>
                         <h6 class="">Winners</h6>
                          <?php winner_display($_SESSION['winners'],$link,$_SESSION['id']); ?>
-                    
+                      
                     <? } ?>
 
 
@@ -81,16 +81,29 @@ if(!isset($_SESSION['id']))
                 
                   <div class="col-3 team content" style="margin-left: 0%!important">
                     <h6 class="">Select players:</h6>
+                    
                 	   <div class="col team content">
-                     <?php if(isset($_GET['add']))
-                            {
-                              retrieve_players_display($_GET['add'],$link);
-                            }
+                     <?php if(isset($_GET['add'])){
+                        retrieve_players_display($_GET['add'],$link);
+                        }
                          else{retrieve_players_display(null,$link);
                          } ?>
-             	    </div>
+             	      </div>
              	  	  
-                </div>
+                  </div>
+
+                  <div class="col-3 team content" style="margin-left: 0%!important;height:10%;min-height: 10px!important">
+                    <h6 class="">Select player:</h6>
+                    <form method="">
+                    <select class="content"><? retrieve_players_display_select($link); ?></select>
+                    <br>WORK IN PROGRESS
+    
+                    
+                  </div>
+
+
+
+                  
               
 
     		

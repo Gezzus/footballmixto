@@ -1,11 +1,11 @@
 <div class="row"">
 	<div class="col top">
 	<? if((active_session() == 1) && ($_SERVER["REQUEST_URI"] == "/web/index.php")){ ?>
-		<button class="team content"><a href="create.php" >Add new</a></button>
+		<button class="team content"><a style="color:black" href="create.php" >Add new</a></button>
 	 <?php }
 	
 	if((active_session() == 1) && ($_SERVER["REQUEST_URI"] == "/web/create.php")){ ?>
-		<button class="team content"><a href="index.php" >Back</a></button>
+		<button class="team content"><a style="color:black" href="index.php" >Back</a></button>
 	<?}
 
 	$gamePath = pathinfo($_SERVER["REQUEST_URI"],PATHINFO_DIRNAME)."/".pathinfo($_SERVER["REQUEST_URI"],PATHINFO_FILENAME).".php";

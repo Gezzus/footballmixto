@@ -67,6 +67,176 @@ include("menumanager.php");
             }
     }
 
+    function game_retrieve_attribute_ammount($received_game_id,$activelink,$attribute,$attribute_value){
+
+        $attendants = query_retrieve_attendants($received_game_id,$activelink);
+        $attendant_row = mysqli_fetch_assoc($attendants);
+
+        $attendants_amount = 0;
+        #$attendant = mysqli_fetch_assoc($attendants);
+        for ($i=0; $i < mysqli_num_rows($attendants); $i++) { 
+         
+           if($attendant_row[$attribute] == $attribute_value)
+           {
+             $attendants_amount++;
+           }
+           $attendant_row = mysqli_fetch_assoc($attendants);
+        }
+
+        return $attendants_amount;
+
+     }
+
+
+     function query_addplayer($activelink,$game_id,$nickname,$gender_id)
+     {
+
+        $received_nickname = filter_var($nickname,FILTER_SANITIZE_STRING);
+        $player_query_exists = "SELECT id,nickName FROM player WHERE nickName='".$received_nickname."'";
+        $player_query_exists_result = mysqli_query($activelink,$player_query_exists);
+        echo mysqli_error($activelink);
+        $player_query_exists_row = mysqli_fetch_assoc($player_query_exists_result);
+        $player_query_exists_amount = mysqli_num_rows($player_query_exists_result);
+
+        switch ($gender_id){
+            case "1":
+            {
+                $received_genderId = 1;
+                break;
+            }
+            case "0":
+            {
+                $received_genderId = 2;
+                break;
+            }
+        }
+
+        if($player_query_exists_amount == 0){
+        $player_query_create = "INSERT INTO player(nickName,genderId,levelId) VALUES('".$received_nickname."','".$received_genderId."','1')";
+                if(mysqli_query($activelink,$player_query_create)){
+                    $player_query_lastid = mysqli_insert_id($activelink);
+                    $player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$game_id."','".$player_query_lastid."','5')";
+                    if(mysqli_query($activelink,$player_event_add)){
+                        return "200";
+                    }
+                    else{
+                        return "500";
+                    }
+                }
+                else {
+                   return "500";
+                }
+        }
+        else
+        {
+            $player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$game_id."','".$player_query_exists_row["id"]."','5')";
+            echo $player_event_add."<br>";
+            if(mysqli_query($activelink,$player_event_add)){
+                        return "200";
+                    }
+                    else {
+                      return "500";
+                    }
+        }
+
+    }
+
+
+    function retrieve_players($activelink)
+    {
+        $select_players = "SELECT * FROM player";
+        $select_players_query = mysqli_query($activelink,$select_players);
+        return $select_players_query;
+    }
+
+    function retrieve_player($activelink,$id)
+    {
+        $select_player = "SELECT player.nickName FROM player WHERE id='".$id."'";
+        $select_player_query = mysqli_query($activelink,$select_player);
+        return $select_player_query;
+    }
+
+    function retrieve_players_display($current_players,$activelink)
+    {
+        $players = retrieve_players($activelink);
+
+        if(!$current_players == null){
+            $current_players_array = explode(",",$current_players);
+
+                    for ($i=0; $i < mysqli_num_rows($players); $i++) { 
+                    $players_row = mysqli_fetch_assoc($players);
+
+                    if(!in_array($players_row['id'],$current_players_array)){
+
+                    ?>
+                    <a href="randomizer.php?add=<?= $players_row['id']?>,<? if(isset($_GET['add'])){ echo $_GET['add']; } ?>"><button class="content team"><?= $players_row['nickName']?></button></a>
+                    <?
+                    }
+            }
+        }
+        else        
+        { for ($i=0; $i < mysqli_num_rows($players); $i++) { 
+            $players_row = mysqli_fetch_assoc($players);
+            ?>
+            <a href="randomizer.php?add=<?= $players_row['id']?>,<? if(isset($_GET['add'])){ echo $_GET['add']; } ?>"><button class="content team"><?= $players_row['nickName']?></button></a>
+            <?
+            }
+        }
+    }
+
+    function retrieve_players_display_select($activelink){
+        $players = retrieve_players($activelink);
+        for ($i=0; $i < mysqli_num_rows($players); $i++) { 
+            $players_row = mysqli_fetch_assoc($players);
+            ?>
+            <option value="<?= $players_row['id']?>"><?= $players_row['nickName']?></option>
+            <?
+            }
+
+    }
+
+    function players_display($players,$activelink)
+    {
+        $exploded_players = explode(",",$players);
+        for ($i=0; $i < count($exploded_players)-1; $i++) {
+        $cur_player = retrieve_player($activelink,$exploded_players[$i]);
+        $cur_player_row = mysqli_fetch_assoc($cur_player);
+            ?><button class="content team"><?= $cur_player_row['nickName']?></button><?
+        }
+        ?>
+            <input name="pool" value="<?= implode(",",$exploded_players) ?>" hidden></input>
+        <?
+    }
+
+    function  player_display_NickName($activelink,$id)
+    {
+        $player = retrieve_player($activelink,$id);
+        $player_row = mysqli_fetch_assoc($player);
+        return $player_row['nickName'];
+    }
+
+
+    function players_return_random($players,$amount,$owner,$activelink)
+    {
+        $players_array = explode(",",$players);
+        $players_array = array_filter($players_array);
+        $players_array = array_unique($players_array);
+        
+        shuffle($players_array);
+        $winners_array = [];
+        for ($i=0; $i < $amount; $i++) { 
+            #echo "<br>";
+            #echo $players_array[$i];
+            array_push($winners_array,$players_array[$i]);
+        }
+        $query_perseguido = "INSERT INTO randomizer(winners,participants,time,owner) VALUES('".filter_var(implode(",",$winners_array),FILTER_SANITIZE_STRING)."','".filter_var(implode(",",$players_array),FILTER_SANITIZE_STRING)."',NOW(),'".$owner."')";
+        #echo $query_perseguido;
+        #filter_var(implode(",",$winners_array),FILTER_SANITIZE_STRING)
+        #filter_var(implode(",",$players_array),FILTER_SANITIZE_STRING)
+        mysqli_query($activelink,$query_perseguido);
+        mysqli_error($activelink);
+        return $winners_array;
+    }
 
      function organize_games($status,$limit,$activelink)
      {
@@ -124,7 +294,7 @@ include("menumanager.php");
                
                 <div class='col-2 content player' style="margin:1%;background-color:<?= $team_color ?>">
                  <img class="profileimage2" height="30" width="30" src="attachments/<?if(is_null($team_row['user.id'])){ echo '0';}else{  echo $team_row['user.id'];}?>"></img>
-                 <label><?=$team_row["player.nickName"];?></label>
+                <label><?=$team_row["player.nickName"]?></label>
                 <label style="float:right"><font size="1">Level:<?=$team_row["player.levelId"];?></font></label>
                 <form style="margin:0px;padding:0px" method='POST' action='src/operatory.php?action=teamchange&id=<?=$received_game_id?>'>
                 <?
@@ -163,7 +333,7 @@ include("menumanager.php");
                             <button class='content team' name='team' value='D'>D</button>
                             <?
                         break;
-                        case 'Asado fin de año 2017':
+                        case 'Social Event':
                             ?>
                             <button class='content team' name='team' value='1'>1</button>
                             <?
@@ -183,9 +353,16 @@ include("menumanager.php");
                 <div class="row" style="width:100%;margin-left:1%">
                 <div class='col player content' style="background-color:#eeeeee">
                         <img class="profileimage2" height="30" width="30" src="attachments/<?if(is_null($team_row['user.id'])){ echo '0';}else{  echo $team_row['user.id'];}?>"></img>
-                        <label><?=$team_row["player.nickName"];?></label>
+                        <label><?
+                        if(strlen($team_row["player.nickName"]) > 14){
+                         echo "<font size='1'>".$team_row["player.nickName"]."</font>";
+                        }
+                        else{ echo $team_row["player.nickName"]; }?>
+                            
+                        </label>
                        
                         <?
+
                         if(isAdmin($received_user_id,$activelink)){
                         ?>
                         <form style="margin:0px;padding:0px;float:right" method="POST" action="src/operatory.php?action=teamchange&id=<?=$received_game_id?>">
@@ -321,79 +498,7 @@ include("menumanager.php");
 
      }
 
-     function game_retrieve_attribute_ammount($received_game_id,$activelink,$attribute,$attribute_value){
-
-        $attendants = query_retrieve_attendants($received_game_id,$activelink);
-        $attendant_row = mysqli_fetch_assoc($attendants);
-
-        $attendants_amount = 0;
-        #$attendant = mysqli_fetch_assoc($attendants);
-        for ($i=0; $i < mysqli_num_rows($attendants); $i++) { 
-         
-           if($attendant_row[$attribute] == $attribute_value)
-           {
-             $attendants_amount++;
-           }
-           $attendant_row = mysqli_fetch_assoc($attendants);
-        }
-
-        return $attendants_amount;
-
-     }
-
-
-     function query_addplayer($activelink,$game_id,$nickname,$gender_id)
-     {
-
-        $received_nickname = filter_var($nickname,FILTER_SANITIZE_STRING);
-        $player_query_exists = "SELECT id,nickName FROM player WHERE nickName='".$received_nickname."'";
-        $player_query_exists_result = mysqli_query($activelink,$player_query_exists);
-        echo mysqli_error($activelink);
-        $player_query_exists_row = mysqli_fetch_assoc($player_query_exists_result);
-        $player_query_exists_amount = mysqli_num_rows($player_query_exists_result);
-
-        switch ($gender_id){
-            case "1":
-            {
-                $received_genderId = 1;
-                break;
-            }
-            case "0":
-            {
-                $received_genderId = 2;
-                break;
-            }
-        }
-
-        if($player_query_exists_amount == 0){
-        $player_query_create = "INSERT INTO player(nickName,genderId,levelId) VALUES('".$received_nickname."','".$received_genderId."','1')";
-                if(mysqli_query($activelink,$player_query_create)){
-                    $player_query_lastid = mysqli_insert_id($activelink);
-                    $player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$game_id."','".$player_query_lastid."','5')";
-                    if(mysqli_query($activelink,$player_event_add)){
-                        return "200";
-                    }
-                    else{
-                        return "500";
-                    }
-                }
-                else {
-                   return "500";
-                }
-        }
-        else
-        {
-            $player_event_add = "INSERT INTO pickPlayer(gameId,playerId,teamId) VALUES('".$game_id."','".$player_query_exists_row["id"]."','5')";
-            echo $player_event_add."<br>";
-            if(mysqli_query($activelink,$player_event_add)){
-                        return "200";
-                    }
-                    else {
-                      return "500";
-                    }
-        }
-
-    }
+     
 
 
 

@@ -37,7 +37,7 @@ include("src/menumanager.php");
                                <label><img class="profileimage" height="100" width="100" src="<?="attachments/".$_SESSION['id'] ?>">
                                <input name="image" class="profileimage" type="file">
                                </img></label><br>
-                               <label><font size="2" color="grey">Click up here to upload a picture.<br>Upload a small picture... please.<br>Changes wont take effect until you press "Update".</font></label>
+                               <label><font size="2" color="grey">Click up here to upload a picture.<br>Upload a small picture... please.<br>Changes wont take effect until you press "Upload Picture".</font></label>
                             </div>
                             
                              <button class="content team" type="input">Upload Picture</button>

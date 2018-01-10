@@ -141,4 +141,8 @@
 		<?
 	}
 
+
+ include("svg/graph.html")
+
+
 	?>

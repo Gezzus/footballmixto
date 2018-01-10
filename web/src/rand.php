@@ -1,7 +1,7 @@
 <?php
 include("connect.php");
 session_start();
-
+include("game.php");
 include("users.php");
 
 echo $_POST['pool']." <br><br> Amount:  ".$_POST['amount'];

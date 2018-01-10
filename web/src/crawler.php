@@ -7,10 +7,9 @@ $doodleUrl = $_POST["doodleUrl"];
 $game_id = $_POST["game_id"];
 sampleCrawler($link,$doodleUrl,$game_id);
 
-function  sampleCrawler($activelink,$doodleUrl,$game_id)
-{
+function  sampleCrawler($activelink,$doodleUrl,$game_id){
 $doodlePath = explode('/',$doodleUrl);
-print_r($doodlePath);
+#print_r($doodlePath);
 #echo $crawledPath[4];
 
 $game_data_json = file_get_contents("https://doodle.com/api/v2.0/polls/".$doodlePath[4]);
