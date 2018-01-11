@@ -1,6 +1,12 @@
 <?php
 include("src/connect.php");
 session_start();
+
+  if(!isset($_SESSION["id"]))
+  {
+    header("location:index.php");
+  }
+
 include("header.html");
 include("src/game.php");
 ?>

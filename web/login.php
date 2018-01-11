@@ -8,7 +8,7 @@ include("header.html");
 
   if(isset($_SESSION["id"]))
   {
-    header("location:web/index.php");
+    header("location:index.php");
   }
 ?>
 
@@ -21,7 +21,7 @@ include("header.html");
 
   <div class="row justify-content-center">
     <div class="col-4 content team">
-       <h5 class="form-text text-muted" style="padding-top:15px">Fúlbo | Welcome</h5>
+       <h5 class="form-text text-muted" style="padding-top:15px">Avafúlbo | Welcome</h5>
       <h5 class="form-text text-muted" style="padding-top:15px">Login</h5>
       <hr>
       <div class="row">
@@ -36,14 +36,14 @@ include("header.html");
       
       <hr>
       <button class="content team" type="submit">Submit</button>  
-      <a href="web/index.php?id=returned">
+      <a href="index.php?id=returned">
         <button type="button" class="content team">Back</button>
       </a>
       
       </form>
       </div>
       <div class="col">
-        <a href="web/register.php"><button type="submit" class="content team" style="min-width:80%" >Register</button></a><br>
+        <a href="register.php"><button type="submit" class="content team" style="min-width:80%" >Register</button></a><br>
         <button style="min-width:80%" class="content team" onclick=window.open("https://api.instagram.com/oauth/authorize/?client_id=d31abc6eb2d94c418c5b5ddc14df11cd&redirect_uri=http://172.20.10.81&response_type=code","_child","width=500,height=500")>Login with Instagram</button><br>
 
          <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with Facebook</button><br>

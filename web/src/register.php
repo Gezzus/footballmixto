@@ -1,12 +1,6 @@
 <?php
 include("connect.php");
 
-/*if($received_username == "")
-{
-	header("location:register.php?id=1");
-}*/
-
-
 $received_username =  filter_var($_POST["username"],FILTER_SANITIZE_STRING);
 $received_password  = filter_var($_POST["password"],FILTER_SANITIZE_STRING);
 
@@ -79,12 +73,12 @@ if($user_query_exists_amount == 0){
 							}
 							else{
 							echo "0:".mysqli_error($link);
-							#header("location:../register.php");
+							header("location:../register.php?error=3");
 							}
 	}
 	}					
 else{
-	header("location:../register.php?id=3");
+	header("location:../register.php?error=3");
 }
 	
 
