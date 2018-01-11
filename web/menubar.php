@@ -7,35 +7,35 @@
 		?>
 			<div class="menu2" style="padding:1%">
 
-				<a class="menubutton" href="/footballmixto/web/src/navbar.php">
+				<a class="menubutton" href="src/navbar.php">
 				<button class="squarebutton team">
-						<image width="16" height="16" src="/footballmixto/web/img/expand-icon.png">
+						<image width="16" height="16" src="img/expand-icon.png">
 						</image>
 				</button>
 				</a>
 
 				<br><br>
 
-				<a class="menubutton" href="/footballmixto/web/index.php">
+				<a class="menubutton" href="index.php">
 				<button class="squarebutton team">
-					<image width="16" height="16" src="/footballmixto/web/img/home.png">
+					<image width="16" height="16" src="img/home.png">
 					</image>
 				</button>
 				</a>
 					
 				<br><br>
 				<? if(active_session() == 0){ ?>
-				<a class="menubutton" href="/footballmixto/web/login.php">
+				<a class="menubutton" href="login.php">
 					<button class="squarebutton team">
-						<image width="16" height="16" src="/footballmixto/web/img/login.png">
+						<image width="16" height="16" src="img/login.png">
 						</image>
 					</button>
 				</a>
 				<br><br>
 
-				<a class="menubutton" href="/footballmixto/web/register.php">
+				<a class="menubutton" href="register.php">
 					<button class="squarebutton team">
-						<image width="16" height="16" src="/footballmixto/web/img/register.png">
+						<image width="16" height="16" src="img/register.png">
 						</image>
 					</button>
 				</a>
@@ -46,25 +46,25 @@
 
 				elseif(active_session() == 1){ ?>
 
-				<a class="menubutton" href="/footballmixto/web/randomizer.php">
+				<a class="menubutton" href="randomizer.php">
 					<button class="squarebutton team">
-						<image width="16" height="16" src="/footballmixto/web/img/randomizer.png">
+						<image width="16" height="16" src="img/randomizer.png">
 						</image>
 					</button>
 				</a>
 				<br><br>
 
-				<a class="menubutton" href="/footballmixto/web/profile.php">
+				<a class="menubutton" href="profile.php">
 					<button class="squarebutton team">
-						<image width="16" height="16" src="/footballmixto/web/img/profile.png">
+						<image width="16" height="16" src="img/profile.png">
 						</image>
 					</button>
 				</a>
 				<br><br>
 
-				<a class="menubutton" href="/footballmixto/web/src/logout.php">
+				<a class="menubutton" href="src/logout.php">
 					<button class="squarebutton team">
-						<image width="16" height="16" src="/footballmixto/web/img/logout.png">
+						<image width="16" height="16" src="img/logout.png">
 						</image>
 					</button>
 				</a>
@@ -89,29 +89,29 @@
 
 			<hr class="menu">
 			<div class="row">
-				<a class="menubutton" style="width:100%" href="/footballmixto/web/index.php">
+				<a class="menubutton" style="width:100%" href="index.php">
 					<button class="menubutton team">Events</button>
 				</a>
 			</div>
 			<? if(active_session() == 0){ ?>
 			<div class="row">
-				<a class="menubutton" href="/footballmixto/web/login.php">
+				<a class="menubutton" href="login.php">
 					<button class="menubutton team">Login</button>
 				</a>
 			</div>
 			<div class="row">
-				<a class="menubutton" href="/footballmixto/web/register.php">
+				<a class="menubutton" href="register.php">
 					<button class="menubutton team">Register</button>
 				</a>
 			</div>
 			<? } else{ ?>
 				<div class="row">
-				<a class="menubutton" href="/footballmixto/web/randomizer.php">
+				<a class="menubutton" href="randomizer.php">
 					<button class="menubutton team">Randomizer</button>
 				</a>
 				</div>
 				<div class="row">
-				<a class="menubutton" href="/footballmixto/web/profile.php">
+				<a class="menubutton" href="web/profile.php">
 					<button class="menubutton team">My profile</button>
 				</a>
 				</div>
@@ -119,13 +119,13 @@
 
 
 				<div class="row">
-				<a class="menubutton" href="/footballmixto/web/src/navbar.php">
+				<a class="menubutton" href="src/navbar.php">
 					<button class="menubutton team">Collapse</button>
 				</a>
 				</div>
 
 				<div class="row">
-				<a class="menubutton" href="/footballmixto/web/src/logout.php">
+				<a class="menubutton" href="src/logout.php">
 					<button class="menubutton team">Logout</button>
 				</a>
 				</div>
