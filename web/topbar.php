@@ -1,12 +1,12 @@
 
 <div class="row"">
 	<div class="col top">
-	<? if((active_session() == 1) && ($_SERVER["REQUEST_URI"] == "/web/index.php")){ ?>
-		<a class="topmenu" href="create.php" ><button class="topmenu">Add new</button></a>
+	<? if((active_session() == 1) && ($_SERVER["REQUEST_URI"] == "footballmixto/web/index.php")){ ?>
+		<a class="topmenu" href="web/create.php" ><button class="topmenu">Add new</button></a>
 	 <?php }
 	
-	if((active_session() == 1) && ($_SERVER["REQUEST_URI"] == "/web/create.php")){ ?>
-		<a class="topmenu" href="index.php" ><button class="topmenu">Back</button></a>
+	if((active_session() == 1) && ($_SERVER["REQUEST_URI"] == "footballmixto/web/create.php")){ ?>
+		<a class="topmenu" href="web/index.php" ><button class="topmenu">Back</button></a>
 	<?}
 
 	$gamePath = pathinfo($_SERVER["REQUEST_URI"],PATHINFO_DIRNAME)."/".pathinfo($_SERVER["REQUEST_URI"],PATHINFO_FILENAME).".php";

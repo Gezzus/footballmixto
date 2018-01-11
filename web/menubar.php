@@ -16,7 +16,7 @@
 
 				<br><br>
 
-				<a class="menubutton" href="index.php">
+				<a class="menubutton" href="web/index.php">
 				<button class="squarebutton team">
 					<image width="16" height="16" src="img/home.png">
 					</image>
@@ -33,7 +33,7 @@
 				</a>
 				<br><br>
 
-				<a class="menubutton" href="register.php">
+				<a class="menubutton" href="web/register.php">
 					<button class="squarebutton team">
 						<image width="16" height="16" src="img/register.png">
 						</image>
@@ -46,7 +46,7 @@
 
 				elseif(active_session() == 1){ ?>
 
-				<a class="menubutton" href="randomizer.php">
+				<a class="menubutton" href="web/randomizer.php">
 					<button class="squarebutton team">
 						<image width="16" height="16" src="img/randomizer.png">
 						</image>
@@ -54,7 +54,7 @@
 				</a>
 				<br><br>
 
-				<a class="menubutton" href="profile.php">
+				<a class="menubutton" href="web/profile.php">
 					<button class="squarebutton team">
 						<image width="16" height="16" src="img/profile.png">
 						</image>
@@ -95,23 +95,23 @@
 			</div>
 			<? if(active_session() == 0){ ?>
 			<div class="row">
-				<a class="menubutton" href="login.php">
+				<a class="menubutton" href="web/login.php">
 					<button class="menubutton team">Login</button>
 				</a>
 			</div>
 			<div class="row">
-				<a class="menubutton" href="register.php">
+				<a class="menubutton" href="web/register.php">
 					<button class="menubutton team">Register</button>
 				</a>
 			</div>
 			<? } else{ ?>
 				<div class="row">
-				<a class="menubutton" href="randomizer.php">
+				<a class="menubutton" href="web/randomizer.php">
 					<button class="menubutton team">Randomizer</button>
 				</a>
 				</div>
 				<div class="row">
-				<a class="menubutton" href="profile.php">
+				<a class="menubutton" href="web/profile.php">
 					<button class="menubutton team">My profile</button>
 				</a>
 				</div>

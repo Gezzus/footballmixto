@@ -7,7 +7,7 @@
 
   if(isset($_SESSION["id"]))
   {
-    header("location:index.php");
+    header("location:web/index.php");
   }
 
   if(isset($_GET["id"]) && $_GET["id"] == 3){
@@ -62,14 +62,14 @@
       </select>
     <hr>
       <button class="content team" type="submit">Submit</button>  
-      <a href="index.php?id=returned">
+      <a href="web/index.php?id=returned">
         <button type="button" class="content team">Back</button>
       </a>
       </form>
     </div> <!-- Col -->
     
      <div class="col">
-      <a href="login.php"><button type="submit" class="content team" style="min-width:80%" >Login</button></a><br>
+      <a href="web/login.php"><button type="submit" class="content team" style="min-width:80%" >Login</button></a><br>
         <button style="min-width:80%" class="content team" onclick=window.open("https://api.instagram.com/oauth/authorize/?client_id=d31abc6eb2d94c418c5b5ddc14df11cd&redirect_uri=http://172.20.10.81&response_type=code","_child","width=500,height=500")>Login with Instagram</button><br>
 
          <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with Facebook</button><br>
