@@ -80,6 +80,29 @@ button.squarebutton{
 	height:30px;
 }
 
+
+button.topmenu{
+	border:solid 1px;
+	border-color: #CCCCCC;
+	border-top:none;
+	background-color:transparent;
+	border-bottom:none;
+	height:100%;
+	font-size:75%;
+
+}
+button.topmenu:hover{
+	
+	background-color: #CCCCCC;
+}
+
+a.topmenu:hover{
+ 	text-decoration: none;
+}
+a.topmenu{
+	color:black;
+}
+
 button.menubutton{
 	border:1px solid;
 	border-color:#5D2E8C;

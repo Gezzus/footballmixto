@@ -23,6 +23,23 @@ include("menumanager.php");
             
         }
 
+        function query_retrieve_game_property($received_game_id,$activelink,$property){
+             $game_retrieve = "SELECT game.typeId,game.date,gameType.type as 'type',".$property." as ".$property." FROM game LEFT JOIN gameType ON game.typeId=gameType.id WHERE game.id='".$received_game_id."'";
+
+            $game_retrieve_query = mysqli_query($activelink,$game_retrieve);
+
+            $game_retrieve_amount = mysqli_num_rows($game_retrieve_query);
+
+            if ($game_retrieve_amount == 0){
+                return "Error";#To do
+            }
+            else{
+                return mysqli_fetch_assoc($game_retrieve_query);
+            }
+
+        }
+
+
         function query_retrieve_team($received_game_id,$received_team_id,$activelink){
            $game_retrieve_team = "SELECT pickPlayer.teamId as 'pickPlayer.teamId',pickPlayer.playerId as 'pickPlayer.playerId',player.nickName as 'player.nickName',player.genderId as 'player.genderId', player.levelId as 'player.levelId', user.id as 'user.id' FROM game LEFT JOIN pickPlayer ON game.id=pickPlayer.gameId LEFT JOIN player ON player.id=pickPlayer.playerId LEFT JOIN user ON player.id=user.playerId WHERE game.id='".$received_game_id."' AND pickPlayer.teamId='".$received_team_id."'";
             $game_retrieve_team_query = mysqli_query($activelink,$game_retrieve_team);

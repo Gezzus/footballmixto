@@ -46,6 +46,9 @@ include("src/game.php");
                         	</div>
                         	</div>
                         	<hr>
+                            <label class="content">Integrations: </label><br>
+                            <label class="content">DoodleUrl: </label><br><input name="doodleurl" class="content">
+                            <hr>
                         	<button class="content team">Add</button>
                         </form>	
                       </div>
