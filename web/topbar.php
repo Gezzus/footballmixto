@@ -9,7 +9,8 @@
 		<a class="topmenu" href="index.php" ><button class="topmenu">Back</button></a>
 	<?}
 
-	$gamePath = pathinfo($_SERVER["REQUEST_URI"],PATHINFO_DIRNAME)."/".pathinfo($_SERVER["REQUEST_URI"],PATHINFO_FILENAME).".php";
+	/*$gamePath = pathinfo($_SERVER["REQUEST_URI"],PATHINFO_DIRNAME)."/".pathinfo($_SERVER["REQUEST_URI"],PATHINFO_FILENAME).".php";*/
+	$gamePath = $_SERVER["REQUEST_URI"];
 
 	if((active_session() == 1) && ($gamePath == "/game.php")){ ?>
 		<form style="padding:0px;margin:0px" method="POST" action="src/join.php">
