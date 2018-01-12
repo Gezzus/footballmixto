@@ -2,12 +2,12 @@
 
 	class player{
 		
-		private $properties = ["id","nickname","gender"];
+		#private $properties = ["id","nickname","gender"];
 
-		private function __construct($received_id,$received_nickname,$received_gender){
+		function __construct($received_id,$received_nickname,$received_gender){
 			$this->properties["id"] = $received_id;
-			$this->properties["nickname"] = $received_size;		
-			$this->properties["gender"] = $received_date;
+			$this->properties["nickname"] = $received_nickname;		
+			$this->properties["gender"] = $received_gender;
 		}
 
 		public function retrieve(){

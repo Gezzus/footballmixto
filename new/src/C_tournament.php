@@ -2,11 +2,11 @@
 
 	class tournament extends team{
 
-		private $teams;
-		private $properties = ["id","size","date"];
+		#private $teams;
+		#private $properties = ["id","size","date"];
 
 
-		public function __construct($received_id,$received_size,$received_date){
+		function __construct($received_id,$received_size,$received_date){
 			$this->teams = [];
 			$this->properties["id"] = $received_id;
 			$this->properties["size"] = $received_size;		
