@@ -1,28 +1,21 @@
 <?php
 
 	class player{
-		private $teams;
-		private $properties = ["id","size","date"];
+		
+		private $properties = ["id","nickname","gender"];
 
-
-		public function __construct($received_id,$received_size,$received_date){
-			$this->teams = [];
+		private function __construct($received_id,$received_nickname,$received_gender){
 			$this->properties["id"] = $received_id;
-			$this->properties["size"] = $received_size;		
-			$this->properties["date"] = $received_date;
-
+			$this->properties["nickname"] = $received_size;		
+			$this->properties["gender"] = $received_date;
 		}
-
-		public function add_team($team_id,$team_size,$team_players){
-			array_push($this->teams,new team($team_id,$team_size,$team_players));
-		}
-
 
 		public function retrieve(){
 			return $this;
 		}
 
 	}
+
 
 
 	
