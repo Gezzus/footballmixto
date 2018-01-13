@@ -1,19 +1,60 @@
 <?php
 
+#require_once '../model/User.php';
+
 class UserService{
 
-	public function login(){
-		return "Test";
-	}
+	
+	public function register(){
 
-	public function test(){
-		echo $result;
-		return $result;
-	}
+		#mocked reply from $user = new User;
+		#$response $user->create($data arguments);
 
-	public function create(){
+		#$result = ["id" => "1","message"=>"Successful login","code" => 200]; #TestResult
 		
+		$result = ["message"=>"Register failed","code" => 0]; #TestResult
+		
+		if($result["code"] == 200){
+			    session_start();
+			    $_SESSION['id'] = $result['id'];
+			}
+
+		return json_encode($result);	
 	}
+
+	public function login($username,$password){
+		#$user = new User;
+
+		
+		#$result = ["id" => "1","message"=>"Successful login","code" => 200]; #TestResult
+		
+		$result = ["message"=>"Login failed","code" => 0]; #TestResult
+		
+
+		if($result["code"] == 200){
+			    session_start();
+			    $_SESSION['id'] = $result['id'];
+			}
+
+	    #echo $result;
+			#print_r($result);
+		# TODO: $result = $user->retrieveUserDb($username,$password);
+		return json_encode($result);
+	}
+
+	/*public function create(){
+		#$user = new User;
+		$result = $user->createUserDb($username,$password);
+		return $result;			
+	}*/
+
+	public function logout(){
+		session_destroy();
+	}
+
+	
+
+
 
 }
 
