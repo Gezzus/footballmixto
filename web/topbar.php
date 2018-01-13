@@ -13,7 +13,7 @@
 	$gamePath = $_SERVER["REQUEST_URI"];*/
 
 	if((active_session() == 1) && ($_SERVER["REQUEST_URI"] == "/game.php")){ ?>
-		<form style="padding:0px;margin:0px" method="POST" action="src/join.php">
+		<form style="padding:0px;margin:0px" method="POST" action="../src/join.php">
             <button class="topmenu" style="float:left">Join Event</button>
             <input hidden value="<?=$_GET['id']?>" name="gameId">
         </form>
@@ -24,7 +24,7 @@
 		if(isAdmin($_SESSION['id'],$link)){
 				$gameProperties = query_retrieve_game_property($_GET['id'],$link,"doodleurl");
 			?>
-			<form style="padding:0px;margin:0px" method="POST" action="src/deletegame.php">
+			<form style="padding:0px;margin:0px" method="POST" action="../src/deletegame.php">
             <button style="float:left" class="topmenu">Delete Event</button>
             <input hidden value="<?=$_GET['id']?>" name="id">
         	</form>
@@ -33,7 +33,7 @@
             <input hidden value="<?=$_GET['id']?>" name="id">
         	</form>
 
-        	<form style="padding:0px;margin:0px" method="POST" action="src/crawler.php">
+        	<form style="padding:0px;margin:0px" method="POST" action="../src/crawler.php">
             <button class="topmenu" style="float:left">Sync Doodle</button>
             <input hidden value="<?=$gameProperties['doodleurl']?>" name=doodleUrl>
             <input hidden value="<?=$_GET['id']?>" name="game_id">

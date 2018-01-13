@@ -30,7 +30,7 @@ include("src/game.php");
                   	<h5>Create event: </h5>
                   	<hr class="content">
                       <div class="row"  style="padding:1%">
-                        <form style="" method="POST" action="src/addgame.php">
+                        <form style="" method="POST" action="../src/addgame.php">
 
                         	<label class="content">Type: </label><br>
                         	<select style="width:60%" class="content" name="type">

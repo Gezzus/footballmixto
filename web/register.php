@@ -36,7 +36,7 @@
         <div class="col" style="border-right: 1px solid;border-color: #CCCCCC">
 
     
-      <form id="login_form" method="POST" action="src/register.php">
+      <form id="login_form" method="POST" action="../src/register.php">
      
       <label style="margin:0px;padding:0px">Username:</label>
       <input class="content team" name="username" placeholder="Username">
@@ -85,7 +85,7 @@
 </div> <!-- Container -->
 
 <?php
- include("svg/graph.html")
+include("svg/graph.html")
 ?>
 </body>
 

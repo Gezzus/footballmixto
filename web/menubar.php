@@ -7,7 +7,7 @@
 		?>
 			<div class="menu2" style="padding:1%">
 
-				<a class="menubutton" href="src/navbar.php">
+				<a class="menubutton" href="../src/navbar.php">
 				<button class="squarebutton team">
 						<image width="16" height="16" src="img/expand-icon.png">
 						</image>
@@ -62,7 +62,7 @@
 				</a>
 				<br><br>
 
-				<a class="menubutton" href="src/logout.php">
+				<a class="menubutton" href="../src/logout.php">
 					<button class="squarebutton team">
 						<image width="16" height="16" src="img/logout.png">
 						</image>
@@ -119,13 +119,13 @@
 
 
 				<div class="row">
-				<a class="menubutton" href="src/navbar.php">
+				<a class="menubutton" href="../src/navbar.php">
 					<button class="menubutton team">Collapse</button>
 				</a>
 				</div>
 
 				<div class="row">
-				<a class="menubutton" href="src/logout.php">
+				<a class="menubutton" href="../src/logout.php">
 					<button class="menubutton team">Logout</button>
 				</a>
 				</div>
@@ -142,7 +142,7 @@
 	}
 
 
- include("svg/graph.html")
+    include("svg/graph.html")
 
 
 	?>

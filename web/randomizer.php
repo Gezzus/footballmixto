@@ -45,7 +45,7 @@ if(!isset($_SESSION['id']))
                   <div class="col-4 team content" style="height: 35%">
                    Randomizer:<br>
 
-                   <form action="src/rand.php" method="POST">
+                   <form action="../src/rand.php" method="POST">
 
                    <div class="col team content" style="margin:1%">
                     <?php 

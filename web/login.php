@@ -27,7 +27,7 @@ include("header.html");
       <div class="row">
       <div class="col" style="border-right: 1px solid;border-color: #CCCCCC">
    
-      <form id="login_form" method="POST" action="src/login.php">
+      <form id="login_form" method="POST" action="../src/login.php">
      
       <label>Username:</label>
       <input type="text" class="content team" name="username" placeholder="Username">
@@ -58,7 +58,7 @@ include("header.html");
 
 </div> <!-- Container -->
 <?php
- include("svg/graph.html")
+include("svg/graph.html")
 ?>
 </body>
 

@@ -57,7 +57,7 @@ if(isset($_GET["error"]) && $_GET["error"] == 1){
         <div class="col-3 content" style=";background-color: rgba(255, 255, 255, 0.6)">   
                 <div class="col content" style="margin:0px">
              	  	<h5>Add an outsider:</h5>
-             	  	<form method="POST" action="src/add.php">
+             	  	<form method="POST" action="../src/add.php">
              	  		<label>Name:</label>
              	  		<input class="content" type="text" name="nickname" placeholder="Your friend's name"></input>
              	  		<label>Sex:</label>

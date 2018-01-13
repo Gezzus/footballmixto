@@ -3,7 +3,7 @@
 	$db_address = "localhost";
 	$db_user = "root";
 	$db_pass = "";
-	$db_name = "avasports";
+	$db_name = "futbolmixto";
 
 	#function connect($db_address,$db_user,$db_pass,$db_name)
 	$mysqli = new mysqli($db_address,$db_user,$db_pass,$db_name);

@@ -2,8 +2,8 @@
 function connect(){
 // LOCAL
 $host_db = "localhost";
-$usuario_db = "test";
-$pass_db = "test";
+$usuario_db = "root";
+$pass_db = "";
 $base_db = "futbolmixto";
 if (!($link=mysqli_connect($host_db, $usuario_db, $pass_db)))
 	{

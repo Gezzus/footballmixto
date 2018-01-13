@@ -44,7 +44,7 @@ include("src/menumanager.php");
                             </form>
                             <hr style="margin:1%">
                             
-                            <form action="src/profile.php" method="POST" style="width:100%">
+                            <form action="../src/profile.php" method="POST" style="width:100%">
 
                             <label class="content">Nickname: </label>
                             <input class="content" style="width:70%" type="text" value=<?= $_SESSION['nickname']?>>
