@@ -1,6 +1,6 @@
 <?php
 
-	class User extends Player{
+	class User extends Player implements Seriarizable {
 
 	    private $playerId;
         private $id;
@@ -42,6 +42,11 @@
 		public function retrieve(){
 			return $this;
 		}
-		
-	}
+
+        public function toJson()
+        {
+            $result = [];
+            return json_encode($result);
+        }
+    }
 ?>
