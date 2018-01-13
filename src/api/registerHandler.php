@@ -13,7 +13,7 @@
 	}
 	else{
 		$result = ["code"=>"1", "message" => "Please complete every field."];
-	 	echo json_encode($result);
+	 	echo $result->toJson();
 	 	#echo $result;
 	}
 
