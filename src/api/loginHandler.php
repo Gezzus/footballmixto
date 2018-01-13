@@ -11,7 +11,6 @@ if(isset( $_POST['username'] ) && isset( $_POST['password']) ) {
      $result = [
          "userName" => $user->getUserName(),
          "userName" => $user->getUserName(),
-
      ];
      echo $result->toJson();
 }

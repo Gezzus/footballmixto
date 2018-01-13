@@ -1,70 +1,65 @@
-<?php
-include("src/connect.php");
-session_start();
-include("header.html");
-include("src/game.php");
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
-if(isset($_GET["error"]) && $_GET["error"] == 3){
-    echo "<script type='text/javascript'>alert('Please log in');</script>";
-}
+<script>
+  $(function(){
+    $("#menubar").load("menubar.html");
+    $("#topbar").load("topbar.html");
+  });
 
- #$headers = apache_request_headers();
- #print_r($headers);
- 
-?>
+</script>
+</head>
 
 
 <html>
-<head>
- <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
+
 <body>
-<div class="container-fluid">
-
-<div class="row">
-
-
-<? include("menubar.php");?>
-
-		<div class="col">
-			<? include("topbar.php"); ?>
-		 	<div class="row">
-                  <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
-                  	<h5>Upcoming matches: </h5>
-                  	<hr class="content">
-                      <div class="row" style="padding-left:3.5%">
-                        	<?= organize_games(0,9,$link); ?>
-                      </div>
-
-             	    </div>	
-              	  	  
-      </div>
+  <div class="container-fluid">
 
       <div class="row">
-                  <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
-                    <h5>Old matches: </h5>
-                    <hr class="content">
-                      <div class="row" style="padding-left:3.5%">
-                          <?= organize_games(1,999,$link); ?>
-                      </div>
 
-                  </div>  
-                      
-      </div>
-      <br>
-     <br>
-      <? include("menufooter.php"); ?>
-    	
-		</div>
+        <div id="menubar">
+          
+        </div>
 
-			
-</div>
+    		<div class="col">
+    			<div id="topbar">
+            
+          </div>
+    		 	<div class="row">
+                      <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
+                      	<h5>Upcoming matches: </h5>
+                      	<hr class="content">
+                          <div class="row" style="padding-left:3.5%">
+                          </div>
 
-</div>
+                 	    </div>	
+                  	  	  
+          </div>
 
-	
+          <div class="row">
+                      <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
+                        <h5>Old matches: </h5>
+                        <hr class="content">
+                          <div class="row" style="padding-left:3.5%">
+                          </div>
 
+                      </div>  
+                          
+          </div>
+          <br>
+          <br>
+
+    		</div>
+
+    			
+    </div><!--container-->
+  </div><!--body-->
 </body>
-
 </html>
 

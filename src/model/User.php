@@ -5,25 +5,56 @@
 	    private $playerId;
         private $id;
 	    private $userName;
-<<<<<<< HEAD
-		
-	}
-=======
+	    #private $password;
 
-		function __construct($received_id, $received_username, $received_password){
-			$this->properties["playerId"] = $this->propeties["id"];
-			$this->properties["id"] = $received_id;
-			$this->properties["username"] = $received_username;
-			$this->properties["password"] = $received_password;
+	    public function __construct($id, $userName) {
+            $this->id = $id;
+            $this->nickName = $userName;
+            #$this->genderId = $genderId;
+            #$this->levelId = $levelId;
+        }
+
+        private static function create($userName,$nickName) {
+			
+
+			$dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND nickName = ?", array($userName, $nickName));
+            if($dbUser->rowCount() == 0) {
+            		$dbPlayer = self::queryWithParameters("SELECT * FROM user WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
+		            if($dbPlayer->rowCount() == 0) {
+		                self::queryWithParameters("INSERT INTO player(nickName, genderId) VALUES(?, ?)", array($nickName, $genderId));
+						$playerId = self::get(self::lastInsertId());
+
+						self::queryWithParameters("INSERT INTO user(userName, password, playerId, ) VALUES(?, ?, ?)", array($userName, $password, $playerId));
+						return self::get(self::lastInsertId());
+					} else{
+						return null;
+					}
+                
+			} else{
+				return null;
+			}	
+
 		}
 
-		function __construct($received_id, $mysqli){
-			$user_data = retrieve_user_db($received_id, $mysqli);
-			$this->properties["id"] = $user_data["id"];
-			$this->properties["username"] = $user_data["username"];
-			$this->properties["password"] = $user_data["password"];
-			$this->properties["playerId"] = $user_data["playerId"];
-		}
+        private static function get($userId){
+            $dbPlayer = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
+            if($dbPlayer->rowCount() == 1) {
+                $playerData = $dbPlayer->fetch();
+                return new Player($playerData["id"], $playerData["playerId"], $playerData["username"], $playerData["password"]);
+            } else {
+                return null;
+            }
+        }
+
+        public function toJson() {
+            $return = [
+                "id" => $this->id,
+                "playerId" => $this->playerId,
+                "userName" => $this->userName,
+                "password" => $this->password
+            ];
+            return json_encode($return);
+        }
 
         public function getUserName()
         {
@@ -33,25 +64,13 @@
         public function setUserName($userName)
         {
             $this->userName = $userName;
+            #DBQueryHere??
         }
-
-
-        private function retrieve_user_db($id,$mysqli){
-			$query_retrieve_user = "SELECT * FROM user WHERE id='" . $id . "' LIMIT 1";
-			$query_result = $mysqli->query($query_retrieve_user);
-			return $mysqli->fetch_assoc($query_result);
-		}
 
 
 		public function retrieve(){
 			return $this;
 		}
 
-        public function toJson()
-        {
-            $result = [];
-            return json_encode($result);
-        }
+        
     }
->>>>>>> 2410bb5678d73e1704cfe89bf544e0d27501740d
-?>
