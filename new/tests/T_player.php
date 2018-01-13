@@ -1,6 +1,6 @@
 <?php
 include("../src/N_connect.php");
-include("../src/C_player.php");
+include("../src/Player.php");
 
 $player2data = ["newNi12114k","2"];
 $player1data = "2";

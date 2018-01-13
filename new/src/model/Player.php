@@ -1,12 +1,12 @@
 <?php
 
-	class player{
+	class Player {
 
 		function __construct(){
 
 		}
 
-		private function db_create_player($received_nickname,$received_gender,$mysqli){
+		private function db_create_player($received_nickname, $received_gender, $mysqli){
 			$query_find_player = "SELECT * FROM player WHERE nickname = '".$received_nickname."' AND genderId = '".$received_gender."'";
 			#echo $query_find_player; 
 			$result_query_find_player = $mysqli->query($query_find_player);

@@ -1,6 +1,6 @@
 <?php
-include("../src/C_team.php");
-include("../src/C_tournament.php");
+include("../src/Team.php");
+include("../src/Tournament.php");
 
 
 	$test = new tournament("1","6","11/11/18");
