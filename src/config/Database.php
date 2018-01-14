@@ -29,4 +29,6 @@ class Database {
     public function getConn() {
         return $this->conn;
     }
+
 }
+?>
