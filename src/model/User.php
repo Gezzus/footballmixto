@@ -1,7 +1,6 @@
 <?php
 
 include("Player.php");
-include("Seriarizable.php");
 
 class User extends Player implements Seriarizable {
 
@@ -19,16 +18,16 @@ class User extends Player implements Seriarizable {
         #$this->levelId = $levelId;
     }
 
-    private static function createUser($userName, $nickName) {
+    public static function createUser($userName,$password,$nickName,$genderId) {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND nickName = ?", array($userName, $nickName));
         if ($dbUser->rowCount() == 0) {
             $dbPlayer = self::queryWithParameters("SELECT * FROM user WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
             if ($dbPlayer->rowCount() == 0) {
                 self::queryWithParameters("INSERT INTO player(nickName, genderId) VALUES(?, ?)", array($nickName, $genderId));
-                $playerId = self::get(self::lastInsertId());
+                $playerId = self::lastInsertId();
 
-                self::queryWithParameters("INSERT INTO user(userName, password, playerId, ) VALUES(?, ?, ?)", array($userName, $password, $playerId));
-                return self::get(self::lastInsertId());
+                self::queryWithParameters("INSERT INTO user(userName, password, playerId) VALUES(?, ?, ?)", array($userName, $password, $playerId));
+                return self::lastInsertId();
             } else {
                 return null;
             }
