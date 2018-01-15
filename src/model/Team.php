@@ -1,78 +1,102 @@
 <?php
-	class Team {
 
+
+include("PersistentEntity.php");
+include("Seriarizable.php");
+
+
+	class Team extends PersistentEntity implements Seriarizable {
+
+
+		private $id;
+		private $name;
+		private $size;
 		#private $players;
-		#private $properties = ["id","size"];
 
-		function __construct($received_id, $received_size, $received_players){
-			$this->players = [];
-			$this->properties["id"] = $received_id;
-			$this->properties["size"] = $received_size;		
+		function __construct($id, $name, $size) {
+			
+		}
 
-			for ($i=0; $i < count($received_players); $i++){
-				array_push($this->players,$received_players[$i]);
+
+		public static function createTeam($name,$size) {
+			$dbTeam = self::queryWithParameters("SELECT * FROM team WHERE name = ? AND size = ?"), array(self::sanitize($name,$size));
+			if($dbTeam->rowCount() == 0) {
+				self::queryWithParameters("INSERT INTO team (name, size) VALUES(?, ?)"),array(self::sanitize($name, $size));
+			#var_dump(self::lastInsertId());
+			return(self::getTeam(self::lastInsertId));
+			} else {
+				return null;
 			}
 		}
 
-		public function retrieve(){
-			return $this;
+		public static function getTeam($teamId) {
+			$dbTeam = self::queryWithParameters("SELECT * FROM team WHERE id = ?", array($teamId));
+			if(dbTeam->rowCount() == 1) {
+				$teamData = $dbTeam->fetch();
+				return new Team($teamData["id"], $teamData["name"], $teamData["size"]);
+			} else { 
+				return null;
+			}
 		}
 
-		public function add_player($player_id){
-			array_push($this->players,$player_id);
-			#db_team_add_player(); TODO
-
-		}
-
-		public function remove_player($player_id){
-			$player_team_position = array_search($player_id, $this->players);
-			unset($this->players[$player_team_position]);
-			#db_team_remove_player(); TODO
-		}
-
-
-		public function db_team_retrieve($team_received_properties, $team_id, $mysqli){
-			
-			$retrieve_team_properties = implode(",", $team_received_properties);
-			$query_retrieve_team = "SELECT " . $retrieve_team_properties . " FROM team WHERE id='" . $team_id . "'";
-			$result_retrieve_team = $mysqli->query($query_retrieve_team);
-			 return $result_retrieve_team->fetch_array();		
-		
+		public static function deleteTeam($id) {
+			self::queryWithParameters("DELETE FROM team WHERE id = ?", array(self::sanitize($id)));
 		}
 
 
+		public function toJson() {
+			$return = [
+            "id" => $this->id,
+            "name" => $this->nickName,
+            "size" => $this->genderId
+        	];
+        	return json_encode($return);
+		}
 
-		private function db_team_add_player($team_id, $player_id, $mysqli){
+		public function getId() {
+			return $this->id;
+		}
 
-			$db_request_array = ["players","size"];
-			$db_team_size_query = db_team_retrieve($db_request_array, $team_id, $mysqli);
-			$db_team_size = count($db_team_size_query["size"]);
-			$db_team_cur_amount = count($db_team_size_query["players"]);
 
-			$db_team_players = implode(",",$db_team_size_query["players"]);
+		public function getPlayers($gameId) {
+			$dbTeam = $this->queryWithParameters("SELECT * FROM pickPlayer WHERE gameId = ? AND teamId = ?",array($gameId, $this->$id);
+			if($dbTeam->rowCount() != 0) {
+				$teamData = $dbTeam->fetch();
+				for ($i=0; $i < $dbTeam->rowCount(); $i++) { 
 
-			if($db_team_cur_amount < $db_team_size){
-				$query_db_team_add_player = "UPDATE team SET players='" . $db_team_players . "," . $player_id. "' WHERE team_id='" . $team_id . "'";
-				$result_query_db_team_add_player = $mysqli->query($query_db_team_add_player);
-				if(!$result_query_db_team_add_player){
-					$response["status"]["errors"] = ["200",null];
-					return $response;
-				}				
-				else{
-					$response["status"]["errors"] = ["501","Internal server error"];
-					return $response;
+					$dbPlayer = $this->queryWithParameters("SELECT * FROM player WHERE id = ?", array(this->sanitize($dbTeam["playerId"])));
+					$playerData = $dbPlayer->fetch();
+					$playersData[$i] = new Player($playerData["id"], $playerData["nickName"], $playerData["gender"], $playerData["levelId"]);
 				}
-
-
+				return json_encode($playersData);
+			} else {
+				return null;
 			}
-			else return "Error -> Cur Amount == Team Size"; #ToDo
-			
 		}
 
+		public function putPlayer($gameId, $playerId) {
+			$playersData = $this->getPlayers($gameId);
+			if(count($playersData) < $this->size) {
+				for ($i=0; $i < count($playersData); $i++) { 
+					if($playersData[$i]["id"] == $playerId) {
+						return null;
+					}
+				} else{
+					$dbPickPlayer = $this->queryWithParameters("INSERT INTO pickPlayer(playerId, teamId, gameId) values(?, ?, ?)",array(this->sanitize($playerId), $this->id, this->sanitize($gameId)));
+					return true;
+				}
+			} else {
+				return null; 	 
+			}
+		}		
+	
+		public function removePlayer($teamId, $gameId, $playerId) {
 
+		}
 
-
-
+	
 	}
+
+
 
 ?>
