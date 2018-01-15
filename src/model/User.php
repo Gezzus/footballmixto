@@ -37,12 +37,12 @@ class User extends Player implements Seriarizable {
         }
     }
 
-    private static function getUser($userName,$password){
+    public static function getUser($userName,$password){
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ? LIMIT 1", array(self::sanitize($userName),self::sanitize($password)));
         if($dbUser->rowCount() == 1) {
             $UserData = $dbUser->fetch();
             $User = new User($UserData["id"], $UserData["userName"], $UserData["password"], $UserData["playerId"]);
-            return $User->toJson();
+            return $User;
         } else {
             return null;
         }

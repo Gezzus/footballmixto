@@ -17,7 +17,7 @@ class UserService{
 		}
 	}
 
-	public function login($username,$password) {
+	public function login($userName,$password) {
 		if($user = User::getUser($userName, $password)) {
 			return $user->toJson();
 		}else {			
