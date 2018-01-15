@@ -10,11 +10,11 @@ class User extends Player implements Seriarizable {
     private $roleId;
     private $lastLogin;
 
-    public function __construct($id, $userName, $password) {
+    public function __construct($id, $userName, $password, $playerId) {
         $this->id = $id;
         $this->userName = $userName;
         $this->password = $password;
-        #$this->genderId = $genderId;
+        $this->genderId = $playerId;
         #$this->levelId = $levelId;
     }
 
@@ -37,11 +37,12 @@ class User extends Player implements Seriarizable {
         }
     }
 
-    private static function getUser($userId){
-        $dbPlayer = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
-        if($dbPlayer->rowCount() == 1) {
-            $playerData = $dbPlayer->fetch();
-            return new Player($playerData["id"], $playerData["playerId"], $playerData["username"], $playerData["password"]);
+    private static function getUser($userName,$password){
+        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ? LIMIT 1", array(self::sanitize($userName),self::sanitize($password)));
+        if($dbUser->rowCount() == 1) {
+            $UserData = $dbUser->fetch();
+            $User = new User($UserData["id"], $UserData["userName"], $UserData["password"], $UserData["playerId"]);
+            return $User->toJson();
         } else {
             return null;
         }
