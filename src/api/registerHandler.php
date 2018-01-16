@@ -1,19 +1,16 @@
-<?php 
+<?php
 
-	require_once 'UserService.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . "src/api/UserService.php";
 
-	if(isset( $_POST['username'] ) && isset( $_POST['password']) &&
-	   isset( $_POST['nickname'] ) && isset( $_POST['gender'])
-	   /*isset( $_POST['skill'] ) && isset( $_POST['email']*/) {
+if (isset( $_POST['username'] ) && isset( $_POST['password']) &&
+   isset( $_POST['nickname'] ) && isset( $_POST['gender'])
+   /*isset( $_POST['skill'] ) && isset( $_POST['email']*/) {
+        $result = UserService::register($_POST['username'],$_POST['password'],$_POST['nickname'],$_POST['gender']);
+        echo $result;
 
-			$userService = new UserService();
-		    $result = $userService->register($_POST['username'],$_POST['password'],$_POST['nickname'],$_POST['gender']);
-			echo $result;
-
-	}
-	else{
-		$result = ["code"=>"1", "message" =>"Please complete every field."];
-	 	echo json_encode($result);
-	}
+} else {
+    $result = ["code"=>"1", "message" =>"Please complete every field."];
+    echo json_encode($result);
+}
 
 ?>
