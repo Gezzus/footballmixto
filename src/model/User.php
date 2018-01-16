@@ -10,38 +10,35 @@ class User extends Player {
     private $roleId;
     private $lastLogin;
 
-    public function __construct($id, $userName, $password, $playerId) {
+    public function __construct($id, $userName, $password, $player) {
+        parent::__construct($player->getId(), $player->getNickName(), $player->getGenderId(), $player->getLevelId());
         $this->id = $id;
         $this->userName = $userName;
         $this->password = $password;
-        #$this->levelId = $levelId;
     }
 
-    public static function createUser($userName,$password,$nickName,$genderId) {
-        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND nickName = ?", array($userName, $nickName));
+    public static function createUser($userName, $password, $nickName, $genderId) {
+        $userNameSanitized = self::sanitize($userName);
+        $passwordSanitized = self::sanitize($password);
+        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND nickName = ?", array($userNameSanitized, self::sanitize($nickName)));
         if ($dbUser->rowCount() == 0) {
-            $dbPlayer = self::queryWithParameters("SELECT * FROM user WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
-            if ($dbPlayer->rowCount() == 0) {
-                self::queryWithParameters("INSERT INTO player(nickName, genderId) VALUES(?, ?)", array($nickName, $genderId));
-                $playerId = self::lastInsertId();
-
-                self::queryWithParameters("INSERT INTO user(userName, password, playerId) VALUES(?, ?, ?)", array($userName, $password, $playerId));
-                return self::lastInsertId();
+            $player = Player::createPlayer($nickName, $genderId);
+            if ($player != null) {
+                self::queryWithParameters("INSERT INTO user (userName, password, playerId) VALUES (?, ?, ?)", array($userNameSanitized, $passwordSanitized, $player->getId()));
+                return self::getUser(self::lastInsertId());
             } else {
                 return null;
             }
-
         } else {
             return null;
         }
     }
 
-    public static function getUser($userName, $password){
-        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND password = ? LIMIT 1", array(self::sanitize($userName), self::sanitize($password)));
+    public static function getUser($userId){
+        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
         if($dbUser->rowCount() == 1) {
-            $UserData = $dbUser->fetch();
-            $User = new User($UserData["id"], $UserData["userName"], $UserData["password"], $UserData["playerId"]);
-            return $User;
+            $userData = $dbUser->fetch();
+            return new User($userData["id"], $userData["userName"], $userData["password"], self::getPlayer($userData["playerId"]));
         } else {
             return null;
         }
@@ -69,6 +66,5 @@ class User extends Player {
     public function retrieve(){
         return $this;
     }
-
 
 }
