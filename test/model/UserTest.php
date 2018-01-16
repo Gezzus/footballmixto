@@ -1,5 +1,5 @@
 <?php
-include("../User.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "src/model/User.php");
 $userName = "TEST";
 $password = "1";
 $nickName = "ALLBOYS";

@@ -3,7 +3,7 @@
 class Database {
 
     private $host = "localhost";
-    private $db_name = "futbolmixto";
+    private $db_name = "lgmsports";
     private $username = "root";
     private $password = "";
     private $conn;

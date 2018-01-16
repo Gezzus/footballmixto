@@ -1,5 +1,5 @@
 <?php
-include("../../src/model/Player.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . "src/model/Player.php");
 
 echo "<pre>";
 $test1 = Player::createPlayer("newNi12114k", 2);
