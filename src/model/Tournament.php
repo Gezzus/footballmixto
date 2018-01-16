@@ -1,30 +1,33 @@
 <?php
 
-	class tournament extends team{
+include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/PersistentEntity.php";
 
-		#private $teams;
-		#private $properties = ["id","size","date"];
+class Tournament extends PersistentEntity implements Seriarizable {
 
-
-		function __construct($received_id, $received_size, $received_date){
-			$this->teams = [];
-			$this->properties["id"] = $received_id;
-			$this->properties["size"] = $received_size;		
-			$this->properties["date"] = $received_date;
-
-		}
-
-		public function add_team($team_id, $team_size, $team_players){
-			array_push($this->teams,new team($team_id, $team_size, $team_players));
-		}
+	#private $teams;
+	#private $properties = ["id","size","date"];
 
 
-		public function retrieve(){
-			return $this;
-		}
-
-
+	function __construct($received_id, $received_size, $received_date){
+		$this->teams = [];
+		$this->properties["id"] = $received_id;
+		$this->properties["size"] = $received_size;
+		$this->properties["date"] = $received_date;
 	}
+
+	public function add_team($team_id, $team_size, $team_players){
+		array_push($this->teams,new team($team_id, $team_size, $team_players));
+	}
+
+
+	public function retrieve(){
+		return $this;
+	}
+
+    public function toJson() {
+        // TODO: Implement toJson() method.
+    }
+}
 
 ?>
 

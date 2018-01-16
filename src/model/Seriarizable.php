@@ -1,7 +1,6 @@
 <?php
 
-interface Seriarizable
-{
+interface Seriarizable {
 
     public function toJson();
 

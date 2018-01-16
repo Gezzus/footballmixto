@@ -1,8 +1,8 @@
 <?php
 
-include("Player.php");
+include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/Player.php";
 
-class User extends Player implements Seriarizable {
+class User extends Player {
 
     private $id;
     private $userName;
@@ -14,7 +14,6 @@ class User extends Player implements Seriarizable {
         $this->id = $id;
         $this->userName = $userName;
         $this->password = $password;
-        $this->genderId = $playerId;
         #$this->levelId = $levelId;
     }
 
