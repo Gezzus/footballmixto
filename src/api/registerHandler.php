@@ -1,15 +1,14 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/api/UserService.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "src/api/UserAPI.php";
 
 if (isset( $_POST['username'] ) && isset( $_POST['password']) &&
-   isset( $_POST['nickname'] ) && isset( $_POST['gender'])
+    isset( $_POST['nickname'] ) && isset( $_POST['gender'])
    /*isset( $_POST['skill'] ) && isset( $_POST['email']*/) {
-        $result = UserService::register($_POST['username'],$_POST['password'],$_POST['nickname'],$_POST['gender']);
+        $result = UserAPI::register($_POST['username'], $_POST['password'], $_POST['nickname'], $_POST['gender']);
         echo $result;
-
 } else {
-    $result = ["code"=>"1", "message" =>"Please complete every field."];
+    $result = ["code"=>"1", "message" => "Please complete every field."];
     echo json_encode($result);
 }
 
