@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/PersistentEntity.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
 
 class Game extends PersistentEntity {
 

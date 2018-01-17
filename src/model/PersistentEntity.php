@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/config/Database.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/config/Database.php";
 
 class PersistentEntity {
 
@@ -19,7 +19,7 @@ class PersistentEntity {
     protected static function queryWithParameters($query, $params) {
         $statement = Database::getInstance()->getConn()->prepare($query);
         for ($i = 0; $i < count($params); $i++) {
-            $statement->bindParam($i + 1, $params[$i]);
+            $statement->bindParam($i + 1, $params[$i], PDO::PARAM_STR || PDO::PARAM_INT);
         }
         $statement->execute();
         return $statement;

@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/User.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -16,11 +16,17 @@ class UserAPI{
 	}
 
 	public static function login($userName,$password) {
-		if ($user = User::getUser($userName, $password)) {
-			return $user->toJson();
-		} else {
-			return null;
+		$user = User::getUser($userName, $password);
+		#$user = User::getUserWithId(9);
+		if($user != null){
+			#return $user->toJson();
+			return json_encode($user);
+		} else { 
+			$result = ["status" => "failed1"];
+			return json_encode($result);
 		}
+
+
 	}
 
 	public static function logout(){

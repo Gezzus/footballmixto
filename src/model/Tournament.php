@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/PersistentEntity.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
 
 class Tournament extends PersistentEntity implements Seriarizable {
 

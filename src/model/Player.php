@@ -1,7 +1,7 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/PersistentEntity.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/Seriarizable.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
 
 class Player extends PersistentEntity implements Seriarizable {
 
