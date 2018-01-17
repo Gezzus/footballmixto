@@ -21,3 +21,4 @@ final class UserTest extends TestCase {
 
 }
 
+?>

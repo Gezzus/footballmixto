@@ -1,8 +1,9 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/PersistentEntity.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/Seriarizable.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/Player.php";
+
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Player.php";
 
 class User extends PersistentEntity implements Seriarizable {
 
@@ -16,6 +17,7 @@ class User extends PersistentEntity implements Seriarizable {
      */
     private $player;
 
+    
     public function __construct($id, $userName, $password, $player) {
         $this->id = $id;
         $this->userName = $userName;
@@ -44,10 +46,8 @@ class User extends PersistentEntity implements Seriarizable {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND password = ?", array($userName, md5($password)));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            var_dump($userData);
             return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayer($userData["playerId"]));
         } else {
-            var_dump("ACA NO ENTRO");
             return null;
         }
     }
@@ -81,3 +81,6 @@ class User extends PersistentEntity implements Seriarizable {
     }
 
 }
+
+
+?>

@@ -17,12 +17,10 @@ class UserAPI{
 
 	public static function login($userName,$password) {
 		$user = User::getUser($userName, $password);
-		#$user = User::getUserWithId(9);
 		if($user != null){
-			#return $user->toJson();
-			return json_encode($user);
+			return $user->toJson();
 		} else { 
-			$result = ["status" => "failed1"];
+			$result = ["status" => "failed"];
 			return json_encode($result);
 		}
 
