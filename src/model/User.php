@@ -25,7 +25,7 @@ class User extends PersistentEntity implements Seriarizable {
 
     public static function createUser($userName, $password, $nickName, $genderId) {
         $userNameSanitized = self::sanitize($userName);
-        $passwordSanitized = self::sanitize($password);
+        $passwordSanitized = self::sanitize(md5($password));
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND nickName = ?", array($userNameSanitized, self::sanitize($nickName)));
         if ($dbUser->rowCount() == 0) {
             $player = Player::createPlayer($nickName, $genderId);
@@ -40,7 +40,19 @@ class User extends PersistentEntity implements Seriarizable {
         }
     }
 
-    public static function getUser($userId){
+    public static function getUser($userName, $password){
+        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND password = ?", array($userName, md5($password)));
+        if($dbUser->rowCount() == 1) {
+            $userData = $dbUser->fetch();
+            var_dump($userData);
+            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayer($userData["playerId"]));
+        } else {
+            var_dump("ACA NO ENTRO");
+            return null;
+        }
+    }
+
+    public static function getUserById($userId){
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
