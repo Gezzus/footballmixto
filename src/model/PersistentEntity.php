@@ -25,3 +25,4 @@ class PersistentEntity {
         return $statement;
     }
 }
+?>

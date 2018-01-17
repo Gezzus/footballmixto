@@ -68,3 +68,5 @@ class Player extends PersistentEntity implements Seriarizable {
     }
 
 }
+
+?>

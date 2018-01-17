@@ -1,11 +1,6 @@
-  function isEmpty(str) {
-    return (!str || 0 === str.length);
-  }
-
-
  function userLogin(){
       $.ajax({
-          url: "../src/api/loginHandler.php", 
+          url: "/src/api/loginHandler.php", 
           type: "POST",
           data: {
               "username": $( "#username" ).val(),
@@ -14,11 +9,9 @@
           dataType: "html",
           async: false,
           success: function(result){
-
-                console.log("Result: "+result);
-
-                $result = JSON.parse(result);
-
+        	  
+        	  
+        	  if($result = JSON.parse(result)) {
                 if($result.status == "failed") {
                   $("#username").css('border', '1px solid red');
                   $("#password").css('border', '1px solid red');
@@ -27,14 +20,15 @@
                   $("#username").css('border', '1px solid red');
                   $("#password").css('border', '1px solid red');
                   $("#error").html("Please complete the fields above and try again");
-                } else {
-                  console.log($result);
+                } else{	
                   console.log("Redirect after session starts");
+                  window.location.href="/index.html";
                 }
+        	  }
           },
-          error: function(status,exception){
-            console.log(status);
-            console.log(exception);
+          error: function(status,exception) {
+        	  console.log(status);
+        	  console.log(exception);
             }
       });
 }

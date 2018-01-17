@@ -5,3 +5,5 @@ interface Seriarizable {
     public function toJson();
 
 }
+
+?>
