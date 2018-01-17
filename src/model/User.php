@@ -1,20 +1,26 @@
 <?php
 
+include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/PersistentEntity.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/Seriarizable.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "src/model/Player.php";
 
-class User extends Player {
+class User extends PersistentEntity implements Seriarizable {
 
     private $id;
     private $userName;
     private $password;
     private $roleId;
     private $lastLogin;
+    /**
+     * @var Player
+     */
+    private $player;
 
     public function __construct($id, $userName, $password, $player) {
-        parent::__construct($player->getId(), $player->getNickName(), $player->getGenderId(), $player->getLevelId());
         $this->id = $id;
         $this->userName = $userName;
         $this->password = $password;
+        $this->player = $player;
     }
 
     public static function createUser($userName, $password, $nickName, $genderId) {
@@ -38,7 +44,7 @@ class User extends Player {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            return new User($userData["id"], $userData["userName"], $userData["password"], self::getPlayer($userData["playerId"]));
+            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayer($userData["playerId"]));
         } else {
             return null;
         }
@@ -47,9 +53,9 @@ class User extends Player {
     public function toJson() {
         $return = [
             "id" => $this->id,
-            "playerId" => $this->playerId,
             "userName" => $this->userName,
-            "password" => $this->password
+            "password" => $this->password,
+            "player" => $this->player->toJson(),
         ];
         return json_encode($return);
     }
@@ -60,11 +66,6 @@ class User extends Player {
 
     public function setUserName($userName) {
         $this->userName = $userName;
-        #DBQueryHere??
-    }
-
-    public function retrieve(){
-        return $this;
     }
 
 }
