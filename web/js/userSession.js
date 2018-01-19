@@ -8,14 +8,13 @@
           dataType: "html",
           async: false,
           success: function(result){
-        	  //console.log("Result in frontend: "+result+"/n<br>");
         	  console.log(result);
         	  if($result = JSON.parse(result)) {
-                if($result.status == "success") {
-                	window.location.href="/web/index.html?redirected";
-                	console.log("redirected");
-                }else{
-                	
+                if($result.status == "failure") {                	
+                		$("#loggedInModal").removeAttr("hidden");
+                	});                	
+                }else if($result.status == "success") {
+                	return null;
                 }
         	  }
           },

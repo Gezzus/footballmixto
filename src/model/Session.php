@@ -18,7 +18,6 @@ class Session {
     
     public static function validate(){
         if(isset($_SESSION['id'])){
-            echo "SUCCESS: ".$_SESSION['id'];
             return $_SESSION['id'];
         }else {
             return null;
