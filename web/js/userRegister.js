@@ -1,30 +1,37 @@
  function userRegister(){
+	 
       $.ajax({
           url: "../src/api/registerHandler.php", 
           type: "POST",
           data: {
-              "username": $( "#username" ).html(),
-              "password": $( "#password" ).html(),
-              "nickname": $( "#nickname" ).html(),
-              "gender": $( "#gender" ).html(),
-              "skill": $( "#skill" ).html()
-              //"email": $( "#email" ).html()
+              "userName": $( "#userName" ).val(),
+              "password": $( "#password" ).val(),
+              "nickName": $( "#nickName" ).val(),
+              "genderId": $( "#genderId" ).val(),
+              "skillId": $( "#skillId" ).val()
+              //"email": $( "#email" ).val()
             },
             dataType: "html",
             async: false,
             success: function(result){
-          	  
+            	$("#userName").css('border', '1px solid rgba(0,0,0,.1)');
+                $("#nickName").css('border', '1px solid rgba(0,0,0,.1)');
+                $("#error").html("Loading...<br>");
+                $("#error").css('color','black');
           	  
           	  if($result = JSON.parse(result)) {
                   if($result.status == "failed") {
-                    $("#username").css('border', '1px solid red');
-                    $("#password").css('border', '1px solid red');
-                    $("#error").html("The provided credentials were incorrect.<br>Please try again");
+                    $("#userName").css('border', '1px solid red');
+                    $("#nickName").css('border', '1px solid red');
+                    $("#error").html("This username or nickname is already in use.<br>Please pick a different one and try again");
+                    $("#error").css('color','red');
                   } else if($result.status == "empty") {
-                    $("#username").css('border', '1px solid red');
+                    $("#userName").css('border', '1px solid red');
                     $("#password").css('border', '1px solid red');
+                    $("#nickName").css('border', '1px solid red');
                     $("#error").html("Please complete the fields above and try again");
-                  } else{	
+                    $("#error").css('color','red');
+                  } else if($result.status == "success"){	
                     console.log("Redirect after session starts");
                     window.location.href="/index.html";
                   }

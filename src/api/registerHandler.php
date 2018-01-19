@@ -2,11 +2,11 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/api/UserAPI.php";
 
-if (isset( $_POST['username'] ) && isset( $_POST['password']) &&
-    isset( $_POST['nickname'] ) && isset( $_POST['gender'])
-   /*isset( $_POST['skill'] ) && isset( $_POST['email']*/) {
-        $result = UserAPI::register($_POST['username'], $_POST['password'], $_POST['nickname'], $_POST['gender']);
-        echo $result;
+if (isset( $_POST['userName'] ) && isset( $_POST['password']) &&
+    isset( $_POST['nickName'] ) && isset( $_POST['genderId']) &&
+    isset( $_POST['skillId'] ) /*&& isset( $_POST['email']*/) {
+        $user = UserAPI::register($_POST['userName'], $_POST['password'], $_POST['nickName'], $_POST['genderId'], $_POST['skillId']);
+        echo $user;
 } else {
     echo json_encode(["status" => "empty"]);
 }

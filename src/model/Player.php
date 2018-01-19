@@ -17,17 +17,22 @@ class Player extends PersistentEntity implements Seriarizable {
         $this->levelId = $levelId;
     }
 
-    public static function createPlayer($nickName, $genderId) {
-        $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ?", array(self::sanitize($nickName), $genderId));
+    public static function createPlayer($nickName, $genderId, $skillId) {
+        $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
         if($dbPlayer->rowCount() == 0) {
-            self::queryWithParameters("INSERT INTO player (nickName, genderId) VALUES(?, ?)", array(self::sanitize($nickName), $genderId));
-            return self::getPlayer(self::lastInsertId());
-        } else{
+            $player = self::queryWithParameters("INSERT INTO player (nickName, genderId, levelId) VALUES(?, ?, ?)", array($nickName, $genderId, $skillId));
+            if($player){
+                return self::getPlayerbyId(self::lastInsertId());
+            } else {
+                return null;
+            }
+        }
+        else {
             return null;
         }
     }
 
-    public static function getPlayer($playerId){
+    public static function getPlayerById($playerId){
         $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE id = ?", array($playerId));
         if($dbPlayer->rowCount() == 1) {
             $playerData = $dbPlayer->fetch();
@@ -36,9 +41,20 @@ class Player extends PersistentEntity implements Seriarizable {
             return null;
         }
     }
-
+    
+    public static function getPlayer($nickName,$genderId){
+        $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ? LIMIT 1", array($nickName, $genderId));
+        #echo $dbPlayer->fetch()->toJson();
+        if($dbPlayer->rowCount() == 1) {
+            $playerData = $dbPlayer->fetch();
+            return new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
+        } else {
+            return null;
+        }
+    }    
+    
     public static function deletePlayer($nickName){
-        self::queryWithParameters("DELETE FROM player WHERE nickName = ?", array(self::sanitize($nickName)));
+        self::queryWithParameters("DELETE FROM player WHERE nickName = ?", array($nickName));
     }
 
     public function toJson() {

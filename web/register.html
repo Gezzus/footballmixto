@@ -4,11 +4,14 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/userRegister.js"></script>
+<script type="text/javascript" src="js/userSession.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
+
+<script>userSession("prevent");</script>
 
 </head>
 
@@ -20,7 +23,7 @@
       <div class="col">
       </div>
 
-      <div class="col-5 content team">
+      <div class="col-5 content team" style="min-width:80%">
       <h5 class="content team" style="padding-top:15px">LMG Sports | Welcome</h5>
       <hr style="margin:1%;padding:0px">
       <h7 class="content team" style="padding-top:15px">Register</h7>
@@ -29,22 +32,21 @@
         <font size="2">
         <div class="col" style="border-right: 1px solid;border-color: #CCCCCC">
           <label style="margin:0px;padding:0px">Username:</label>
-          <input class="content team" id="username" placeholder="Username">
+          <input class="content team" id="userName" placeholder="Username">
           <small class="content team">Username must be unique.</small><br>
           <label style="margin:0px;padding:0px">Password:</label>
           <input class="content team" type="password" id="password" placeholder="Password">
-          <small class="content team">Use a random password.</small><br>
           <label style="margin:0px;padding:0px">Nickname:</label>
-          <input class="content team" id="nickname" placeholder="Shorty">
-          <small class="content team">Whatever you wanna be called, must also be unique.</small><br>
+          <input class="content team" id="nickName" placeholder="Shorty">
+          <small class="content team">Your nickname will be displayed, must be unique.</small><br>
           <label>Gender:</label>
-          <select class="content team" id="gender">
+          <select class="content team" id="genderId">
               <option value="1" class="">Male</option>
               <option value="2" class="">Female</option>
           </select>
           <br>
           <label>Skill:</label>
-          <select class="content team" style="min-width:80%" id="skill">
+          <select class="content team" style="min-width:80%" id="skillId">
               <option class="" value="1">I know how to play</option>
               <option class="" value="2">I'm ok</option>
               <option class="" value="3">I know what a ball is</option>
@@ -64,9 +66,9 @@
       
         <div class="col">
         <a href="register.html"><button type="submit" class="content team" style="min-width:80%" >Login</button></a><br>
-          <button style="min-width:80%" class="content team" onclick=window.open("https://api.instagram.com/oauth/authorize/?client_id=d31abc6eb2d94c418c5b5ddc14df11cd&redirect_uri=http://172.20.10.81&response_type=code","_child","width=500,height=500")>Login with Instagram</button><br>
-          <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with Facebook</button><br>
-          <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with LinkedIn</button><br>
+          <button style="min-width:80%" class="content team" onclick=window.open("https://api.instagram.com/oauth/authorize/?client_id=d31abc6eb2d94c418c5b5ddc14df11cd&redirect_uri=http://172.20.10.81&response_type=code","_child","width=500,height=500")>Register with Instagram</button><br>
+          <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Register with Facebook</button><br>
+          <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Register with LinkedIn</button><br>
         </div>
       </div>
       </div>

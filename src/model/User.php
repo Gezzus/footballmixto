@@ -25,19 +25,34 @@ class User extends PersistentEntity implements Seriarizable {
         $this->player = $player;
     }
 
-    public static function createUser($userName, $password, $nickName, $genderId) {
-        $userNameSanitized = self::sanitize($userName);
-        $passwordSanitized = self::sanitize(md5($password));
-        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND nickName = ?", array($userNameSanitized, self::sanitize($nickName)));
+    public static function createUser($userName, $password, $nickName, $genderId, $skillId) {
+        $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ?", array($userName));
         if ($dbUser->rowCount() == 0) {
-            $player = Player::createPlayer($nickName, $genderId);
-            if ($player != null) {
-                self::queryWithParameters("INSERT INTO user (userName, password, playerId) VALUES (?, ?, ?)", array($userNameSanitized, $passwordSanitized, $player->getId()));
-                return self::getUser(self::lastInsertId());
+            $dbPlayer = Player::getPlayer($nickName, $genderId);
+            if($dbPlayer != null) {
+                $userExistsCheck = self::queryWithParameters("SELECT * FROM user WHERE playerId= ? LIMIT 1", array($dbPlayer->getId()));
+                if($userExistsCheck->rowCount() == 0) {
+                    self::queryWithParameters("INSERT INTO user(userName, password, playerId, roleId, lastLogin) VALUES (?, ?, ?, 1, NOW())", array($userName, $password, $dbPlayer->getId()));
+                    $newUser = self::getUserById(self::lastInsertId());
+                    return $newUser;
+                    
+                } else {
+                    #echo "Status: Nickname is associated already";
+                    return null;
+                }
             } else {
-                return null;
+                $player = Player::createPlayer($nickName, $genderId, $skillId);
+                if ($player != null) {
+                    self::queryWithParameters("INSERT INTO user (userName, password, playerId, roleId, lastLogin) VALUES (?, ?, ?, 1, NOW())", array($userName, $password, $player->getId()));
+                    $newUser = self::getUserById(self::lastInsertId());
+                    return $newUser;
+                } else {
+                    #echo "Status: Create Player Failed";
+                    return null;
+                }
             }
         } else {
+            #echo "Status: Username Exists";
             return null;
         }
     }
@@ -46,7 +61,7 @@ class User extends PersistentEntity implements Seriarizable {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND password = ?", array($userName, md5($password)));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayer($userData["playerId"]));
+            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayerById($userData["playerId"]));
         } else {
             return null;
         }
@@ -56,7 +71,7 @@ class User extends PersistentEntity implements Seriarizable {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayer($userData["playerId"]));
+            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayerById($userData["playerId"]));
         } else {
             return null;
         }
@@ -75,6 +90,11 @@ class User extends PersistentEntity implements Seriarizable {
     public function getUserName() {
         return $this->userName;
     }
+    
+    public function getId() {
+        return $this->id;
+    }
+    
 
     public function setUserName($userName) {
         $this->userName = $userName;

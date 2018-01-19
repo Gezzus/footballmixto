@@ -1,34 +1,37 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Session.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-class UserAPI{
+class UserAPI {
 	
-	public static function register($userName, $password, $nickName, $genderId) {
-		if ($newUser = User::createUser($userName, $password, $nickName, $genderId) != null) {
-			return $newUser->toJson();
-		} else {
-			return null;
+    public static function register($userName, $password, $nickName, $genderId, $skillId) {
+        $user = User::createUser($userName, $password, $nickName, $genderId, $skillId);
+        if(($user != null) && (null != ($user->getId()))) {
+            if(Session::create($user->getId())) {
+                return json_encode(["status => success"]);
+            } else {
+                return json_encode(["status" => "500"]);
+            }
+        } else {
+            return json_encode(["status" => "failed"]);
 		}
 	}
 
 	public static function login($userName,$password) {
 		$user = User::getUser($userName, $password);
-		if($user != null){
-			return $user->toJson();
-		} else { 
-			$result = ["status" => "failed"];
-			return json_encode($result);
+		if(($user != null) && (null !== ($user->getId()))) {
+		    if(Session::create($user->getId())) {
+		        return json_encode(["status => success"]);
+		    } else {
+		       return json_encode(["status" => "500"]);
+		    }
+		} else {
+		    return json_encode(["status" => "failed"]);
 		}
-
-
-	}
-
-	public static function logout(){
-		session_destroy();
 	}
 
 }
