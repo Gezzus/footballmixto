@@ -1,31 +1,47 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
 
-class Game extends PersistentEntity {
+class Game extends PersistentEntity implements Seriarizable {
 
-    function __construct($received_id, $received_size, $received_teams){
-        $this->teams = [];
-        $this->properties["id"] = $received_id;
-        $this->properties["size"] = $received_size;
+    private $id;
+    private $date;
+    private $typeId;
+    private $status;
+    private $teams;
+    private $teamless;
+    private $doodleUrl;
 
-        for ($i=0; $i < count($received_players); $i++){
-            array_push($this->players, $received_teams[$i]);
-        }
+    function __construct($id, $date, $typeId, $status, $doodleUrl){
+        $this->id = $id;
+        $this->date = $date;
+        $this->typeId = $typeId;
+        $this->status = $status;
+        $this->doodleUrl = $doodleUrl;
+        $this->teams = array();
+        $this->teamless = array();
     }
 
-    public function retrieve(){
-        return $this;
+    public function addTeam($teamId){
+        array_push($this->teams, $teamId);
     }
 
-    public function add_team($team_id){
-        array_push($this->teams, $team_id);
+    public function removeTeam($teamId){
+        $teamPosition = array_search($teamId, $this->teams);
+        unset($this->teams[$teamPosition]);
     }
 
-    public function remove_team($team_id){
-        $team_position = array_search($team_id, $this->teams);
-        unset($this->teams[$team_position]);
-        #db_team_remove_player(); TODO
+    //TODO encode array objects
+    public function toJson() {
+        $return = [
+            "id" => $this->id,
+            "date" => $this->date,
+            "typeId" => $this->typeId,
+            "status" => $this->status,
+            "teams" => $this->teams,
+            "teamless" => $this->teamless
+        ];
+        return json_encode($return);
     }
 }
-?>
