@@ -78,14 +78,18 @@ class User extends PersistentEntity implements Seriarizable {
         }
     }
 
-    public function toJson() {
+    public function toArray() {
         $return = [
             "id" => $this->id,
             "userName" => $this->userName,
             "password" => $this->password,
             "player" => $this->player->toJson(),
         ];
-        return json_encode($return);
+        return $return;
+    }
+
+    public function toJson() {
+        return json_encode($this->toArray());    
     }
 
     public function getUserName() {

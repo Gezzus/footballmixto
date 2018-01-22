@@ -1,4 +1,5 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
 
 class Session implements Seriarizable {
 
@@ -32,7 +33,7 @@ class Session implements Seriarizable {
     }
     
     public static function create($id) {
-        $session = new Session($id)
+        $session = new Session($id);
             return $session;
         }
 
@@ -60,7 +61,7 @@ class Session implements Seriarizable {
         }
     }
 
-
+}
     /*public function setId($id) {
         return $this->Id;
     }*/
