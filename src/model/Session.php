@@ -1,6 +1,6 @@
 <?php
 
-class Session {
+class Session implements Seriarizable {
 
     private $id; 
         
@@ -8,10 +8,15 @@ class Session {
         $this->id = $id;
         $this->start();
     }
-    
-    public function start() {
-        session_start();
+
+    public static function start() {
+        if(session_start()){
         $_SESSION['id'] = $this->id;
+        return ["status" => "success"];
+        } else { 
+            return null;
+        }
+
     }
     
     public static function stop() {
@@ -20,37 +25,45 @@ class Session {
     
     public static function validate(){
         if(isset($_SESSION['id'])){
-            return new Session($_SESSION['id']);
+            return $_SESSION['id'];
         } else {
             return null;
         }
     }
     
     public static function create($id) {
-        $session = new Session($id);            
-        if(isset($_SESSION['id'])){
+        $session = new Session($id)
             return $session;
-        } else {
-            return null;
         }
-    }
 
-    public function toJson() {
+    public function toArray() {
         $result = [
             $id => $this->id
         ];
         return $result;
     }
 
+    public function toJson() {
+        
+        return json_encode($this->toArray());
+    }
+
     public function getId() {
         return $this->Id;
     }
+
+    public function getSession() {
+         if(isset($_SESSION['id'])){
+            return new Session($id);
+        } else {
+            return null;
+        }
+    }
+
 
     /*public function setId($id) {
         return $this->Id;
     }*/
 
-
-}
 
 ?>

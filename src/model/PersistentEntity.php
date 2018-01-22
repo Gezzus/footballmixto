@@ -28,5 +28,3 @@ class PersistentEntity {
     protected static function queryErrorInfo() {
         return Database::getInstance()->getConn()->errorInfo(); 
     }
-}
-?>
