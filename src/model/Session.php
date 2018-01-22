@@ -4,12 +4,18 @@ class Session {
 
     private $id; 
         
-    public function __construct() {
+    public function __construct($id) {
+        $this->id = $id;
         $this->start();
     }
     
     public static function start() {
-        session_start();
+        if(session_start()){
+        $_SESSION['id'] = $this->id;
+        return ["status" => "success"];
+        } else { 
+            return ["status" => "failed"];
+        }
     }
     
     public static function stop() {
@@ -24,16 +30,14 @@ class Session {
         }
     }
     
-    public function create($id) {
-        if(session_start()){
-            $this->id = $id;
-            return $id;             
+    public static function create($id) {
+        $session = new Session($id);
+        if($session->validate()){
+            return $session;
         } else {
             return null;
         }
     }
-
-
 }
 
 ?>

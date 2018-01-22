@@ -57,14 +57,19 @@ class Player extends PersistentEntity implements Seriarizable {
         self::queryWithParameters("DELETE FROM player WHERE nickName = ?", array($nickName));
     }
 
-    public function toJson() {
+    public function toArray() {
         $return = [
             "id" => $this->id,
             "nickName" => $this->nickName,
             "genderId" => $this->genderId,
             "levelId" => $this->levelId
         ];
-        return json_encode($return);
+        return $return;
+        
+    }
+    
+    public function toJson() {
+       return json_encode($this->toArray());
     }
 
     public function getId() {

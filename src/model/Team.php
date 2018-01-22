@@ -7,46 +7,48 @@ class Team extends PersistentEntity implements Seriarizable {
 
     private $id;
     private $name;
-    private $size;
+    #private $size;
     #private $players;
 
-    function __construct($id, $name, $size) {
-
+    function __construct($id, $name) {
+        $this->id = $id;
+        $this->name = $name;
     }
 
     public static function createTeam($name,$size) {
-        $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE name = ? AND size = ?", array(self::sanitize($name), $size));
+        $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE name = ? AND size = ?", array($name, $size));
         if($dbTeam->rowCount() == 0) {
-            self::queryWithParameters("INSERT INTO team (name, size) VALUES(?, ?)", array(self::sanitize($name), $size));
-        #var_dump(self::lastInsertId());
+            self::queryWithParameters("INSERT INTO team (name, size) VALUES(?, ?)", array($name, $size));
         return(self::getTeam(self::lastInsertId));
         } else {
             return null;
         }
     }
 
-    public static function getTeam($teamId) {
-        $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE id = ?", array($teamId));
+    public static function getTeam($id) {
+        $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE id= ?",array($id));
         if($dbTeam->rowCount() == 1) {
             $teamData = $dbTeam->fetch();
-            return new Team($teamData["id"], $teamData["name"], $teamData["size"]);
+            return new Team($teamData["id"], $teamData["name"]);
         } else {
             return null;
         }
     }
 
     public static function deleteTeam($id) {
-        self::queryWithParameters("DELETE FROM team WHERE id = ?", array(self::sanitize($id)));
+        self::queryWithParameters("DELETE FROM team WHERE id = ?", array($id));
     }
 
-
-    public function toJson() {
+    public function toArray() {
         $return = [
-        "id" => $this->id,
-        "name" => $this->nickName,
-        "size" => $this->genderId
+            "id" => $this->id,
+            "name" => $this->name
         ];
-        return json_encode($return);
+        return $return;
+    }
+    
+    public function toJson() {
+        return json_encode($this->toArray());
     }
 
     public function getId() {
