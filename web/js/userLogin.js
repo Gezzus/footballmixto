@@ -14,7 +14,7 @@
               $("#error").html("Loading...<br>");
               $("#error").css('color','black');
         	  
-              //console.log(result);//DELETE
+            console.log(result);//DELETE
         	  if($result = JSON.parse(result)) {
                 if($result.status == "failed") {
                   $("#userName").css('border', '1px solid red');

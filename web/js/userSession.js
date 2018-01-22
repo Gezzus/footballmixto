@@ -1,4 +1,4 @@
- function userSession($value){
+ function userSession($value,$action){
       $.ajax({
           url: "/src/api/sessionHandler.php", 
           type: "GET",
@@ -11,12 +11,19 @@
         	  console.log(result);
         	  if($result = JSON.parse(result)) {
                 if($result.status == "failure") {                	
-                		$("#loggedInModal").removeAttr("hidden");
-                	});                	
-                }else if($result.status == "success") {
-                	return null;
-                }
-        	  }
+                		if($action == "kick") {
+                      window.location.href="/index.html";
+                    } else if($action == "modal") {
+                        $(document).ready(function(){
+                          $("#login").hide();
+                          $("#logedIn").show();
+                          $("loggedUserName").append($result.username);
+                        })                    
+                    } else if($result.status == "success") {
+                	     return null;
+                    }
+        	     }
+            }
           },
           error: function(status,exception) {
         	  console.log(status);

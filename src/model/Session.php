@@ -4,12 +4,14 @@ class Session {
 
     private $id; 
         
-    public function __construct() {
+    public function __construct($id) {
+        $this->id = $id;
         $this->start();
     }
     
-    public static function start() {
+    public function start() {
         session_start();
+        $_SESSION['id'] = $this->id;
     }
     
     public static function stop() {
@@ -18,20 +20,35 @@ class Session {
     
     public static function validate(){
         if(isset($_SESSION['id'])){
-            return $_SESSION['id'];
-        }else {
-            return null;
-        }
-    }
-    
-    public function create($id) {
-        if(session_start()){
-            $this->id = $id;
-            return $id;             
+            return new Session($_SESSION['id']);
         } else {
             return null;
         }
     }
+    
+    public static function create($id) {
+        $session = new Session($id);            
+        if(isset($_SESSION['id'])){
+            return $session;
+        } else {
+            return null;
+        }
+    }
+
+    public function toJson() {
+        $result = [
+            $id => $this->id
+        ];
+        return $result;
+    }
+
+    public function getId() {
+        return $this->Id;
+    }
+
+    /*public function setId($id) {
+        return $this->Id;
+    }*/
 
 
 }

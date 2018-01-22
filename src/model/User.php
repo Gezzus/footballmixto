@@ -31,8 +31,9 @@ class User extends PersistentEntity implements Seriarizable {
             $dbPlayer = Player::getPlayer($nickName, $genderId);
             if($dbPlayer != null) {
                 $userExistsCheck = self::queryWithParameters("SELECT * FROM user WHERE playerId= ? LIMIT 1", array($dbPlayer->getId()));
+               // echo "This dbPlayer->getId() = ".$dbPlayer->getId();
                 if($userExistsCheck->rowCount() == 0) {
-                    self::queryWithParameters("INSERT INTO user(userName, password, playerId, roleId, lastLogin) VALUES (?, ?, ?, 1, NOW())", array($userName, $password, $dbPlayer->getId()));
+                    self::queryWithParameters("INSERT INTO user(userName, password, playerId, roleId, lastLogin) VALUES (?, MD5(?), ?, 1, NOW())", array($userName, $password, $dbPlayer->getId()));
                     $newUser = self::getUserById(self::lastInsertId());
                     return $newUser;
                     
