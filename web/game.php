@@ -1,59 +1,31 @@
-
-<?php
-include("src/connect.php");
-session_start();
-include("header.html");
-include("src/game.php");
-
-$game = game_retrieve($_GET['id'],$link);
-
-if(active_session() == 0){
-  header("location:index.php?error=3");
-  
-}
-
-if(isset($_GET["error"]) && $_GET["error"] == 3){
-    echo "<script type='text/javascript'>alert('This doesn/'t do shit... yet);</script>";
-}
-
-if(isset($_GET["error"]) && $_GET["error"] == 1){
-    echo "<script type='text/javascript'>alert('You are already subscribed to this event');</script>";
-}
-
-
-
-
-?>
-
-
-
 <html>
 <head>
- <link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/gameRetrieve.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
 </head>
 <body>
 <div class="container-fluid">
 
 <div class="row">
-
-    <? include("menubar.php"); ?>
-
     <div class="col">
-      <? include("topbar.php"); ?>
 
-      <div class="row">
-        <div class="col content" style="background-color: rgba(255, 255, 255, 0.6)">
+    <div class="row">
+        <div class="col-8 content" style="background-color: rgba(255, 255, 255, 0.6)">
             <h5>Event information:</h5>
             <hr class="content">
 
                 <div class="row" style="margin:-4px;width:30%;">
-                  <ul class="list-group" style="">
-                    <li>When: <?= $game["date"]; ?></li>
-                    <li>Type: <?= $game["type"]; ?></li>
-                  </ul>
+					<p id="test"></p>                  
                 </div> 
-                <? game_organize_teams($_GET['id'],$link,$_SESSION['id']) ?>
+              
         </div> 
+	</div>
+	
         <div class="col-3 content" style=";background-color: rgba(255, 255, 255, 0.6)">   
                 <div class="col content" style="margin:0px">
              	  	<h5>Add an outsider:</h5>
@@ -66,38 +38,18 @@ if(isset($_GET["error"]) && $_GET["error"] == 1){
                                 <option>Female</option>
                     </select><br>
                     <button class="content team" type="submit">Submit</button>
-                    <input name="gameId" hidden value="<?=$_GET['id']?>"></input>
+                    <input hidden id="gameId"></input>
              	  	</form>
              	</div>
-              <div class="col content" style="margin:0px">
-              <h5>Current players:</h5>
-                  
-                  <label>Male: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","2")?></label><br>
-                  <label>Female: <?= game_retrieve_attribute_ammount($_GET['id'],$link,"player.genderId","1")?></label>
-              </div>
-              
+		 
               
       </div> <!-- End of both col -->
     </div>
-
-    <?if(query_retrieve_team($_GET['id'],'5',$link) != "Error"){?>
-    <div class="row">
-       <div class="col content" style="background-color:rgba(255, 255, 255, 0.6)">
-                <h6>Teamless</h6>
-                <hr class="content"> 
-                <? organize_team($_GET['id'],'5',$link,'0',$_SESSION['id']); ?>
-                </div>
-    </div>
-    <? } ?>
-
-              
-
             
     
 		</div> <!-- Col Div -->
 </div>
 
-</div><!-- Row Div -->
 
 </body>
 </html>

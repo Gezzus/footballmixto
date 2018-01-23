@@ -74,8 +74,8 @@ class Game extends PersistentEntity implements Seriarizable {
             if($gameId != null){
                 
                 $game = new Game($gameId, $date, $typeId, '0', $doodleUrl);
-                for ($i = 0; $i < $gameInfo[0]['teamAmount']; $i++) {
-                  $team = Team::getTeam($i+1);
+                for ($i = 0; $i < $gameInfo[0]['teamsAmount']; $i++) {
+                  $team = Team::getById($gameId, $i+1);
                   $game->teams->add($team);
                 }
                 var_dump($game);
@@ -95,7 +95,7 @@ class Game extends PersistentEntity implements Seriarizable {
             $dbGameRow = $dbGame->fetch();
             $game = new Game($dbGameRow['id'], $dbGameRow['date'], $dbGameRow['typeId'], $dbGameRow['status'], $dbGameRow['doodleurl']); // TODO TEAMLESS
             $gameInfo = self::getGameData($dbGameRow['typeId']);
-            for ($i = 0; $i < $gameInfo[0]['teamAmount']; $i++) {
+            for ($i = 0; $i < $gameInfo[0]['teamsAmount']; $i++) {
                 $teams[$i] = Team::getById($id, $i+1);
                 $game->teams->add($teams[$i]);
             }
@@ -128,8 +128,15 @@ class Game extends PersistentEntity implements Seriarizable {
     
     public function addPlayer($playerId) { // Teamless
         $player = Player::getById($playerId);
-        $this->teamless->add($player);
-        return $playerId;
+        $dbPickPlayer = $this->queryWithParameters("SELECT * FROM pickPlayer WHERE gameId = ? AND playerId = ?", array($this->id, $playerId));
+        if($dbPickPlayer->rowCount() != 0) {
+            return null;
+        } else {
+            $result = $this->queryWithParameters("INSERT INTO pickPlayer(gameId, playerId) VALUES(?, ?)", array($this->id, $playerId));
+            #var_dump($this->queryErrorInfo());
+            $this->teamless->add($player);
+            return $playerId;
+        }
     }
 
     public function getTeam($teamId) {

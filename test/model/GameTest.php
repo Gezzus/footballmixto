@@ -2,21 +2,28 @@
 
 include_once($_SERVER['DOCUMENT_ROOT'] . "/src/model/Game.php");
 
-$date = "2018-01-30 19:03:00";
+$date = "2018-01-30 19:05:00";
 $typeId = "2";
 $doodleUrl = "test";
-$playerId = "13";
+$playerId = "200";
 
 echo "<pre>";
-$test1 = Game::getById(3);
+$test1 = Game::getById(31);
 #$test1 = Game::create($date, $typeId, $doodleUrl);
 
 echo "<code>";
 print_r($test1->toJson());
 #echo "</code>";
+
+echo $test1->addPlayer($playerId);
+echo $test1->addPlayer($playerId+3);
+
+
+#echo "<hr>";
+print_r($test1->toJson());
+echo "</code>";
 echo "<hr>";
-#$test1->addPlayer($playerId);
-#$test1->addPlayer($playerId+1);
+echo "</pre>";
 #print_r($test1->toJson());
 #$teamTest = $test1->getTeam("2");
 #$game = $test1->toArray();

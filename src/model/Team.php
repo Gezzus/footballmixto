@@ -76,8 +76,8 @@ class Team extends PersistentEntity implements Seriarizable {
     public function getPlayers($gameId) {
         $dbTeam = $this->queryWithParameters("SELECT * FROM pickPlayer WHERE gameId = ? AND teamId = ?", array($gameId, $this->id));
         if($dbTeam->rowCount() != 0) {
-            $teamData = $dbTeam->fetch();
             for ($i=0; $i < $dbTeam->rowCount(); $i++) {
+                $teamData = $dbTeam->fetch();
                 $dbPlayer = $this->queryWithParameters("SELECT * FROM player WHERE id = ?", array($teamData["playerId"]));
                 $playerData = $dbPlayer->fetch();
                 $player = new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
