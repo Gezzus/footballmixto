@@ -13,7 +13,7 @@ class Team extends PersistentEntity implements Seriarizable {
     function __construct($id, $name) {
         $this->id = $id;
         $this->name = $name;
-        $this->players = [];
+        $this->players = new SerializableCollection();
     }
 
     public function toArray() {
@@ -38,7 +38,7 @@ class Team extends PersistentEntity implements Seriarizable {
         $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE name = ? AND size = ?", array($name, $size));
         if($dbTeam->rowCount() == 0) {
             self::queryWithParameters("INSERT INTO team (name, size) VALUES(?, ?)", array($name, $size));
-        return(self::getTeam(self::lastInsertId));
+        return(self::getTeam(self::lastInsertId()));
         } else {
             return null;
         }
@@ -72,8 +72,6 @@ class Team extends PersistentEntity implements Seriarizable {
         self::queryWithParameters("DELETE FROM team WHERE id = ?", array($id));
     }
 
-    
-
     public function getId() {
         return $this->id;
     }
@@ -87,17 +85,16 @@ class Team extends PersistentEntity implements Seriarizable {
                 $dbPlayer = $this->queryWithParameters("SELECT * FROM player WHERE id = ?", array($teamData["playerId"]));
                 $playerData = $dbPlayer->fetch();
                 $player = new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
-                array_push($this->players,$player);
+                $this->players->add($player);
             }
         } else {
             return null;
         }
     }
 
-    public function putPlayer($gameId, $playerId) {
-        $dbPlayer = self::queryWithParameters("INSERT INTO pickPlayer(gameId, playerId, teamId) VALUES(?, ?, ?)",array($gameId, $playerId, $this->id));
+    public function putPlayer($playerId) {
         $player = Player::getPlayerById($playerId);
-        array_push($this->teamless,$player);
+        $this->players->add($player);
         return $playerId;
     }
 
@@ -105,13 +102,10 @@ class Team extends PersistentEntity implements Seriarizable {
 
     }
 
-    public function transferPlayer($gameId, $playerId) {
-        $dbPlayer = self::queryWithParameters("UPDATE pickPlayer set teamId = ?  WHERE gameId = ? AND playerId = ?",array($this->id, $gameId, $playerId));
+    public function transferPlayer($playerId) {
         $player = Player::getById($playerId);
-        array_push($this->teamless,$player);
+        $this->players->add($player);
         return $playerId;
     }
 
 }
-
-?>
