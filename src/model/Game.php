@@ -1,6 +1,7 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/SerializableCollection.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Team.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Player.php";
@@ -15,7 +16,7 @@ class Game extends PersistentEntity implements Seriarizable {
     private $teamless;
     private $doodleUrl;
 
-    function __construct($id, $date, $typeId, $status, $doodleUrl){
+    function __construct($id, $date, $typeId, $status, $doodleUrl) {
         $this->id = $id;
         $this->date = $date;
         $this->typeId = $typeId;

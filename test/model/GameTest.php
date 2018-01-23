@@ -35,5 +35,3 @@ echo "<hr>";
 #echo "<hr>";
 #echo "</pre>";
 #$test1->delete();
-
-?>
