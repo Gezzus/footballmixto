@@ -17,15 +17,10 @@ class Team extends PersistentEntity implements Seriarizable {
     }
 
     public function toArray() {
-        $indexedPlayers = array();
-        foreach ($this->players as $row) {
-            $indexedPlayers[] = $row->toArray();
-        }
-
         $return = [
             "id" => $this->id,
             "name" => $this->name,
-            "players" => $indexedPlayers 
+            "players" => $this->players->toArray();
         ];
         return $return;
     }
