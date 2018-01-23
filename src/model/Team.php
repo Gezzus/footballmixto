@@ -20,7 +20,7 @@ class Team extends PersistentEntity implements Seriarizable {
         $return = [
             "id" => $this->id,
             "name" => $this->name,
-            "players" => $this->players->toArray();
+            "players" => $this->players->toArray(),
         ];
         return $return;
     }
