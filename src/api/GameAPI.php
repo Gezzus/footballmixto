@@ -13,7 +13,41 @@ class GameAPI {
             return null;
         }
     }
-}
 
+    public static function create($date, $type, $doodleUrl) {
+        $game = Game::create($date, $type, $doodleUrl);
+        if($game != null) {
+            return $game;
+        } else {
+            return null;
+        }
+    }
+    
+      
+    public static function addPlayer($gameId, $playerId) {
+        $game = Game::getById($gameId);
+        if(in_array($playerId,$game->teamless)){
+            return null;
+        } else {
+            return $game->addPlayer($playerId);
+        }
+    }
+    
+    public static function getPlayerById($playerId) {
+        return Player::getById($playerId);
+    }
+    
+    public static function getPlayer($nickName, $gender) {
+        return Player::get($nickName, $genderId);
+    }
+    
+    public static function transferPlayer($gameId, $playerId, $teamId) {
+        $game = Game::getById($gameId);
+        $team = $game->getTeam($teamId);
+        $team->transferPlayer($playerId);
+        return playerId; // TODO error handling
+    }
+    
+}
 
 ?>

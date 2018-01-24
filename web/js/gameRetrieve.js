@@ -8,6 +8,7 @@ function getGame($value){
           url: "/src/api/gameHandler.php", 
           type: "GET",
           data: {
+        	  "action" : "retrieve",
         	  "id": $value
           },
           dataType: "html",
