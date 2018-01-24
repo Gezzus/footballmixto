@@ -2,8 +2,10 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Session.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php";
-
-    $session = Session::validate();
+    
+$session = new Session;
+$session->start();    
+$session->validate();
 
     if($session != null) {
         if($_GET["action"] == "allow") {

@@ -28,7 +28,7 @@
                   $("#error").css('color','red');
                 } else if($result.status == "success"){	
                   console.log("Redirect after session starts");
-                  window.location.href="/index.html";
+                  //window.location.href="/index.html";
                 }
         	  }
           },

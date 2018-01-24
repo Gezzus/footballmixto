@@ -34,7 +34,7 @@ class User extends PersistentEntity implements Seriarizable {
                // echo "This dbPlayer->getId() = ".$dbPlayer->getId();
                 if($userExistsCheck->rowCount() == 0) {
                     self::queryWithParameters("INSERT INTO user(userName, password, playerId, roleId, lastLogin) VALUES (?, MD5(?), ?, 1, NOW())", array($userName, $password, $dbPlayer->getId()));
-                    $newUser = self::getUserById(self::lastInsertId());
+                    $newUser = self::getById(self::lastInsertId());
                     return $newUser;
                     
                 } else {
@@ -45,7 +45,7 @@ class User extends PersistentEntity implements Seriarizable {
                 $player = Player::createPlayer($nickName, $genderId, $skillId);
                 if ($player != null) {
                     self::queryWithParameters("INSERT INTO user (userName, password, playerId, roleId, lastLogin) VALUES (?, ?, ?, 1, NOW())", array($userName, $password, $player->getId()));
-                    $newUser = self::getUserById(self::lastInsertId());
+                    $newUser = self::getById(self::lastInsertId());
                     return $newUser;
                 } else {
                     #echo "Status: Create Player Failed";
@@ -62,17 +62,17 @@ class User extends PersistentEntity implements Seriarizable {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND password = ?", array($userName, md5($password)));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayerById($userData["playerId"]));
+            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getById($userData["playerId"]));
         } else {
             return null;
         }
     }
 
-    public static function getUserById($userId){
+    public static function getById($userId){
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getPlayerById($userData["playerId"]));
+            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getById($userData["playerId"]));
         } else {
             return null;
         }

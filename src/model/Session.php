@@ -5,37 +5,40 @@ class Session implements Seriarizable {
 
     private $id; 
         
-    public function __construct($id) {
+    public function __construct() {
+        
+    }
+
+    public function build($id) {
         $this->id = $id;
-        $this->start();
     }
-
+    
     public static function start() {
-        if(session_start()){
-        $_SESSION['id'] = $this->id;
-        return ["status" => "success"];
-        } else { 
-            return null;
-        }
-
+        session_start();
+        #echo "Session started"; // DELETE
     }
+    
     
     public static function stop() {
         session_destroy();
     }
     
-    public static function validate(){
+    public function validate(){
         if(isset($_SESSION['id'])){
-            return $_SESSION['id'];
+         $this->build($_SESSION['id']);
+          return $this;
         } else {
             return null;
         }
     }
     
     public static function create($id) {
-        $session = new Session($id);
-            return $session;
-        }
+        $session = new Session();
+        $session->start();
+        $_SESSION['id'] = $id;
+        $session->build($_SESSION['id']);
+        return $session;
+    }
 
     public function toArray() {
         $result = [
@@ -53,13 +56,6 @@ class Session implements Seriarizable {
         return $this->Id;
     }
 
-    public function getSession() {
-         if(isset($_SESSION['id'])){
-            return new Session($id);
-        } else {
-            return null;
-        }
-    }
 
 }
     /*public function setId($id) {
