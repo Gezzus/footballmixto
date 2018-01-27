@@ -9,44 +9,21 @@
 
 <script>userSession("all");</script>
 
-<script>
-  $(function(){
-    $("#menubar").load("menubar.html");
-    $("#topbar").load("topbar.html");
-  });
-</script>
 </head>
 
 <html>
     <body>
         <div class="container-fluid">
-            <div class="row">
-                <div id="menubar">
-                </div>
-                <div class="col">
-                    <div id="topbar">
-                    </div>
-                        <div class="row">
-                            <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
-                                <h5>Upcoming matches: </h5>
-                                <hr class="content">
-                                <div class="row" style="padding-left:3.5%">
-                                </div>
-                            </div>
-                        </div>
-                    <div class="row">
-                        <div class="col-8 team content" style="background-color: rgba(255, 255, 255, 0.6)">
-                            <h5>Old matches: </h5>
-                            <hr class="content">
-                            <div class="row" style="padding-left:3.5%">
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                </div>
-            </div><!--container-->
-        </div><!--body-->
+            
+            <div id="menu">
+            	<a href="login.html"><button onclick="userSessionTerminate()">Log In</button></a>
+            	<a href="register.html"><button >Register</button></a>
+            	<a href="game#3"><button >Game (Testing Only)</button></a>
+                <button onclick="userSessionTerminate()">Log Out</button>
+            </div>
+            
+
+        </div><!--container-->
     </body>
 </html>
 

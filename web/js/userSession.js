@@ -33,3 +33,27 @@
       });
 }
 
+function userSessionTerminate() {
+  $.ajax({
+    url: "/src/api/logoutHandler.php",
+    type:"POST",
+    data: {
+
+    },
+    dataType:"html",
+    async: false,
+    success: function(result){
+      console.log(result);
+      if($result = JSON.parse(result)) {
+        if($result.status="success"){
+          window.location.href = "/web/index.html"
+        } else {
+          // SOMETHING WENT WRONG PAGE
+        }
+      } else {
+
+      }
+    }
+  })
+}
+

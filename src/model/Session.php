@@ -14,12 +14,12 @@ class Session implements Seriarizable {
     }
     
     public static function start() {
-        session_start();
+        return session_start();
     }
     
     
     public static function stop() {
-        session_destroy();
+        return session_destroy();
     }
     
     public function validate(){

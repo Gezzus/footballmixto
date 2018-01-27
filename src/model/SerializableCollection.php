@@ -33,3 +33,5 @@ class SerializableCollection implements Seriarizable {
         $this->collection[$i];
     }
 }
+
+?>
