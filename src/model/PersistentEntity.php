@@ -24,5 +24,8 @@ class PersistentEntity {
         $statement->execute();
         return $statement;
     }
+
+    protected static function queryErrorInfo() {
+        return Database::getInstance()->getConn()->errorInfo(); 
+    }
 }
-?>

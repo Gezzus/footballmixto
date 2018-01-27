@@ -12,7 +12,7 @@ class UserAPI {
         $user = User::createUser($userName, $password, $nickName, $genderId, $skillId);
         if(($user != null) && (null != ($user->getId()))) {
             if(Session::create($user->getId())) {
-                return json_encode(["status => success"]);
+                return json_encode(["status" => "success"]);
             } else {
                 return json_encode(["status" => "500"]);
             }
@@ -24,8 +24,10 @@ class UserAPI {
 	public static function login($userName,$password) {
 		$user = User::getUser($userName, $password);
 		if(($user != null) && (null !== ($user->getId()))) {
-		    if(Session::create($user->getId())) {
-		        return json_encode(["status => success"]);
+		    $session = Session::create($user->getId());
+		    if($session) {
+		        #var_dump($session);
+		        return json_encode(["status" => "success"]);
 		    } else {
 		       return json_encode(["status" => "500"]);
 		    }

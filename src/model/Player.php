@@ -17,7 +17,7 @@ class Player extends PersistentEntity implements Seriarizable {
         $this->levelId = $levelId;
     }
 
-    public static function createPlayer($nickName, $genderId, $skillId) {
+    public static function create($nickName, $genderId, $skillId) {
         $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
         if($dbPlayer->rowCount() == 0) {
             $player = self::queryWithParameters("INSERT INTO player (nickName, genderId, levelId) VALUES(?, ?, ?)", array($nickName, $genderId, $skillId));
@@ -32,7 +32,7 @@ class Player extends PersistentEntity implements Seriarizable {
         }
     }
 
-    public static function getPlayerById($playerId){
+    public static function getById($playerId){
         $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE id = ?", array($playerId));
         if($dbPlayer->rowCount() == 1) {
             $playerData = $dbPlayer->fetch();
@@ -42,7 +42,7 @@ class Player extends PersistentEntity implements Seriarizable {
         }
     }
     
-    public static function getPlayer($nickName,$genderId){
+    public static function get($nickName,$genderId){
         $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ? LIMIT 1", array($nickName, $genderId));
         #echo $dbPlayer->fetch()->toJson();
         if($dbPlayer->rowCount() == 1) {
@@ -53,18 +53,23 @@ class Player extends PersistentEntity implements Seriarizable {
         }
     }    
     
-    public static function deletePlayer($nickName){
+    public static function delete($nickName){
         self::queryWithParameters("DELETE FROM player WHERE nickName = ?", array($nickName));
     }
 
-    public function toJson() {
+    public function toArray() {
         $return = [
             "id" => $this->id,
             "nickName" => $this->nickName,
             "genderId" => $this->genderId,
             "levelId" => $this->levelId
         ];
-        return json_encode($return);
+        return $return;
+        
+    }
+    
+    public function toJson() {
+       return json_encode($this->toArray());
     }
 
     public function getId() {

@@ -1,39 +1,66 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
 
-class Session {
+class Session implements Seriarizable {
 
     private $id; 
         
     public function __construct() {
-        $this->start();
+        
+    }
+
+    public function build($id) {
+        $this->id = $id;
     }
     
     public static function start() {
         session_start();
+        #echo "Session started"; // DELETE
     }
+    
     
     public static function stop() {
         session_destroy();
     }
     
-    public static function validate(){
+    public function validate(){
         if(isset($_SESSION['id'])){
-            return $_SESSION['id'];
-        }else {
-            return null;
-        }
-    }
-    
-    public function create($id) {
-        if(session_start()){
-            $this->id = $id;
-            return $id;             
+         $this->build($_SESSION['id']);
+          return $this;
         } else {
             return null;
         }
     }
+    
+    public static function create($id) {
+        $session = new Session();
+        $session->start();
+        $_SESSION['id'] = $id;
+        $session->build($_SESSION['id']);
+        return $session;
+    }
+
+    public function toArray() {
+        $result = [
+            $id => $this->id
+        ];
+        return $result;
+    }
+
+    public function toJson() {
+        
+        return json_encode($this->toArray());
+    }
+
+    public function getId() {
+        return $this->Id;
+    }
 
 
 }
+    /*public function setId($id) {
+        return $this->Id;
+    }*/
+
 
 ?>

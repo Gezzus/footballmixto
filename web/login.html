@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
-<script>userSession("prevent");</script>
+<script>userSession("prevent","modal");</script>
 
 </head>
 
@@ -19,55 +19,60 @@
 
 <div class="container" style="margin-top:10%;">
 
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
-</div>
-
   <div class="row">
 
       <div class="col">
       </div>
+      <!-- Login -->
+      <div id="login" class="col-5 content team">
+          <h5 class="content team" style="padding-top:15px">LMG Sports | Welcome</h5>
+          <hr style="margin:1%;padding:0px">
+          <h6 class="content team" style="padding-top:15px">Login</h6>
+          <hr style="margin:1%;padding:0px">
+            <div class="row">
+            
+            <div class="col" style="border-right: 1px solid;border-color: #CCCCCC">
 
-      <div class="col-5 content team">
-      <h5 class="content team" style="padding-top:15px">LMG Sports | Welcome</h5>
-      <hr style="margin:1%;padding:0px">
-      <h6 class="content team" style="padding-top:15px">Login</h6>
-      <hr style="margin:1%;padding:0px">
-        <div class="row">
-        
-        <div class="col" style="border-right: 1px solid;border-color: #CCCCCC">
+              <label>Username:</label>
+              <input id="userName" type="text" class="content team">
+              <label>Password:</label>
+              <input id="password" type="password" class="content team">
+              <font size="1"><label id=error></label></font>
+            <hr>
+            <button class="content team" type="submit" onclick="userLogin()">Submit</button>  
 
-          <label>Username:</label>
-          <input id="userName" type="text" class="content team">
-          <label>Password:</label>
-          <input id="password" type="password" class="content team">
-          <font size="1"><label id=error></label></font>
-        <hr>
-        <button class="content team" type="submit" onclick="userLogin()">Submit</button>  
+            </div> <!-- Col -->
+          
+            <div class="col">
+            <a href="register.html"><button type="submit" class="content team" style="min-width:80%" >Login</button></a><br>
+              <button style="min-width:80%" class="content team" onclick=window.open("https://api.instagram.com/oauth/authorize/?client_id=d31abc6eb2d94c418c5b5ddc14df11cd&redirect_uri=http://172.20.10.81&response_type=code","_child","width=500,height=500")>Login with Instagram</button><br>
 
-        </div> <!-- Col -->
-      
-        <div class="col">
-        <a href="register.html"><button type="submit" class="content team" style="min-width:80%" >Login</button></a><br>
-          <button style="min-width:80%" class="content team" onclick=window.open("https://api.instagram.com/oauth/authorize/?client_id=d31abc6eb2d94c418c5b5ddc14df11cd&redirect_uri=http://172.20.10.81&response_type=code","_child","width=500,height=500")>Login with Instagram</button><br>
+               <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with Facebook</button><br>
 
-           <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with Facebook</button><br>
-
-           <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with LinkedIn</button><br>
-        </div>
+               <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with LinkedIn</button><br>
+            </div>
+          </div>
       </div>
+
+      <!-- Already loged in -->
+      <div id="logedIn" class="col-5 content team" style="display:none">
+      <h5 class="content team" style="padding-top:15px">LMG Sports | There's an active session already:</h5>
+      <hr style="margin:1%;padding:0px">
+      <h6 class="content team" style="padding-top:15px">Are you #UserHere?</h6>
+      <hr style="margin:1%;padding:0px">
       </div>
+
 
       <div class="col">
       </div>
-    </div>  
-  </div>
+
+
+  </div>  
+
+
+
+
+
 </div> <!-- Container -->
 
 </body>
