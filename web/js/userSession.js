@@ -1,25 +1,27 @@
- function userSession($value,$action){
+ function userSession($action){
       $.ajax({
           url: "/src/api/sessionHandler.php", 
           type: "GET",
           data: {
-        	  "action":$value
+        	  "action":$action
           },
           dataType: "html",
           async: false,
           success: function(result){
         	  console.log(result);
         	  if($result = JSON.parse(result)) {
+              console.log($result);
                 if($result.status == "failure") {                	
                 		if($action == "kick") {
                       window.location.href="/index.html";
-                    } else if($action == "modal") {
+                    }
+                    else if($action == "modal") {
                         $(document).ready(function(){
-                          $("#login").hide();
-                          $("#logedIn").show();
-                          $("loggedUserName").append($result.username);
-                        })                    
-                    } else if($result.status == "success") {
+                       // TBD $("").hide();
+                       // TBD $("").show();
+                        })     
+                    }
+                } else if($result.status == "success") {
                 	     return null;
                     }
         	     }
