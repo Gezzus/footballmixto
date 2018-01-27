@@ -19,7 +19,7 @@
                     window.location.href="/web/login.html#restricted";
                    }
                 } else if($validation == "logedOut") {
-                    window.location.href("/web/index.html");
+                    window.location.href="/web/index.html";
                 } 		
         	    } else if($validation == "success") {
                 console.log($result);
