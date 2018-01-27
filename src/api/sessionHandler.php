@@ -5,15 +5,14 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php";
     
 $session = new Session;
 $session->start();    
-$session->validate();
 
-    if($session != null) {
+    if($session->validate() != null) {
         if($_GET["action"] == "allow") {
             $response = ["status" => "success"];
             echo json_encode($response);
         }
         else if($_GET["action"] == "prevent") {
-            $user = User::getUserById($session->getId());
+            $user = User::getById($session->getId());
             $response = ["status" => "failure","username" => $user->getUserName()];
             echo json_encode($response);
         } 
