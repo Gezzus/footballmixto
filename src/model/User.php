@@ -28,32 +28,28 @@ class User extends PersistentEntity implements Seriarizable {
     public static function createUser($userName, $password, $nickName, $genderId, $skillId) {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ?", array($userName));
         if ($dbUser->rowCount() == 0) {
-            $dbPlayer = Player::getPlayer($nickName, $genderId);
+            $dbPlayer = Player::get($nickName, $genderId);
             if($dbPlayer != null) {
-                $userExistsCheck = self::queryWithParameters("SELECT * FROM user WHERE playerId= ? LIMIT 1", array($dbPlayer->getId()));
+                $userExistsCheck = self::queryWithParameters("SELECT * FROM user WHERE playerId = ?", array($dbPlayer->getId()));
                // echo "This dbPlayer->getId() = ".$dbPlayer->getId();
                 if($userExistsCheck->rowCount() == 0) {
-                    self::queryWithParameters("INSERT INTO user(userName, password, playerId, roleId, lastLogin) VALUES (?, MD5(?), ?, 1, NOW())", array($userName, $password, $dbPlayer->getId()));
+                    self::queryWithParameters("INSERT INTO user (userName, password, playerId, roleId, lastLogin) VALUES (?, MD5(?), ?, 1, NOW())", array($userName, $password, $dbPlayer->getId()));
                     $newUser = self::getById(self::lastInsertId());
                     return $newUser;
-                    
                 } else {
-                    #echo "Status: Nickname is associated already";
                     return null;
                 }
             } else {
-                $player = Player::createPlayer($nickName, $genderId, $skillId);
+                $player = Player::create($nickName, $genderId, $skillId);
                 if ($player != null) {
                     self::queryWithParameters("INSERT INTO user (userName, password, playerId, roleId, lastLogin) VALUES (?, ?, ?, 1, NOW())", array($userName, $password, $player->getId()));
                     $newUser = self::getById(self::lastInsertId());
                     return $newUser;
                 } else {
-                    #echo "Status: Create Player Failed";
                     return null;
                 }
             }
         } else {
-            #echo "Status: Username Exists";
             return null;
         }
     }

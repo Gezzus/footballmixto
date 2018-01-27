@@ -69,7 +69,7 @@ class Game extends PersistentEntity implements Seriarizable {
         if($gameInfo == null){
             return null;
         } else {
-            self::queryWithParameters("INSERT INTO game(date, typeId, doodleurl, status) VALUES(?, ?, ?, '0')", array($date, $typeId, $doodleUrl));
+            self::queryWithParameters("INSERT INTO game(date, typeId, doodleurl, status) VALUES(?, ?, ?, 0)", array($date, $typeId, $doodleUrl));
             $gameId = self::lastInsertId();
             if($gameId != null){
                 

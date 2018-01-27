@@ -22,7 +22,7 @@ class Player extends PersistentEntity implements Seriarizable {
         if($dbPlayer->rowCount() == 0) {
             $player = self::queryWithParameters("INSERT INTO player (nickName, genderId, levelId) VALUES(?, ?, ?)", array($nickName, $genderId, $skillId));
             if($player){
-                return self::getPlayerbyId(self::lastInsertId());
+                return self::getbyId(self::lastInsertId());
             } else {
                 return null;
             }
@@ -42,9 +42,8 @@ class Player extends PersistentEntity implements Seriarizable {
         }
     }
     
-    public static function get($nickName,$genderId){
-        $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ? LIMIT 1", array($nickName, $genderId));
-        #echo $dbPlayer->fetch()->toJson();
+    public static function get($nickName, $genderId){
+        $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
         if($dbPlayer->rowCount() == 1) {
             $playerData = $dbPlayer->fetch();
             return new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
@@ -89,5 +88,3 @@ class Player extends PersistentEntity implements Seriarizable {
     }
 
 }
-
-?>
