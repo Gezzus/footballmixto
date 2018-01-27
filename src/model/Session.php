@@ -15,7 +15,6 @@ class Session implements Seriarizable {
     
     public static function start() {
         session_start();
-        #echo "Session started"; // DELETE
     }
     
     
@@ -53,7 +52,7 @@ class Session implements Seriarizable {
     }
 
     public function getId() {
-        return $this->Id;
+        return $this->id;
     }
 
 
