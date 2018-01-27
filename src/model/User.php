@@ -25,26 +25,16 @@ class User extends PersistentEntity implements Seriarizable {
         $this->player = $player;
     }
 
-    public static function createUser($userName, $password, $nickName, $genderId, $skillId) {
+    public static function create($userName, $password, $nickName, $genderId, $skillId) {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ?", array($userName));
         if ($dbUser->rowCount() == 0) {
             $dbPlayer = Player::get($nickName, $genderId);
             if($dbPlayer != null) {
-                $userExistsCheck = self::queryWithParameters("SELECT * FROM user WHERE playerId = ?", array($dbPlayer->getId()));
-               // echo "This dbPlayer->getId() = ".$dbPlayer->getId();
-                if($userExistsCheck->rowCount() == 0) {
-                    self::queryWithParameters("INSERT INTO user (userName, password, playerId, roleId, lastLogin) VALUES (?, MD5(?), ?, 1, NOW())", array($userName, $password, $dbPlayer->getId()));
-                    $newUser = self::getById(self::lastInsertId());
-                    return $newUser;
-                } else {
-                    return null;
-                }
+                return self::createUserIfNeeded($userName, $password, $dbPlayer->getId());
             } else {
                 $player = Player::create($nickName, $genderId, $skillId);
                 if ($player != null) {
-                    self::queryWithParameters("INSERT INTO user (userName, password, playerId, roleId, lastLogin) VALUES (?, ?, ?, 1, NOW())", array($userName, $password, $player->getId()));
-                    $newUser = self::getById(self::lastInsertId());
-                    return $newUser;
+                    return self::createUser($userName, $password, $player->getId());
                 } else {
                     return null;
                 }
@@ -52,6 +42,21 @@ class User extends PersistentEntity implements Seriarizable {
         } else {
             return null;
         }
+    }
+
+    private static function createUserIfNeeded($userName, $password, $playerId) {
+        $userExistsCheck = self::queryWithParameters("SELECT * FROM user WHERE playerId = ?", array($playerId));
+        if ($userExistsCheck->rowCount() == 0) {
+            return self::createUser($userName, $password, $playerId);
+        } else {
+            return null;
+        }
+    }
+
+    private static function createUser($userName, $password, $playerId) {
+        self::queryWithParameters("INSERT INTO user (userName, password, playerId, roleId, lastLogin) VALUES (?, MD5(?), ?, 1, NOW())", array($userName, $password, $playerId));
+        $newUser = self::getById(self::lastInsertId());
+        return $newUser;
     }
 
     public static function getUser($userName, $password){

@@ -9,7 +9,7 @@ header("Content-Type: application/json; charset=UTF-8");
 class UserAPI {
 	
     public static function register($userName, $password, $nickName, $genderId, $skillId) {
-        $user = User::createUser($userName, $password, $nickName, $genderId, $skillId);
+        $user = User::create($userName, $password, $nickName, $genderId, $skillId);
         if(($user != null) && (null != ($user->getId()))) {
             if(Session::create($user->getId())) {
                 return json_encode(["status" => "success"]);
