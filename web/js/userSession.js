@@ -25,9 +25,8 @@
                 	     return null;
                     }
         	     }
-            }
-          },
-          error: function(status,exception) {
+            },
+            error: function(status,exception) {
         	  console.log(status);
         	  console.log(exception);
             }
