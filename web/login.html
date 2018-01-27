@@ -8,72 +8,33 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
 
 <script>userSession("logedOut");</script>
 
 </head>
 
 <body class="landing">
-
-
-<div class="container" style="margin-top:10%;">
-
-  <div class="row">
-
-      <div class="col">
-      </div>
-      <!-- Login -->
-      <div id="login" class="col-5 content team">
-          <h5 class="content team" style="padding-top:15px">LMG Sports | Welcome</h5>
-          <hr style="margin:1%;padding:0px">
-          <h6 class="content team" style="padding-top:15px">Login</h6>
-          <hr style="margin:1%;padding:0px">
-            <div class="row">
-            
-            <div class="col" style="border-right: 1px solid;border-color: #CCCCCC">
-
-              <label>Username:</label>
-              <input id="userName" type="text" class="content team">
-              <label>Password:</label>
-              <input id="password" type="password" class="content team">
-              <font size="1"><label id=error></label></font>
-            <hr>
-            <button class="content team" type="submit" onclick="userLogin()">Submit</button>  
-
-            </div> <!-- Col -->
-          
-            <div class="col">
-            <a href="register.html"><button type="submit" class="content team" style="min-width:80%" >Login</button></a><br>
-              <button style="min-width:80%" class="content team" onclick=window.open("https://api.instagram.com/oauth/authorize/?client_id=d31abc6eb2d94c418c5b5ddc14df11cd&redirect_uri=http://172.20.10.81&response_type=code","_child","width=500,height=500")>Login with Instagram</button><br>
-
-               <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with Facebook</button><br>
-
-               <button style="min-width:80%" class="content team" onclick=window.open("","_child","width=500,height=500")>Login with LinkedIn</button><br>
-            </div>
-          </div>
-      </div>
-
-      <!-- Already loged in
-      <div id="logedIn" class="col-5 content team" style="display:none">
-      <h5 class="content team" style="padding-top:15px">LMG Sports | There's an active session already:</h5>
-      <hr style="margin:1%;padding:0px">
-      <h6 id="logedInUser" class="content team" style="padding-top:15px">Are you</h6>
-      <hr style="margin:1%;padding:0px">
-      </div>
-      -->
-
-      <div class="col">
-      </div>
-
-
-  </div>  
-
-
-
-
-
-</div> <!-- Container -->
+<div class="container">
+    <div class="card card-container">
+        <h1 class="lgmHeader">LMG Sports | Welcome</h1>
+        <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+        </form><!-- /form -->
+        <a href="#" class="forgot-password">
+            Forgot the password?
+        </a>
+    </div><!-- /card-container -->
+    <div class="ball">
+        <img src="svg/ball.svg" alt="Ball">
+    </div>
+</div><!-- /container -->
 
 </body>
 
