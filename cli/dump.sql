@@ -38,13 +38,10 @@ CREATE TABLE genderByGameType (
 
 CREATE TABLE player (
     id INT NOT NULL AUTO_INCREMENT,
-    firstName VARCHAR(255) NOT NULL,
-    lastName VARCHAR(255) NOT NULL,
     nickName VARCHAR(255) DEFAULT NULL,
     genderId INT DEFAULT NULL,
     levelId INT DEFAULT NULL,
     PRIMARY KEY (id),
-    UNIQUE KEY (nickName),
     FOREIGN KEY (genderId) REFERENCES gender(id),
     FOREIGN KEY (levelId) REFERENCES playerLevel(id)
 );

@@ -19,7 +19,7 @@
                 $("#error").html("Loading...<br>");
                 $("#error").css('color','black');
           	  
-              console.log(result); // DELETE
+              
           	  if($result = JSON.parse(result)) {
                   if($result.status == "failed") {
                     $("#userName").css('border', '1px solid red');
@@ -34,7 +34,7 @@
                     $("#error").css('color','red');
                   } else if($result.status == "success"){	
                     console.log("Redirect after session starts");
-                    window.location.href="/index.html";
+                    window.location.href="/web/index.html";
           	  }
             }
           },
