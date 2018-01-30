@@ -14,6 +14,22 @@ h1.mt-4{
   font-weight: 400;
 }
 
+
+.btn-primary:hover{
+	background-color:#1ab996!important;
+	border-color:#1ab996!important;
+}
+
+.btn-primary{
+	background-color:#309881!important;
+	border-color:#309881!important;
+}
+
+.badge{
+	background-color:#309881!important;
+	border-color:#309881!important;
+}
+
 .frontpage {
   background-position-y: -35rem;
   height: 70vh;
