@@ -25,29 +25,19 @@ class GameAPI {
     
       
     public static function addPlayer($gameId, $playerId) {
-        $game = Game::getById($gameId);
-        if(in_array($playerId,$game->teamless)){
-            return null;
-        } else {
-            return $game->addPlayer($playerId);
-        }
+
     }
     
     public static function getPlayerById($playerId) {
         return Player::getById($playerId);
     }
     
-    public static function getPlayer($nickName, $gender) {
+    public static function getPlayer($nickName, $genderId) {
         return Player::get($nickName, $genderId);
     }
     
     public static function transferPlayer($gameId, $playerId, $teamId) {
-        $game = Game::getById($gameId);
-        $team = $game->getTeam($teamId);
-        $team->transferPlayer($playerId);
-        return playerId; // TODO error handling
+
     }
     
 }
-
-?>
