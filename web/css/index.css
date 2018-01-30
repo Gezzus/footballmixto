@@ -1,0 +1,43 @@
+body {
+  padding-top: 54px;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
+
+h1.mt-4{
+  text-shadow: 2px 2px black;
+  margin-top: 1rem!important;
+  font-weight: 400;
+}
+
+.frontpage {
+  background-position-y: -35rem;
+  height: 70vh;
+  min-height: 300px;
+  background: url('../img/frontpage.jpeg') center center no-repeat scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+img.card-img-top {
+  height: 200px!important;
+}
+
+.event-list {
+  float:right;
+  position: absolute!important;
+  left:80%;
+}
+.card {
+  height: 100%;
+}
+
+.container-sidebar {
+  float:right;
+}

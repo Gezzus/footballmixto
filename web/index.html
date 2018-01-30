@@ -1,29 +1,171 @@
-<html>
-<head>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/userSession.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<!DOCTYPE html>
+<html lang="en">
 
-<script>userSession("all");</script>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LGM Sports</title>
+
+    <!-- Custom styles for this template -->
+    <link href="css/index.css" rel="stylesheet">
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/userSession.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script>userSession("all");</script>
 
 </head>
 
-<html>
-    <body>
-        <div class="container-fluid">
-            
-            <div id="menu">
-            	<a href="login.html"><button onclick="userSessionTerminate()">Log In</button></a>
-            	<a href="register.html"><button >Register</button></a>
-            	<a href="game#3"><button >Game (Testing Only)</button></a>
-                <button onclick="userSessionTerminate()">Log Out</button>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Los Gatos Monteses Sports</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header with Background Image -->
+<header class="frontpage">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="display-3 text-center text-white mt-4">LGM Sports</h1>
+
+
             </div>
-            
+        </div>
+    </div>
+</header>
 
-        </div><!--container-->
-    </body>
+<div class="container-sidebar">
+    <div class="col-sm">
+        <h2 class="mt-4">Overall events</h2>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Football 5 vs 5 (2 fields)
+                <span class="badge badge-primary badge-pill">14</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Football 5 vs 5 (1 field)
+                <span class="badge badge-primary badge-pill">2</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Tennis 2 vs 2
+                <span class="badge badge-primary badge-pill">1</span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div class="container">
+    <!-- Page Content -->
+    <div class="container-body">
+
+        <div class="row">
+            <div class="col-sm-8">
+                <h2 class="mt-4">Incoming events</h2>
+                <p>Here you will find a glimpse of the latest events.</p>
+
+                <a class="btn btn-primary btn-lg" href="#">Create new event &raquo;</a>
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-sm-4 my-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/football.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Football 5 vs 5 (2 fields)</h4>
+                        <p class="card-text">Date: 31/01/18 19:00 PM</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">See event &raquo;</a>
+                        <a href="#" class="btn btn-primary" style="float:right">Join</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 my-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/football-2.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Football 5 vs 5</h4>
+                        <p class="card-text">Date: 31/01/18 19:00 PM</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">See event &raquo;</a>
+                        <a href="#" class="btn btn-primary" style="float:right">Join</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 my-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/tennis-2v2.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Tennis 2 vs 2</h4>
+                        <p class="card-text">Date: 31/01/18 19:00 PM</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn btn-primary">See event &raquo;</a>
+                        <a href="#" class="btn btn-primary" style="float:right">Join</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 my-4">
+                <a class="btn btn-primary btn-lg" href="#">See all events &raquo;</a>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
+<!-- /.container -->
+</div>
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Made with ♥ by a bunch of guys.</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
 </html>
-
