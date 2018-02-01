@@ -111,7 +111,7 @@ class Game extends PersistentEntity implements Seriarizable {
         }
     }
     
-    public static function getByOther($other,$otherValue) {
+    public static function getByOther($other, $otherValue) {
         $dbGames = self::queryWithParameters("SELECT * FROM game WHERE ? = ?", array($other,$otherValue));
         if($dbGames->rowCount() == 0){
             return null;

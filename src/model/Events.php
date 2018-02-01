@@ -3,6 +3,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/SerializableCollection.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Game.php";
 
 class Events extends PersistentEntity implements Seriarizable {
 
@@ -24,16 +25,29 @@ class Events extends PersistentEntity implements Seriarizable {
         return json_encode($this->toArray());
     }
 
-    public static function getByType($amount,$status,$typeId) {
+    public static function getByType($status, $amount, $typeId) {
         $dbEvents = self::queryWithParameters("SELECT * FROM game WHERE status=? AND typeId= ? LIMIT ?", array($status, $typeId, $amount));
         $events = Events::arrangeEvents($dbEvents);
         return $events;
     }
 
-    public static function get($amount,$status) {
-            $dbEvents = self::queryWithParameters("SELECT * FROM game WHERE status=? LIMIT ?", array($status, $amount));
-            $events = Events::arrangeEvents($dbEvents);
-            return $events;
+    public static function get($status, $amount) {
+        
+        #$dbEvents = self::query("SELECT * FROM game WHERE status=0 LIMIT 3"); //, array($status, $amount));
+        $dbEvents = self::queryWithParameters("SELECT * FROM game WHERE status=? LIMIT " . $amount, array($status));
+        #var_dump(self::queryErrorInfo());
+            if($dbEvents->rowCount() == 0) {
+                return null;
+            } else {
+                $events = new Events();
+                for($i = 0; $i < 3; $i++) {
+                    $dbGame = $dbEvents->fetch();
+                    $events->games->add(Game::getById($dbGame['id']));
+                }
+                return $events;
+            }
+            #$events = Events::arrangeEvents($dbEvents);
+            #return $events;
     }
 
     public static function arrangeEvents($queryObject) {
@@ -48,7 +62,6 @@ class Events extends PersistentEntity implements Seriarizable {
             return null;
         }
     }
-
 
 
 }
