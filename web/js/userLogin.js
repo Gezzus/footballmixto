@@ -13,7 +13,7 @@
               $("#password").css('border', '1px solid rgba(0,0,0,.1)');
               $("#error").html("Loading...<br>");
               $("#error").css('color','black');
-        	  
+        	  console.log(result);
             
         	  if($result = JSON.parse(result)) {
                 if($result.status == "failed") {

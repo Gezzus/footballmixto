@@ -24,12 +24,10 @@ class Player extends PersistentEntity implements Seriarizable {
             if($player){
                 return self::getbyId(self::lastInsertId());
             } else {
-                echo "fuck";
                 return null;
             }
         }
         else {
-            echo "shit";
             return null;
         }
     }

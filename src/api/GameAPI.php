@@ -25,19 +25,17 @@ class GameAPI {
     
       
     public static function addPlayer($gameId, $playerId) {
-
-    }
-    
-    public static function getPlayerById($playerId) {
-        return Player::getById($playerId);
-    }
-    
-    public static function getPlayer($nickName, $genderId) {
-        return Player::get($nickName, $genderId);
+       $game = Game::getById($gameId);
+       if($game->addPlayer($playerId)){
+           return json_encode(["status" => "success"]);
+       } else {
+           return json_encode(["status" => "failed"]);
+       }
     }
     
     public static function transferPlayer($gameId, $playerId, $teamId) {
-
+       $game = Game::getById($gameId);
+       $team = $game->getTeam($teamId);
+       #TODO
     }
-    
 }

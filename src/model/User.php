@@ -18,10 +18,11 @@ class User extends PersistentEntity implements Seriarizable {
     private $player;
 
     
-    public function __construct($id, $userName, $password, $player) {
+    public function __construct($id, $userName, $password, $roleId, $player) {
         $this->id = $id;
         $this->userName = $userName;
         $this->password = $password;
+        $this->roleId = $roleId;
         $this->player = $player;
     }
 
@@ -63,7 +64,7 @@ class User extends PersistentEntity implements Seriarizable {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ? AND password = ?", array($userName, md5($password)));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getById($userData["playerId"]));
+            return new User($userData["id"], $userData["userName"], $userData["password"], $userData["roleId"], Player::getById($userData["playerId"]));
         } else {
             return null;
         }
@@ -73,7 +74,7 @@ class User extends PersistentEntity implements Seriarizable {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE id = ?", array($userId));
         if($dbUser->rowCount() == 1) {
             $userData = $dbUser->fetch();
-            return new User($userData["id"], $userData["userName"], $userData["password"], Player::getById($userData["playerId"]));
+            return new User($userData["id"], $userData["userName"], $userData["password"], $userData["roleId"], Player::getById($userData["playerId"]));
         } else {
             return null;
         }
@@ -101,6 +102,9 @@ class User extends PersistentEntity implements Seriarizable {
         return $this->id;
     }
     
+    public function getRoleId() {
+        return $this->roleId;
+    } 
 
     public function setUserName($userName) {
         $this->userName = $userName;

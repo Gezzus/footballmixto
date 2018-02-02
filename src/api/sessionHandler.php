@@ -25,9 +25,9 @@ switch ($validation) {
                     case 'admin':
                         $user = User::getById($session->getId());
                         if($user->getRoleId() != 2){
-                            echo json_encode(["status" => "failed","username" => $user->getUserName()]);
+                            echo json_encode(["status" => "failed","username" => $user->getUserName(), "roleId" => $user->getRoleId()]);
                         } else {
-                            echo json_encode(["status" => "success","username" => $user->getUserName()]);
+                            echo json_encode(["status" => "success","username" => $user->getUserName(), "roleId" => $user->getRoleId()]);
                         }
                         break;
                     
@@ -37,7 +37,7 @@ switch ($validation) {
                 }
             } else {
                 $user = User::getById($session->getId());
-                echo json_encode(["status" => "success","username" => $user->getUserName()]);
+                echo json_encode(["status" => "success","username" => $user->getUserName(), "roleId" => $user->getRoleId()]);
             }
         } else {
             echo json_encode(["status" => "failed"]);
@@ -47,7 +47,7 @@ switch ($validation) {
     case 'logedOut':
          if($session->validate() != null){
             $user = User::getById($session->getId());
-            echo json_encode(["status" => "failed","username" => $user->getUserName()]);
+            echo json_encode(["status" => "failed","username" => $user->getUserName(), "roleId" => $user->getRoleId()]);
          } else {
             echo json_encode(["status" => "success"]);
          } 
@@ -56,7 +56,7 @@ switch ($validation) {
     case 'all':
         if($session->validate() != null){
             $user = User::getById($session->getId());
-            echo json_encode(["status" => "success","username" => $user->getUserName()]);
+            echo json_encode(["status" => "success","username" => $user->getUserName(), "roleId" => $user->getRoleId()]);
          } else {
             echo json_encode(["status" => "success"]);
          } 
