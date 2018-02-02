@@ -4,7 +4,7 @@
           type: "GET",
           data: {
         	  "validation":$validation,
-            "role":$role
+              "role":$role
           },
           dataType: "html",
           async: false,
@@ -21,8 +21,16 @@
                 } else if($validation == "logedOut") {
                     window.location.href="/web/index.html";
                 } 		
-        	    } else if($validation == "success") {
-                console.log($result);
+        	    } else if($result.status == "success") {
+                    console.log($result);
+                    if($validation == "logedIn") {
+                        $(document).ready(function() {
+                            $buttons = "<li class='nav-item'>" +
+                                "<a href='#' onclick='userSessionTerminate()' class='nav-link'>Logout</a>" +
+                                "</li>";
+                            $("#navigationBar").append($buttons);
+                        })
+                }
               }
             }
           },

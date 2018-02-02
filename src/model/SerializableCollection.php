@@ -1,4 +1,4 @@
-<?
+<?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
 
@@ -33,5 +33,3 @@ class SerializableCollection implements Seriarizable {
         $this->collection[$i];
     }
 }
-
-?>

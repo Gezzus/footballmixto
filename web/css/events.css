@@ -49,11 +49,6 @@ img.card-img-top {
   height: 200px!important;
 }
 
-.event-list {
-  float:right;
-  position: absolute!important;
-  left:80%;
-}
 .card {
   height: 100%;
 }
@@ -62,7 +57,14 @@ img.card-img-top {
   float:right;
 }
 
+.list-group {
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%!important;
+}
+
 .container {
     max-width: 940px;
     min-width: 940px;
 }
+
