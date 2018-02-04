@@ -1,15 +1,16 @@
- function userSession($validation,$role){
+ function validateUserSession($validation, $role){
       $.ajax({
-          url: "/src/api/sessionHandler.php", 
+          url: "/src/api/userHandler.php",
           type: "GET",
           data: {
-        	  "validation":$validation,
+              "action": "validate",
+        	  "validation": $validation,
               "role":$role
           },
           dataType: "html",
           async: false,
           success: function(result){
-        	  console.log(result);
+        	  //console.log(result);
         	  if($result = JSON.parse(result)) {
               if($result.status == "failed") {                	
                 if($validation == "logedIn"){
@@ -22,7 +23,7 @@
                     window.location.href="/web/index.html";
                 } 		
         	    } else if($result.status == "success") {
-                    console.log($result);
+                    //console.log($result);
                     if($validation == "logedIn") {
                     	
                     $(document).ready(function() {
@@ -52,10 +53,29 @@
             }
       });
 }
+
+function getUser() {
+    $response = $.ajax({
+        url: "/src/api/userHandler.php",
+        type: "GET",
+        data: {
+            "action": "get"
+        },
+        dataType: "html",
+        async: false,
+        success: function(result){
+                console.log(result);
+        },
+        error: function(status,exception) {
+        console.log(status);
+        console.log(exception);
+    }});
+    return JSON.parse($response.responseText);
+}
  
 /*function userGetRole(){
 	$.ajax({
-		url: "/src/api/sessionHandler.php", 
+		url: "/src/api/userHandler.php",
         type: "GET",
         data: {
       	  "validation":"logedIn",

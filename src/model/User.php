@@ -106,6 +106,10 @@ class User extends PersistentEntity implements Seriarizable {
         return $this->roleId;
     } 
 
+    public function getPlayerId(){
+        return $this->player->getId();
+    } // Player is private, I need this function
+
     public function setUserName($userName) {
         $this->userName = $userName;
     }

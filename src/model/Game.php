@@ -132,10 +132,21 @@ class Game extends PersistentEntity implements Seriarizable {
         if($dbPickPlayer->rowCount() != 0) {
             return null;
         } else {
-            $result = $this->queryWithParameters("INSERT INTO pickPlayer(gameId, playerId) VALUES(?, ?)", array($this->id, $playerId));
-            #var_dump($this->queryErrorInfo());
+            $this->queryWithParameters("INSERT INTO pickPlayer(gameId, playerId) VALUES(?, ?)", array($this->id, $playerId));
             $this->teamless->add($player);
-            return $playerId;
+            return $player;
+        }
+    }
+
+    public function removePlayer($playerId) {
+        $player = Player::getById($playerId);
+        $dbPickPlayer = $this->queryWithParameters("SELECT * FROM pickPlayer WHERE gameId = ? AND playerId = ?", array($this->id, $playerId));
+        if($dbPickPlayer->rowCount() == 0) {
+            return null;
+        } else {
+            $this->queryWithParameters("DELETE FROM pickPlayer WHERE gameId= ? AND playerId= ?", array($this->id, $playerId));
+            $this->teamless->add($player);
+            return true;
         }
     }
 

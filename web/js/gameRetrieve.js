@@ -1,10 +1,10 @@
-var gameId = location.hash.substr(1);
-getGame(gameId);
-
-$("#gameId").html(gameId);
+function getThisGame(){
+    var gameId = location.hash.substr(1);
+	getGame(gameId);
+}
 
 function getGame($value){
-      $.ajax({
+    $.ajax({
           url: "/src/api/gameHandler.php", 
           type: "GET",
           data: {
@@ -14,12 +14,13 @@ function getGame($value){
           dataType: "html",
           async: false,
           success: function(result){
-        	  console.log(result);
-        	  var resultObj = JSON.parse(result);
-        	  
+        	  //console.log(result);
+        	  var $result = JSON.parse(result);
+
         	  $(document).ready(function(){
-        		  drawTeams(resultObj.teams);
-            	  drawTeamless(resultObj.teamless);
+        	  	  drawEvent($result);
+        		  drawTeams($result);
+            	  drawTeamless($result);
         	  })
           },
           error: function(status,exception) {
@@ -30,9 +31,48 @@ function getGame($value){
 }
 
 
-function drawTeamless(teamless) {
-	console.log(teamless);
-	console.log("Teamless Size: "+teamless.length);
+function drawEvent($event) {
+    $user = getUser();
+
+    switch ($event.typeId) {
+        default:
+            var $eventType = "Something went wrong ;(";
+            break;
+        case "1":
+            $eventType = "Football 5 vs 5 - (One field)";
+
+            break;
+        case "2":
+            $eventType = "Football 5 vs 5 - (Two fields)";
+
+            break;
+        case "3":
+            $eventType = "Tennis 1 vs 1";
+
+            break;
+        case "4":
+            $eventType = "Tennis 2 vs 2";
+
+            break;
+    }
+
+    $("#event-title").html($eventType);
+    $("#event-date").html($event.date);
+
+    if($user.roleId == '2'){
+    	$buttons = "<button class='btn btn-primary btn-md' onclick='addSelfPlayer()'>Join Event</button>" +
+			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer()'>Mark as finished</button>" +
+			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer()'>Delete</button>";
+    	$("#game-buttons").append($buttons);
+	}
+
+}
+
+// TODO Remove DrawTeamless -> Use DrawPlayer();
+function drawTeamless(event) {
+
+    $user = getUser();
+    teamless = event.teamless;
 	for(i = 0; i < teamless.length; i++) {
 		
 	switch(teamless[i].levelId){
@@ -58,63 +98,98 @@ function drawTeamless(teamless) {
 		$gender = "Male";
 		break;
 	}
-		
-		
-	var player = "<div class='col-sm-4'>" +
+
+
+	if($user.roleId === "2") { // ADMIN
+        $lowerButtons = "<button class='btn btn-primary btn-sm' onclick='removePlayer("+teamless[i].id+")' >Remove</button>";
+        switch(event.typeId){
+			case "default":
+				$sideButtons = "<p>Error here amio ;)</p>";
+        	case "1":
+			case "2":
+            $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
+                "<button class='btn btn-primary btn-sm' >2</button><br>" +
+                "<button class='btn btn-primary btn-sm' >3</button><br>" +
+                "<button class='btn btn-primary btn-sm' >4</button>";
+				break;
+			case "3":
+                $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
+                    "<button class='btn btn-primary btn-sm' >2</button><br>";
+				break;
+			case "4":
+                $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
+                    "<button class='btn btn-primary btn-sm' >2</button><br>";
+
+                break;
+			case "5":
+                $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
+                    "<button class='btn btn-primary btn-sm' >2</button><br>";
+				break;
+        }
+
+	} else if(teamless[i].id === $user.playerId) { // OWN PLAYER
+        $lowerButtons = "<button class='btn btn-primary btn-sm' onclick='removePlayer("+teamless[i].id+")' >Remove</button>";
+        $sideButtons = "";
+	} else {
+		$lowerButtons = "";
+        $sideButtons = "";
+	}
+
+	var player = "<div class='col-sm-3'>" +
 					 "<div id='player"+teamless[i].id+"' class='business-card'>" +
 					 		"<div class='media'>" +
 						 		"<div class='media-left'>" +
-						 		"<img class='media-object rounded-circle profile-img' src='http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'>" +
+						 		"<img class='media-object rounded-circle profile-img' src='http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'><br>" +
+        						"<center>"+$lowerButtons+"</center>" +
 						 		"</div>" +
 						 		"<div class='media-body'>" +
 							 		"<h4 class='card-title'>"+teamless[i].nickName+"</h4>" +
-							 		"<p class='card-text'>"+$level+"</p>" +
+							 		"<small><p class='card-text'>"+$level+"</p></small>" +
 							 		"<p class='card-text'>"+$gender+"</p>" +
 						 		"</div>" +
-						 		"<div class='media-menu'>" +
-							 		"<button class='btn btn-primary btn-sm' >1</button>" +
-						 			"<button class='btn btn-primary btn-sm' >2</button>" +
-						 			"<button class='btn btn-primary btn-sm' >3</button>" +
-						 			"<button class='btn btn-primary btn-sm' >4</button>" +
+						 		"<div class='media-menu-lower'>" +
+									$sideButtons+
 						 		"</div>" +
-						 		
-						 	"</div>" +
-						"</div>" +
-					"</div>";
-					 	
-					 
-					 
-/*"<h4 class='card-title'>"+teamless[i].nickName+"</h4>" +
-					     	"<p class='card-text'>"+$level+"</p>" +
-					     	"<p class='card-text'>"+$gender+"</p>" +*/
-	
+							"</div>" +
+					"</div>" +
+				"</div>";
+
 	$("#teamless").append(player);
-	console.log("Drawing player");
 	}
 }
 
 
-function drawTeams(teams) {
-	//console.log(teams);
-	console.log("Teams Size: "+teams.length);
+function drawTeams(event) {
+
+	teams = event.teams;
+    /* USER Buttons Chunk
+    * It's purpose it's to set the appropriate buttons depending on logged in user */
+    $user = getUser()
+ 	var $buttons;
 	for(i = 0; i < teams.length; i++) {
+
 		var team = "<div class='col-3'>" +
 				   "<ul id='team"+i+"' class='list-group-item'>" +
 				   "</ul>" +
 				   "</div>";
-		
-		console.log("Drawing team");
 		
 		$("#teams").append(team);
 		var title = "<h6>Team "+i+"</h6>";
 		$("#team"+i).append(title);
 		
 		for(j = 0; j < teams[i].players.length; j++) {
-			var player = "<li class='list-group-item' id='player"+teams[i].players[j].id+"'>"+teams[i].players[j].nickName+"</li>";
+
+            if($user.roleId === "2") { // ADMIN
+                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='removePlayer("+teams[i].players[j].id+")' >Remove</button>";
+            } else if(teams[i].players[j].id === $user.playerId) { // OWN PLAYER
+                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='removePlayer("+teams[i].players[j].id+")'>Remove</button>";
+            } else {
+                $buttons = "";
+            }
+
+			var player = "<li class='list-group-item' id='player"+teams[i].players[j].id+"'>"+teams[i].players[j].nickName+$buttons+"</li>";
 			$("#team"+i).append(player);
-			console.log("Drawing player")
 		}
 	}
-	console.log("Finished drawing teams");  
 
 }

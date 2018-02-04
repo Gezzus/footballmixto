@@ -3,9 +3,6 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Session.php";
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
-
 class UserAPI {
 	
     public static function register($userName, $password, $nickName, $genderId, $skillId) {

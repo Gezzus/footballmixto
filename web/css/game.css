@@ -9,9 +9,7 @@ body {
 }
 
 h1.mt-4{
-  text-shadow: 2px 2px black;
-  margin-top: 1rem!important;
-  font-weight: 400;
+
 }
 
 
@@ -35,22 +33,18 @@ h1.mt-4{
   float:right;
 }
 
+
 .container {
     max-width: 940px;
     min-width: 940px;
 }
 
-.media-menu{
-	float:right;
-	width:30px;		
-	
-}
-
 .btn-sm {
-	justify-content:center;
+	margin:0px!important;
+    padding:0px!important;
 	font-size: x-small!important;
-	width:20px;
-	height:20px;
+    width: fit-content;
+    min-width: 15px;
 }
 
 li.list-group-item {
@@ -62,6 +56,10 @@ li.list-group-item:hover {
 	cursor: pointer;
 }
 
+div.col-sm-4 {
+    width: fit-content;
+}
+
 .business-card {
   border: 1px solid #cccccc;
   background: #f8f8f8;
@@ -70,13 +68,40 @@ li.list-group-item:hover {
   margin-bottom: 10px;
 }
 .profile-img {
-  height: 120px;
+  height: 80px;
+  width: 80px;
   background: white;
 }
-.job {
-  color: #666666;
-  font-size: 17px;
+
+.media-body{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
-.mail {
-  font-size: 16px;
+
+.media-menu{
+    float:right;
+    width:fit-content;
+    margin:1px;
+    padding:0px;
+}
+
+.media-menu-lower{
+
+}
+
+.card-title {
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
+color: #666666!important;
+font-size: 17px!important;
+}
+.card-text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  font-size: 16px!important;
+    text-overflow: ellipsis!important;
  }
+
