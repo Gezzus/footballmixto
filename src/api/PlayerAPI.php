@@ -1,7 +1,6 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Player.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Session.php";
 
 class PlayerAPI {
     
@@ -18,6 +17,10 @@ class PlayerAPI {
     public static function get($nickName, $genderId) {
         return Player::get($nickName, $genderId);
     }
-    
+
+    public static function playerGames($id) {
+        $player = Player::getById($id);
+        return $player->getGames();
+    }
     
 }

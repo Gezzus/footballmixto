@@ -1,7 +1,8 @@
 <?php
 
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Game.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
+include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/SerializableCollection.php";
 
 class Player extends PersistentEntity implements Seriarizable {
 
@@ -9,12 +10,14 @@ class Player extends PersistentEntity implements Seriarizable {
     private $nickName;
     private $genderId;
     private $levelId;
+    private $games;
 
     public function __construct($id, $nickName, $genderId, $levelId) {
         $this->id = $id;
         $this->nickName = $nickName;
         $this->genderId = $genderId;
         $this->levelId = $levelId;
+        $this->games = new SerializableCollection();
     }
 
     public static function create($nickName, $genderId, $skillId) {
@@ -66,7 +69,7 @@ class Player extends PersistentEntity implements Seriarizable {
         return $return;
         
     }
-    
+
     public function toJson() {
        return json_encode($this->toArray());
     }
@@ -87,4 +90,27 @@ class Player extends PersistentEntity implements Seriarizable {
         return $this->levelId;
     }
 
+    public function getGames() {
+    /*    $dbGames = self::queryWithParameters("SELECT * FROM pickPlayer where playerId= ?",array($this->id));
+        $games = $dbGames->fetchAll();
+        var_dump($games);
+        for ($i = 0; $i < count($games); $i++){
+            $this->games->add($dbGames[$i]["gameId"]);
+        }
+        var_dump($this->games);
+    */}
+
 }
+
+
+/*public function toArray() {
+    $return = [
+        "games" => $this->games->toArray()
+    ];
+    return $return;
+
+}
+
+public function toJson() {
+    return json_encode($this->toArray());
+}*/

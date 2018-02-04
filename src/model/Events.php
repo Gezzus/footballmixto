@@ -31,21 +31,9 @@ class Events extends PersistentEntity implements Seriarizable {
     }
 
     public static function get($status, $amount) {
-
         $dbEvents = self::queryWithParameters("SELECT * FROM game WHERE status=? LIMIT " . $amount, array($status));
-        #var_dump(self::queryErrorInfo());
-            if($dbEvents->rowCount() == 0) {
-                return null;
-            } else {
-                $events = new Events();
-                for($i = 0; $i < $dbEvents->rowCount(); $i++) {
-                    $dbGame = $dbEvents->fetch();
-                    $events->games->add(Game::getById($dbGame['id']));
-                }
-                return $events;
-            }
-            #$events = Events::arrangeEvents($dbEvents);
-            #return $events;
+        $events = Events::arrangeEvents($dbEvents);
+        return $events;
     }
 
     public static function arrangeEvents($queryObject) {

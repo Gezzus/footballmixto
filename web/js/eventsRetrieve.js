@@ -24,7 +24,10 @@ function getEvents($status,$amount,$id){
 }
 
 function drawEvents($events,$id) {
-	console.log($events);
+	$user = getUser();
+	$playerGames = getPlayerGames($user.playerId);
+    console.log($playerGames);
+
 	var $eventType;
 	var $eventImage;
     var $game;
@@ -63,21 +66,29 @@ function drawEvents($events,$id) {
                 $game = "<div class='col-sm-4 my-4'>" +
                                 "<div class='card'>" +
                                     "<img class='card-img-top' src='img/"+$eventImage+".jpg' alt=''>" +
-                                        "<div class='card-body'>" +
+                                        "<div class='card-body' id='event-info'>" +
                                         "<h4 class='card-title'>"+$eventType+"</h4>" +
                                         "<p class='card-text'>"+$events["games"][i]["date"]+"</p>" +
                                         "</div>" +
                                     "<div class='card-footer'>" +
                                         "<a href='game#"+$events["games"][i]["id"]+"' class='btn btn-primary'>See event &raquo;</a>" +
-                                        "<a href='game#' class='btn btn-primary' style='float:right'>Join</a>" +
+                                        "<button onclick='addSelfPlayer("+$events["games"][i]["id"]+")' class='btn btn-primary' style='float:right'>Join</button>" +
                                     "</div>" +
                                 "</div>" +
                             "</div>";
                 break;
             case "oldEvents":
+
+                if($.inArray($user.playerId, )){
+                    $participatedBadge = "<span class='badge badge-primary badge-pill'>Participated</span>";
+                } else {
+                    $participatedBadge = "";
+                }
+
+
                 $game = "<li class='list-group-item d-flex justify-content-between align-items-center'>" +
                                 $eventType + " - " + $events["games"][i]["date"] +
-                                "<span class='badge badge-primary badge-pill'>Participated</span>" +
+                                 $participatedBadge +
                                 "<a href='game#"+$events["games"][i]["id"]+"' class='btn btn-primary' style='float:right' >See event &raquo;</a>" +
 
                         "</li>";

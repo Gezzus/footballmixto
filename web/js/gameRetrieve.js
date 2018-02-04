@@ -60,10 +60,14 @@ function drawEvent($event) {
     $("#event-date").html($event.date);
 
     if($user.roleId == '2'){
-    	$buttons = "<button class='btn btn-primary btn-md' onclick='addSelfPlayer()'>Join Event</button>" +
-			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer()'>Mark as finished</button>" +
-			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer()'>Delete</button>";
+    	$buttons = "<a class='btn btn-primary btn-md' href='index.html'>Back</a>" +
+			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>" +
+			"<button class='btn btn-primary btn-md' onclick=''>Mark as finished</button>" +
+			"<button class='btn btn-primary btn-md' onclick=''>Delete</button>";
     	$("#game-buttons").append($buttons);
+	} else {
+        $buttons = "<a class='btn btn-primary btn-md' href='../index.html'>Back</a>";
+        $buttons = "<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>";
 	}
 
 }

@@ -64,7 +64,7 @@ function getUser() {
         dataType: "html",
         async: false,
         success: function(result){
-                console.log(result);
+                //console.log(result);
         },
         error: function(status,exception) {
         console.log(status);
