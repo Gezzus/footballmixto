@@ -145,8 +145,8 @@ class Game extends PersistentEntity implements Seriarizable {
             return null;
         } else {
             $this->queryWithParameters("DELETE FROM pickPlayer WHERE gameId= ? AND playerId= ?", array($this->id, $playerId));
-            $this->teamless->add($player);
-            return true;
+            $this->teamless->remove($player);
+            return $playerId;
         }
     }
 

@@ -27,7 +27,7 @@ class GameAPI {
     public static function addPlayer($gameId, $playerId) {
        $game = Game::getById($gameId);
        if($game->addPlayer($playerId)){
-           return true;
+           return true; // If this is returning true... how the hell am i drawing stuff :thinking:
        } else {
            return null;
        }
@@ -35,11 +35,7 @@ class GameAPI {
 
     public static function removePlayer($gameId, $playerId) {
         $game = Game::getById($gameId);
-        if($game->removePlayer($playerId)){
-            return true;
-        } else {
-            return null;
-        }
+         return $game->removePlayer($playerId);
     }
     
     public static function transferPlayer($gameId, $playerId, $teamId) {

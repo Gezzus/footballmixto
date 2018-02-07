@@ -139,8 +139,8 @@ function drawTeamless(event) {
         $sideButtons = "";
 	}
 
-	var player = "<div class='col-sm-3'>" +
-					 "<div id='player"+teamless[i].id+"' class='business-card'>" +
+	var player = "<div id='player"+teamless[i].id+"' class='col-sm-3'>" +
+					 "<div class='business-card'>" +
 					 		"<div class='media'>" +
 						 		"<div class='media-left'>" +
 						 		"<img class='media-object rounded-circle profile-img' src='http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'><br>" +
@@ -184,14 +184,16 @@ function drawTeams(event) {
 		for(j = 0; j < teams[i].players.length; j++) {
 
             if($user.roleId === "2") { // ADMIN
-                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='removePlayer("+teams[i].players[j].id+")' >Remove</button>";
+                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='unasign("+teams[i].players[j].id+")' >Remove</button>";
             } else if(teams[i].players[j].id === $user.playerId) { // OWN PLAYER
-                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='removePlayer("+teams[i].players[j].id+")'>Remove</button>";
+                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='unasign("+teams[i].players[j].id+")'>Remove</button>";
             } else {
                 $buttons = "";
             }
 
-			var player = "<li class='list-group-item' id='player"+teams[i].players[j].id+"'>"+teams[i].players[j].nickName+$buttons+"</li>";
+			var player = "<li class='list-group-item' id='player"+teams[i].players[j].id+"'>" +
+							teams[i].players[j].nickName+$buttons+"" +
+							"</li>";
 			$("#team"+i).append(player);
 		}
 	}

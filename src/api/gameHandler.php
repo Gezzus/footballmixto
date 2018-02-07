@@ -81,7 +81,7 @@ function removePlayer()
         $player = PlayerAPI::getById($_GET['playerId']);
         $removal = GameAPI::removePlayer($_GET['id'], $player->getId());
         if ($removal != null && !empty($removal)) {
-            echo $removal;
+            echo json_encode(["status" => "success","playerId" => $removal]);
         } else {
             echo json_encode(["status" => "failed"]);
         }

@@ -41,8 +41,8 @@ function drawPlayer($player, $user, $location){
         $sideButtons = "";
     }
 
-    var player = "<div class='col-sm-3'>" +
-        "<div id='player"+$player.id+"' class='business-card'>" +
+    var player = "<div id='player"+$player.id+"' class='col-sm-3'>" +
+        "<div class='business-card'>" +
         "<div class='media'>" +
         "<div class='media-left'>" +
         "<img class='media-object rounded-circle profile-img' src='http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'><br>" +
@@ -62,4 +62,9 @@ function drawPlayer($player, $user, $location){
 
     $("#"+$location).append(player);
 
+}
+
+function erasePlayer($playerId,$location) {
+	console.log("Erasing: #"+$location+$playerId);
+	$("#"+$location+$playerId).remove();
 }

@@ -81,6 +81,7 @@ function removePlayer($playerId) {
 
             $(document).ready(function(){
                 if(result.status == "success"){
+                	erasePlayer($result.playerId,"player");
 
                 } else if(result.status == "failed"){
                     $error ="<div class=\"alert alert-error alert-dismissable\" >" +
@@ -97,6 +98,7 @@ function removePlayer($playerId) {
         }
     });
 }
+
 
 function getPlayerGames($playerId){
     var $playerGames = $.ajax({
@@ -118,3 +120,4 @@ function getPlayerGames($playerId){
     });
     return JSON.parse($playerGames.responseText);
 }
+

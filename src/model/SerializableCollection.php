@@ -13,6 +13,11 @@ class SerializableCollection implements Seriarizable {
     public function add($element) {
         array_push($this->collection, $element);
     }
+    
+    public function remove($element) {
+        $position = array_search($element, $this->collection);
+        unset($this->collection[$position]);
+    }
 
     public function toJson() {
     }
