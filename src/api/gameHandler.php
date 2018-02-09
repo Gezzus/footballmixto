@@ -9,15 +9,18 @@ if(isset($_GET['action'])) {
             echo json_encode(["status" => "failed"]);
             
         case "retrieve":
-            echo retrieveGame();
+            retrieveGame();
             break;
 
         case "remove":
-            echo removePlayer();
+            removePlayer();
             break;
 
         case "add":
-            echo addPlayer();
+            addPlayer();
+            break;
+        case "transfer":
+            transferPlayer();
             break;
     }
 }
@@ -61,8 +64,7 @@ function addPlayer() {
     }
 }
 
-function getPlayer()
-{
+function getPlayer() {
     if (isset($_GET['id'])) {
         $player = PlayerAPI::getById($_GET['id']);
         if ($player != null && !empty($player)) {
@@ -75,13 +77,24 @@ function getPlayer()
     }
 }
 
-function removePlayer()
-{
+function removePlayer() {
     if (isset($_GET['id']) && isset($_GET['playerId'])) {
         $player = PlayerAPI::getById($_GET['playerId']);
         $removal = GameAPI::removePlayer($_GET['id'], $player->getId());
         if ($removal != null && !empty($removal)) {
             echo json_encode(["status" => "success","playerId" => $removal]);
+        } else {
+            echo json_encode(["status" => "failed"]);
+        }
+    } else {
+        echo json_encode(["status" => "failed"]);
+    }
+}
+
+function transferPlayer() {
+    if(isset($_GET['gameId']) && isset($_GET['teamId']) && isset($_GET['playerId'])) {
+        if($player = GameAPI::transferPlayer($_GET['gameId'], $_GET['playerId'], $_GET['teamId'])){
+            echo json_encode(["status" => "success","player" => $player, "teamId" => $_GET['teamId']]);
         } else {
             echo json_encode(["status" => "failed"]);
         }

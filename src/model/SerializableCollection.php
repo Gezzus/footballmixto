@@ -17,9 +17,11 @@ class SerializableCollection implements Seriarizable {
     public function remove($element) {
         $position = array_search($element, $this->collection);
         unset($this->collection[$position]);
+        return trim($this->collection);
     }
 
     public function toJson() {
+        return json_encode($this->toArray());
     }
 
     public function toArray() {
@@ -31,10 +33,10 @@ class SerializableCollection implements Seriarizable {
     }
 
     public function size() {
-        count($this->collection);
+        return count($this->collection);
     }
 
     public function get($i) {
-        $this->collection[$i];
+        return $this->collection[$i];
     }
 }

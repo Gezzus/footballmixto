@@ -1,23 +1,30 @@
-function addSelfPlayer($gameId){
+function addSelfPlayer($gameId) {
     var $user = getUser();
     $.ajax({
         url: "/src/api/gameHandler.php",
         type: "GET",
         data: {
-            "action" : "add",
+            "action": "add",
             "id": $gameId,
             "playerId": $user.playerId
         },
         dataType: "html",
         async: false,
-        success: function(result){
+        success: function (result) {
             console.log(result);
-            var $result = JSON.parse(result);
-
-            $(document).ready(function(){
-                if($result.status == "failed"){
-                    $(document).ready(function(){
-                        $error ="<div class=\"alert alert-success alert-dismissable\" >" +
+            try {
+                $result = JSON.parse(result)
+            } catch (err) {
+                $error = "<div class=\"alert alert-danger alert-dismissable\" >" +
+                    "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                    "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
+                    "</div>"
+                $("#event-info").append($error);
+            }
+            $(document).ready(function () {
+                if ($result.status == "failed") {
+                    $(document).ready(function () {
+                        $error = "<div class=\"alert alert-success alert-dismissable\" >" +
                             "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                             "<strong>Hey!</strong> You are already subscribed to this event." +
                             "</div>"
@@ -25,12 +32,18 @@ function addSelfPlayer($gameId){
 
                     })
                     return false;
+                } else if ($result.status == "success") {
+                    drawPlayer($result.player, $user, "teamless");
                 } else {
-                    drawPlayer($result.player, $user,"teamless");
+                    $error = "<div class=\"alert alert-danger alert-dismissable\" >" +
+                        "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                        "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
+                        "</div>"
+                    $("#event-info").append($error);
                 }
             })
         },
-        error: function(status,exception) {
+        error: function (status, exception) {
             console.log(status);
             console.log(exception);
         }
@@ -77,13 +90,21 @@ function removePlayer($playerId) {
         async: false,
         success: function(result){
             console.log(result);
-            var result = JSON.parse(result);
+            try {
+                var $result = JSON.parse(result)
+            } catch(err) {
+                $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
+                    "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                    "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
+                    "</div>"
+                $("#event-info").append($error);
+            }
 
             $(document).ready(function(){
-                if(result.status == "success"){
+                if($result.status == "success"){
                 	erasePlayer($result.playerId,"player");
 
-                } else if(result.status == "failed"){
+                } else if($result.status == "failed"){
                     $error ="<div class=\"alert alert-error alert-dismissable\" >" +
                         "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                         "<strong>Hey!</strong> Something happened while trying to remove you. Please refresh the page and contact Alessandro." +
@@ -111,7 +132,15 @@ function getPlayerGames($playerId){
         dataType: "html",
         async: false,
         success: function(result){
-            console.log(result); // delete later
+            try {
+                $result = JSON.parse(result)
+            } catch(err) {
+                $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
+                    "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                    "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
+                    "</div>"
+                $("#event-info").append($error);
+            }
         },
         error: function(status,exception) {
             console.log(status);
@@ -121,3 +150,54 @@ function getPlayerGames($playerId){
     return JSON.parse($playerGames.responseText);
 }
 
+
+function putPlayerTeam($playerId, $teamId, $gameId) {
+    var $playerGames = $.ajax({
+        url: "/src/api/gameHandler.php",
+        type: "GET",
+        data: {
+            "action" : "transfer",
+            "playerId": $playerId,
+            "gameId": $gameId,
+            "teamId": $teamId
+        },
+        dataType: "html",
+        async: false,
+        success: function(result){
+            console.log(result);
+            try {
+                $result = JSON.parse(result)
+            } catch(err) {
+                $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
+                            "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                            "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
+                        "</div>"
+                $("#event-info").append($error);
+            }
+        },
+        error: function(status,exception) {
+            console.log(status);
+            console.log(exception);
+        }
+    });
+    return JSON.parse($playerGames.responseText);
+}
+
+
+function transferPlayer($playerId, $teamId, $gameId){
+    var $user = getUser();
+    var $result = putPlayerTeam($playerId, $teamId, $gameId);
+    if($result.status === "success") {
+        var $location = "team"+$teamId;
+        var $oldLocation = "player"+$playerId;
+        console.log("PlayerID: "+$result.player[0].playerId);
+        erasePlayer($playerId, $oldLocation)
+        drawPlayer($playerId, $user, $location);
+    } else {
+        $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
+            "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+            "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
+            "</div>"
+        $("#event-info").append($error);
+    }
+}

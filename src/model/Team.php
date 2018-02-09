@@ -1,7 +1,6 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/SerializableCollection.php";
 
 class Team extends PersistentEntity implements Seriarizable {
@@ -98,10 +97,12 @@ class Team extends PersistentEntity implements Seriarizable {
 
     }
 
-    public function transferPlayer($playerId) {
+    public function transferPlayer($playerId,$gameId) {
         $player = Player::getById($playerId);
+        self::queryWithParameters("UPDATE pickPlayer SET teamId=? WHERE playerId= ? AND gameId= ? ", array($this->getId(), $playerId, $gameId));
+        // Error handling? TODO
         $this->players->add($player);
-        return $playerId;
+        return array(["playerId" => $playerId, "gameId" => $gameId]);
     }
 
 }

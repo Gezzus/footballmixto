@@ -22,5 +22,6 @@ class PlayerAPI {
         $player = Player::getById($id);
         return $player->getGames();
     }
-    
+
+
 }

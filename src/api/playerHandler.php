@@ -13,6 +13,8 @@ switch ($_GET["action"]){
     case "getGames":
         getGames();
         break;
+    case "putPlayerTeam":
+        putPlayerTeam();
 }
 
 function get() {
@@ -20,9 +22,22 @@ function get() {
 }
 
 function getGames() { // Add type later
-    if($games = PlayerAPI::playerGames($_GET['id'])){
-        echo json_encode(["status" => "success","games" => $games]);
-    } else {
-        echo json_encode(["status" => "failed"]);
+    if(isset($_GET['id'])){
+        if($games = PlayerAPI::playerGames($_GET['id'])){
+            echo json_encode(["status" => "success","games" => $games]);
+        } else {
+            echo json_encode(["status" => "failed"]);
+        }
+    }
+
+}
+
+function putPlayerTeam() {
+    if(isset($_GET['id']) && isset($_GET['gameId']) && isset($_GET['teamId'])) {
+        if($movement= PlayerAPI::putTeam($_GET['id'], $_GET['teamId'], $_GET['gameId'])) {
+            echo json_encode(["status" => "success", "player" => $movement]);
+        } else {
+            echo json_encode(["status" => "failed"]);
+        }
     }
 }

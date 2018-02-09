@@ -150,12 +150,18 @@ class Game extends PersistentEntity implements Seriarizable {
         }
     }
 
+    public function getTeams() {
+        return $this->teams;
+    }
+
     public function getTeam($teamId) {
         for ($i=0; $i < $this->teams->size(); $i++) {
+            #echo "Comparing: ".$this->teams->get($i)->getId()." with ".$teamId;
             if($this->teams->get($i)->getId() == $teamId) {
-                return $this->teams[$i];
+                return $this->teams->get($i);
             }    
         }
+        return null;
     }
     
 }

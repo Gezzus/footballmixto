@@ -35,12 +35,14 @@ class GameAPI {
 
     public static function removePlayer($gameId, $playerId) {
         $game = Game::getById($gameId);
-         return $game->removePlayer($playerId);
+        return $game->removePlayer($playerId);
     }
+
     
     public static function transferPlayer($gameId, $playerId, $teamId) {
        $game = Game::getById($gameId);
-       $team = $game->getTeam($teamId);
-       #TODO
+        #$teams = $game->getTeams();
+        $team = $game->getTeam($teamId);
+        return $team->transferPlayer($playerId,$gameId);
     }
 }

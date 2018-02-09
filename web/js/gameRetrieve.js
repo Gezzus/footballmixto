@@ -14,7 +14,7 @@ function getGame($value){
           dataType: "html",
           async: false,
           success: function(result){
-        	  //console.log(result);
+        	  console.log(result);
         	  var $result = JSON.parse(result);
 
         	  $(document).ready(function(){
@@ -56,19 +56,21 @@ function drawEvent($event) {
             break;
     }
 
-    $("#event-title").html($eventType);
-    $("#event-date").html($event.date);
+
 
     if($user.roleId == '2'){
     	$buttons = "<a class='btn btn-primary btn-md' href='index.html'>Back</a>" +
 			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>" +
 			"<button class='btn btn-primary btn-md' onclick=''>Mark as finished</button>" +
 			"<button class='btn btn-primary btn-md' onclick=''>Delete</button>";
-    	$("#game-buttons").append($buttons);
 	} else {
-        $buttons = "<a class='btn btn-primary btn-md' href='../index.html'>Back</a>";
-        $buttons = "<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>";
+        $buttons = "<a class='btn btn-primary btn-md' href='index.html'>Back</a>" +
+			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>";
 	}
+
+    $("#event-title").html($eventType);
+    $("#event-date").html($event.date);
+    $("#game-buttons").append($buttons);
 
 }
 
@@ -111,23 +113,23 @@ function drawTeamless(event) {
 				$sideButtons = "<p>Error here amio ;)</p>";
         	case "1":
 			case "2":
-            $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
-                "<button class='btn btn-primary btn-sm' >2</button><br>" +
-                "<button class='btn btn-primary btn-sm' >3</button><br>" +
-                "<button class='btn btn-primary btn-sm' >4</button>";
+            $sideButtons =  "<button onclick='transferPlayer("+teamless[i].id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >1</button><br>"+
+                "<button onclick='transferPlayer("+teamless[i].id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>" +
+                "<button onclick='transferPlayer("+teamless[i].id+",3,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >3</button><br>" +
+                "<button onclick='transferPlayer("+teamless[i].id+",4,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >4</button>";
 				break;
 			case "3":
-                $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
-                    "<button class='btn btn-primary btn-sm' >2</button><br>";
+                $sideButtons =  "<button onclick='transferPlayer("+teamless[i].id+",1,"+location.hash.substr(1)+")'  class='btn btn-primary btn-sm' >1</button><br>"+
+                    "<button onclick='transferPlayer("+teamless[i].id+",2,"+location.hash.substr(1)+")'class='btn btn-primary btn-sm' >2</button><br>";
 				break;
 			case "4":
-                $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
-                    "<button class='btn btn-primary btn-sm' >2</button><br>";
+                $sideButtons =  "<button onclick='transferPlayer('"+teamless[i].id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
+                    "<button onclick="+teamless[i].id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
 
                 break;
 			case "5":
-                $sideButtons =  "<button class='btn btn-primary btn-sm' >1</button><br>"+
-                    "<button class='btn btn-primary btn-sm' >2</button><br>";
+                $sideButtons =  "<button onclick='transferPlayer("+teamless[i].id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
+                    "<button onclick="+teamless[i].id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
 				break;
         }
 
@@ -184,9 +186,9 @@ function drawTeams(event) {
 		for(j = 0; j < teams[i].players.length; j++) {
 
             if($user.roleId === "2") { // ADMIN
-                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='unasign("+teams[i].players[j].id+")' >Remove</button>";
+                $buttons = "<button onclick='transferPlayer("+teams[i].players[j].id+",NULL,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
             } else if(teams[i].players[j].id === $user.playerId) { // OWN PLAYER
-                $buttons = "<button class='btn btn-primary btn-sm' style='float:right;' onclick='unasign("+teams[i].players[j].id+")'>Remove</button>";
+                $buttons = "<button onclick='transferPlayer("+teams[i].players[j].id+",NULL,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
             } else {
                 $buttons = "";
             }
