@@ -100,9 +100,20 @@ class Team extends PersistentEntity implements Seriarizable {
     public function transferPlayer($playerId,$gameId) {
         $player = Player::getById($playerId);
         self::queryWithParameters("UPDATE pickPlayer SET teamId=? WHERE playerId= ? AND gameId= ? ", array($this->getId(), $playerId, $gameId));
-        // Error handling? TODO
         $this->players->add($player);
         return array(["playerId" => $playerId, "gameId" => $gameId]);
+    }
+
+    public static function transferPlayerWithId($playerId, $teamId, $gameId) {
+        $player = Player::getById($playerId);
+        if($teamId == null) {
+            self::queryWithParameters("UPDATE pickPlayer SET teamId=NULL WHERE playerId= ? AND gameId= ? ", array($playerId, $gameId));
+            return array(["playerId" => $playerId, "teamId" => $teamId, "gameId" => $gameId]);
+        } else {
+            self::queryWithParameters("UPDATE pickPlayer SET teamId=? WHERE playerId= ? AND gameId= ? ", array($teamId, $playerId, $gameId));  
+            return array(["playerId" => $playerId, "teamId" => $teamId, "gameId" => $gameId]);
+        }
+        
     }
 
 }

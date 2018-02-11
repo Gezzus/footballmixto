@@ -17,7 +17,6 @@ class SerializableCollection implements Seriarizable {
     public function remove($element) {
         $position = array_search($element, $this->collection);
         unset($this->collection[$position]);
-        return trim($this->collection);
     }
 
     public function toJson() {

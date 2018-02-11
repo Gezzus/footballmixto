@@ -14,8 +14,9 @@ class GameAPI {
         }
     }
 
-    public static function create($date, $type, $doodleUrl) {
-        $game = Game::create($date, $type, $doodleUrl);
+    public static function create($type, $date, $time) {
+        $datetime = $date." ".$time;
+        $game = Game::create($datetime, $type, "NULL");
         if($game != null) {
             return $game;
         } else {
@@ -42,7 +43,12 @@ class GameAPI {
     public static function transferPlayer($gameId, $playerId, $teamId) {
        $game = Game::getById($gameId);
         #$teams = $game->getTeams();
-        $team = $game->getTeam($teamId);
-        return $team->transferPlayer($playerId,$gameId);
+        if($teamId != null) {
+          $team = $game->getTeam($teamId);
+          return $team->transferPlayer($playerId,$gameId);
+        } else {
+          return Team::transferPlayerWithId($playerId, null, $gameId);
+        }
+        
     }
 }

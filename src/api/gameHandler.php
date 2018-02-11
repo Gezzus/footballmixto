@@ -22,6 +22,9 @@ if(isset($_GET['action'])) {
         case "transfer":
             transferPlayer();
             break;
+        case "createGame":
+            createGame();
+            break;
     }
 }
 
@@ -38,13 +41,29 @@ function retrieveGame() {
     }
 }
 
+function createGame() {
+    if(isset($_GET['typeId']) && isset($_GET['date']) && isset($_GET['time'])) {
+        $gameId = GameAPI::create($_GET['typeId'], $_GET['date'], $_GET['time']);
+        if($gameId != null) {
+            $game = GameAPI::get($gameId);
+            echo json_encode(["status" => "success", "game" => $game->toArray()]);
+        } else {
+            echo json_encode(["status" => "failed"]);
+        }
+    } else {
+        echo json_encode(["status" => "empty"]);
+    }
+}
+
+
+
 function addPlayer() {
     if (isset($_GET['id'])) {
         if (isset($_GET['playerId'])) {
             $addition = GameAPI::addPlayer($_GET['id'], $_GET['playerId']);
             if ($addition) {
                $player = Player::getById($_GET['playerId']);
-               return json_encode(["status" => "success", "player" => $player->toArray()]);
+               echo json_encode(["status" => "success", "player" => $player->toArray()]);
             } else {
                 echo json_encode(["status" => "failed"]);
             }
@@ -93,10 +112,18 @@ function removePlayer() {
 
 function transferPlayer() {
     if(isset($_GET['gameId']) && isset($_GET['teamId']) && isset($_GET['playerId'])) {
-        if($player = GameAPI::transferPlayer($_GET['gameId'], $_GET['playerId'], $_GET['teamId'])){
-            echo json_encode(["status" => "success","player" => $player, "teamId" => $_GET['teamId']]);
+        if($_GET['teamId'] == null) {
+            if($player = GameAPI::transferPlayer($_GET['gameId'], $_GET['playerId'], null)){
+                echo json_encode(["status" => "success","player" => $player, "teamId" => "Teamless"]);
+            } else {
+                echo json_encode(["status" => "failed"]);
+            }
         } else {
-            echo json_encode(["status" => "failed"]);
+            if($player = GameAPI::transferPlayer($_GET['gameId'], $_GET['playerId'], $_GET['teamId'])){
+                echo json_encode(["status" => "success","player" => $player, "teamId" => $_GET['teamId']]);
+            } else {
+                echo json_encode(["status" => "failed"]);
+            }
         }
     } else {
         echo json_encode(["status" => "failed"]);

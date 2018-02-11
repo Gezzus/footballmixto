@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/userSession.js"></script>
     <script type="text/javascript" src="js/eventsRetrieve.js"></script>
     <script type="text/javascript" src="js/gamePlayerActions.js"></script>
+    <script type="text/javascript" src="js/gameCreate.js"></script>
     <link href="css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -72,8 +73,10 @@
                 <h2 class="mt-4">Incoming events</h2>
 
 
-
-                <a class="btn btn-primary btn-lg" href="#">Create new event &raquo;</a>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#product_view">
+                 Create new event &raquo;
+                </button>
+                <!--<a class="btn btn-primary btn-lg" href="#">Create new event &raquo;</a>-->
 
             </div>
             <!--<div class="col-1-sm" style="float:right">
@@ -127,4 +130,51 @@
 
 </body>
 
+<div class="modal fade product_view" id="product_view">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create a new event</h3>
+            </div>
+            <div class="modal-body">
+                
+                    <div class="row">
+                        <div class="col-md-12 product_content">
+                           <select class="form-control" id="newTypeId">
+                                <option value="2">Football - 5 vs 5 (2 fields)</option>
+                                <option value="1">Football - 5 vs 5 (1 field)</option>
+                                <option value="3">Tennis - 1 vs 1</option>
+                                <option value="4">Tennis - 2 vs 2</option>
+                           </select>
+
+                            <div class="col">
+                                    <label class="">Date: </label>
+                                    <input class="form-control" type="date" id="newDate">
+                            </div>
+                            <div class="col">
+                                <label class="">Time: </label>
+                                <input class="form-control" type="time" id="newTime">
+                            </div>
+                            <div class="col-md">
+                                <button onClick="prepareGame()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
+                                 Create
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
+                                 Cancel
+                                </button>
+                            </div> 
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </html>
+
+

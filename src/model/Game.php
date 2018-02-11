@@ -56,7 +56,6 @@ class Game extends PersistentEntity implements Seriarizable {
         $dbPlayersInfo = self::queryWithParameters("SELECT playerId FROM pickPlayer WHERE gameId = ?  AND teamId IS NULL", array($id));
         if($dbPlayersInfo->rowCount() != 0) {
             $playersInfo = $dbPlayersInfo->fetchAll();
-            #var_dump($playersInfo);
             return $playersInfo;
         } else {
             return null;
@@ -66,20 +65,13 @@ class Game extends PersistentEntity implements Seriarizable {
     
     public static function create($date, $typeId, $doodleUrl) {
         $gameInfo = self::getGameData($typeId);
-        if($gameInfo == null){
+        if($gameInfo == null) {
             return null;
         } else {
-            self::queryWithParameters("INSERT INTO game(date, typeId, doodleurl, status) VALUES(?, ?, ?, 0)", array($date, $typeId, $doodleUrl));
+            self::queryWithParameters("INSERT INTO game(date, typeId, doodleurl, status) VALUES('".$date."', ?, ?, 0)", array($typeId, $doodleUrl));
             $gameId = self::lastInsertId();
-            if($gameId != null){
-                
-                $game = new Game($gameId, $date, $typeId, '0', $doodleUrl);
-                for ($i = 0; $i < $gameInfo[0]['teamsAmount']; $i++) {
-                  $team = Team::getById($gameId, $i+1);
-                  $game->teams->add($team);
-                }
-                var_dump($game);
-                return $game;
+            if($gameId != null){   
+                return $gameId;
             }
             else { 
                 return null;

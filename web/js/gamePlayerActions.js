@@ -186,13 +186,19 @@ function putPlayerTeam($playerId, $teamId, $gameId) {
 
 function transferPlayer($playerId, $teamId, $gameId){
     var $user = getUser();
+    //console.log("GOT IN HERE: "+$playerId+" "+$teamId+" "+$gameId);
     var $result = putPlayerTeam($playerId, $teamId, $gameId);
     if($result.status === "success") {
         var $location = "team"+$teamId;
         var $oldLocation = "player"+$playerId;
         console.log("PlayerID: "+$result.player[0].playerId);
-        erasePlayer($playerId, $oldLocation)
-        drawPlayer($playerId, $user, $location);
+        if($teamId === null) {
+            erasePlayer($playerId, "player");
+            drawPlayer($playerId, $user, "teamless");
+        } else {
+            erasePlayer($playerId, "player")
+            drawPlayer($playerId, $user, $location);
+        }
     } else {
         $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
             "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +

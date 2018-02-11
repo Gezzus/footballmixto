@@ -30,6 +30,29 @@ function getGame($value){
       });
 }
 
+function getGameById($id) {
+	$result = $.ajax({
+          url: "/src/api/gameHandler.php", 
+          type: "GET",
+          data: {
+        	  "action" : "retrieve",
+        	  "id": $id
+          },
+          dataType: "html",
+          async: false,
+          success: function(result){
+        	  console.log(result);
+        	  $(document).ready(function(){
+        	  	  
+        	  })
+          },
+          error: function(status,exception) {
+        	  console.log(status);
+        	  console.log(exception);
+            }
+      });
+	return JSON.parse($result.responseText);
+}
 
 function drawEvent($event) {
     $user = getUser();
@@ -168,11 +191,12 @@ function drawTeamless(event) {
 function drawTeams(event) {
 
 	teams = event.teams;
+	console.log(teams);
     /* USER Buttons Chunk
     * It's purpose it's to set the appropriate buttons depending on logged in user */
     $user = getUser()
  	var $buttons;
-	for(i = 0; i < teams.length; i++) {
+	for(i = 1; i < teams.length+1; i++) {
 
 		var team = "<div class='col-3'>" +
 				   "<ul id='team"+i+"' class='list-group-item'>" +
@@ -183,18 +207,18 @@ function drawTeams(event) {
 		var title = "<h6>Team "+i+"</h6>";
 		$("#team"+i).append(title);
 		
-		for(j = 0; j < teams[i].players.length; j++) {
+		for(j = 0; j < teams[i-1].players.length; j++) {
 
             if($user.roleId === "2") { // ADMIN
-                $buttons = "<button onclick='transferPlayer("+teams[i].players[j].id+",NULL,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
+                $buttons = "<button style='float:right' onclick='transferPlayer("+teams[i-1].players[j].id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
             } else if(teams[i].players[j].id === $user.playerId) { // OWN PLAYER
-                $buttons = "<button onclick='transferPlayer("+teams[i].players[j].id+",NULL,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
+                $buttons = "<button style='float:right' onclick='transferPlayer("+teams[i-1].players[j].id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
             } else {
                 $buttons = "";
             }
 
-			var player = "<li class='list-group-item' id='player"+teams[i].players[j].id+"'>" +
-							teams[i].players[j].nickName+$buttons+"" +
+			var player = "<li class='list-group-item' id='player"+teams[i-1].players[j].id+"'>" +
+							teams[i-1].players[j].nickName+$buttons+"" +
 							"</li>";
 			$("#team"+i).append(player);
 		}
