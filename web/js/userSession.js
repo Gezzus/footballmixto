@@ -38,7 +38,7 @@
                     if($result.roleId == "2"){
                     	$(document).ready(function() {
                         	$buttons = "<li class='nav-item'>" +
-                        				"<a href='#' onclick='' class='nav-link'>Admin</a>" +
+                        				"<a href='admin.html' onclick='' class='nav-link'>Admin</a>" +
                         				"</li>";
                         	$("#navigationBar").append($buttons);
                     	})

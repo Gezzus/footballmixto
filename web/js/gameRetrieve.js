@@ -84,7 +84,7 @@ function drawEvent($event) {
     if($user.roleId == '2'){
     	$buttons = "<a class='btn btn-primary btn-md' href='index.html'>Back</a>" +
 			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>" +
-			"<button class='btn btn-primary btn-md' onclick=''>Mark as finished</button>" +
+			"<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",1)'>Mark as finished</button>" +
 			"<button class='btn btn-primary btn-md' onclick=''>Delete</button>";
 	} else {
         $buttons = "<a class='btn btn-primary btn-md' href='index.html'>Back</a>" +

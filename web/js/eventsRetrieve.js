@@ -79,11 +79,11 @@ function drawEvents($events,$id) {
                 break;
             case "oldEvents":
 
-                if($.inArray($user.playerId, )){
+                //if($.inArray($user.playerId,)){
                     $participatedBadge = "<span class='badge badge-primary badge-pill'>Participated</span>";
-                } else {
-                    $participatedBadge = "";
-                }
+                //} else {
+                 //   $participatedBadge = "";
+                //}
 
 
                 $game = "<li class='list-group-item d-flex justify-content-between align-items-center'>" +

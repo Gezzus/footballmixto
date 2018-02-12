@@ -42,7 +42,6 @@ function putPlayerTeam() {
 function get() {
     if(isset($_GET['id'])) {
         if($player = PlayerAPI::getById($_GET['id'])) {
-            echo "DID I GET IN HERE";
             echo json_encode(["status" => "success", "player" => $player->toArray()]);
         } else {
             echo json_encode(["status" => "failed"]);

@@ -33,7 +33,7 @@ function addSelfPlayer($gameId) {
                     })
                     return false;
                 } else if ($result.status == "success") {
-                    drawPlayer($result.player, $user, "teamless");
+                    drawPlayer($result.player.id, $user, "teamless");
                 } else {
                     $error = "<div class=\"alert alert-danger alert-dismissable\" >" +
                         "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +

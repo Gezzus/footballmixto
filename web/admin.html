@@ -7,31 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-	<meta http-equiv="Pragma" content="no-cache"/>
-	<meta http-equiv="Expires" content="0"/>
-    
 
     <title>LGM Sports</title>
 
     <!-- Custom styles for this template -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/userSession.js"></script>
-    <script type="text/javascript" src="js/gameRetrieve.js"></script>
-    <script type="text/javascript" src="js/gamePlayerActions.js"></script>
-    <script type="text/javascript" src="js/drawerPlayer.js"></script>
-    <script type="text/javascript" src="js/playerRetrieve.js"></script>
-    <script type="text/javascript" src="js/userActions.js"></script>
+    <script type="text/javascript" src="js/adminActions.js"></script>
 
     <link href="css/game.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-    <script>validateUserSession("logedIn");</script>
-    <script>getThisGame();</script>
-
+    <script>validateUserSession("logedIn","admin");</script>
 </head>
-
 <body>
 
 <!-- Navigation -->
@@ -46,31 +35,26 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">Home</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="events.html">Events</a>
-                    <span class="sr-only">(current)</span>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm" id="game-buttons">
+<!--<div class="container-sidebar">
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm" id="event-info">
-            <h1 class="mt-4" id="event-title"></h1>
-            <h2 class="mt-4" id="event-date"></h2>
-        </div>
-    </div>
+</div>-->
+
+<div class="container">
+    <!-- Page Content -->
+    <!--<div class="container-body">-->
+
     <div class="row">
         <div class="col-sm">
-            <h2 class="mt-4">Teams</h2>
-            <div class="row" id="teams">
+            <h2 class="mt-4">Randomizer</h2>
+            <div class="row" id="players">
 
             </div>
 
@@ -78,32 +62,18 @@
     </div>
 
     <div class="row">
-        <div class="col-sm" style="min-height:500px">
-            <h2 class="mt-4">Teamless</h2>
-            <div class="row" id="teamless">
+        <div class="col-sm">
+            <h2 class="mt-4">Past events</h2>
+            <div class="row">
+                <ul class="list-group" id="result">
+
+                </ul>
+
             </div>
+
         </div>
-
     </div>
-    <!--<div class="col-1-sm" style="float:right">
 
-
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Football 5 vs 5 (2 fields)
-                <span class="badge badge-primary badge-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Football 5 vs 5 (1 field)
-                <span class="badge badge-primary badge-pill">2</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Tennis 2 vs 2
-                <span class="badge badge-primary badge-pill">1</span>
-            </li>
-        </ul>
-
-    </div> -->
 </div>
 <!--</div>-->
 <!-- /.row -->
@@ -120,3 +90,5 @@
 </body>
 
 </html>
+
+

@@ -155,5 +155,11 @@ class Game extends PersistentEntity implements Seriarizable {
         }
         return null;
     }
-    
+
+    public function putStatus($status) {
+        $this->queryWithParameters("UPDATE game SET status=? WHERE id=?", array($status,$this->id));
+        $this->status = $status;
+        return $this;
+    }
+
 }

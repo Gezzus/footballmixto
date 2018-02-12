@@ -49,6 +49,10 @@ class GameAPI {
         } else {
           return Team::transferPlayerWithId($playerId, null, $gameId);
         }
-        
+    }
+
+    public static function putGameStatus($gameId, $status) {
+        $game = Game::getById($gameId);
+        return $game->putStatus($status);
     }
 }

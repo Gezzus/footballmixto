@@ -7,15 +7,12 @@ if(isset($_GET['action'])) {
     switch($_GET['action']) {
         default:
             echo json_encode(["status" => "failed"]);
-            
         case "retrieve":
             retrieveGame();
             break;
-
         case "remove":
             removePlayer();
             break;
-
         case "add":
             addPlayer();
             break;
@@ -24,6 +21,9 @@ if(isset($_GET['action'])) {
             break;
         case "createGame":
             createGame();
+            break;
+        case "changeStatus":
+            changeStatus();
             break;
     }
 }
@@ -127,5 +127,15 @@ function transferPlayer() {
         }
     } else {
         echo json_encode(["status" => "failed"]);
+    }
+}
+
+function changeStatus() {
+    if(isset($_GET['id']) && isset($_GET['status'])) {
+        if($game = GameAPI::putGameStatus($_GET['id'],$_GET['status'])) {
+            echo json_encode(["status" => "success","game" => $game]);
+        } else {
+            echo json_encode(["status" => "failed"]);
+        }
     }
 }
