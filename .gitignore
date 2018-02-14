@@ -5,3 +5,4 @@
 vendor/*
 6
 composer.lock
+src/config/Database.php
