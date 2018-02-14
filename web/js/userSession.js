@@ -93,11 +93,28 @@ function getUser() {
         },
         error: function(status,exception) {
         	if($result = JSON.parse(result)) {
-        		
+
         	}
         }
 	})
 }*/
+
+function retrieveUserInfo() {
+    $user = getUser();
+    console.log($user);
+    $(document).ready(function() {
+        if ($user.status == "success") {
+            var $userInfo = "<h4 class='mt-4'>Username: " + $user.username + "</h4>";
+            $("#user-info").append($userInfo);
+        } else {
+            $error = "<div class=\"alert alert-danger alert-dismissable\" >" +
+                "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                "<strong>Hey!</strong> Something odd happened" +
+                "</div>";
+            $("#error").append($error);
+        }
+    })
+}
 
 function userSessionTerminate() {
   $.ajax({

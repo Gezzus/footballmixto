@@ -51,6 +51,14 @@ li.list-group-item {
 	background-color: #00940021!important;
 }
 
+div.list-group-text {
+    width:75%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
+
 li.list-group-item:hover {
 	background-color: #0094005c!important;
 	cursor: pointer;
@@ -78,6 +86,7 @@ div.col-sm-4 {
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
 
 .media-menu{
     float:right;

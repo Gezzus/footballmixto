@@ -130,6 +130,7 @@
 
 </body>
 
+
 <div class="modal fade product_view" id="product_view">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -138,41 +139,43 @@
             </div>
             <div class="modal-body">
 
-                    <div class="row">
-                        <div class="col-md-12 product_content">
-                           <select class="form-control" id="newTypeId">
+                <div class="row">
+                    <div class="col-md-12 product_content">
+                        <div class="col">
+                            <label class="">Type</label>
+                            <select class="form-control" id="newTypeId">
                                 <option value="2">Football - 5 vs 5 (2 fields)</option>
                                 <option value="1">Football - 5 vs 5 (1 field)</option>
                                 <option value="3">Tennis - 1 vs 1</option>
                                 <option value="4">Tennis - 2 vs 2</option>
-                           </select>
-
-                            <div class="col">
-                                    <label class="">Date: </label>
-                                    <input class="form-control" type="date" id="newDate">
-                            </div>
-                            <div class="col">
-                                <label class="">Time: </label>
-                                <input class="form-control" type="time" id="newTime">
-                            </div>
-                            <div class="col-md">
-                                <button onClick="prepareGame()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
-                                 Create
-                                </button>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
-                                 Cancel
-                                </button>
-                            </div>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label class="">Date</label>
+                            <input class="form-control" type="date" id="newDate">
+                        </div>
+                        <div class="col">
+                            <label class="">Time</label>
+                            <input class="form-control" type="time" id="newTime">
+                        </div>
+                        <div class="col">
+                            <button onClick="prepareGame()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
+                                Create
+                            </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
+                                Cancel
+                            </button>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
+                <div class="row">
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 </html>

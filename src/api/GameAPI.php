@@ -55,4 +55,9 @@ class GameAPI {
         $game = Game::getById($gameId);
         return $game->putStatus($status);
     }
+
+    public static function delete($gameId){
+        $game = Game::GetById($gameId);
+        return $game->delete();
+    }
 }

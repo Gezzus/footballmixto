@@ -33,7 +33,11 @@ function addSelfPlayer($gameId) {
                     })
                     return false;
                 } else if ($result.status == "success") {
-                    drawPlayer($result.player.id, $user, "teamless");
+                    if(window.location.href === "game#"+$gameId){
+                        drawPlayer($result.player.id, $user, "teamless");
+                    } else {
+                        window.location.href = "game#"+$gameId;
+                    }
                 } else {
                     $error = "<div class=\"alert alert-danger alert-dismissable\" >" +
                         "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
@@ -134,12 +138,21 @@ function getPlayerGames($playerId){
         success: function(result){
             try {
                 $result = JSON.parse(result)
+                if($result.status="success"){
+
+                } else {
+                    $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
+                        "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
+                        "<strong>Hey!</strong> Something happened when we attempted to get your games." +
+                        "</div>"
+                    $("#error").append($error);
+                }
             } catch(err) {
                 $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
                     "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                     "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
                     "</div>"
-                $("#event-info").append($error);
+                $("#error").append($error);
             }
         },
         error: function(status,exception) {

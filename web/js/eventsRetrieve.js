@@ -9,7 +9,6 @@ function getEvents($status,$amount,$id){
         dataType: "html",
         async: false,
         success: function(result){
-        console.log(result);
             var resultObj = JSON.parse(result);
 
             $(document).ready(function(){
@@ -24,9 +23,10 @@ function getEvents($status,$amount,$id){
 }
 
 function drawEvents($events,$id) {
-	$user = getUser();
-	$playerGames = getPlayerGames($user.playerId);
-    console.log($playerGames);
+	var $user = getUser();
+	var $gamesResponse = getPlayerGames($user.playerId);
+	var $playedGames = $gamesResponse.games;
+    console.log($playedGames);
 
 	var $eventType;
 	var $eventImage;
@@ -63,6 +63,18 @@ function drawEvents($events,$id) {
 
         switch($id) {
             case "events":
+                for($j = 0; $j < $playedGames.length; $j++) {
+                    if($events["games"][i]["id"] === $playedGames[$j]["id"]){
+                        var $played = true;
+                    }
+                }
+
+                if($played === true){
+                    $buttons = "";
+                } else {
+                    $buttons =  "<button onclick='addSelfPlayer("+$events["games"][i]["id"]+")' class='btn btn-primary' style='float:right'>Join</button>";
+                }
+
                 $game = "<div class='col-sm-4 my-4'>" +
                                 "<div class='card'>" +
                                     "<img class='card-img-top' src='img/"+$eventImage+".jpg' alt=''>" +
@@ -72,18 +84,25 @@ function drawEvents($events,$id) {
                                         "</div>" +
                                     "<div class='card-footer'>" +
                                         "<a href='game#"+$events["games"][i]["id"]+"' class='btn btn-primary'>See event &raquo;</a>" +
-                                        "<button onclick='addSelfPlayer("+$events["games"][i]["id"]+")' class='btn btn-primary' style='float:right'>Join</button>" +
+                                        $buttons +
                                     "</div>" +
                                 "</div>" +
                             "</div>";
                 break;
+
             case "oldEvents":
 
-                //if($.inArray($user.playerId,)){
+                for($j = 0; $j < $playedGames.length; $j++) {
+                    if($events["games"][i]["id"] === $playedGames[$j]["id"]){
+                        var $played = true;
+                    }
+                }
+
+                if($played === true){
                     $participatedBadge = "<span class='badge badge-primary badge-pill'>Participated</span>";
-                //} else {
-                 //   $participatedBadge = "";
-                //}
+                } else {
+                    $participatedBadge = "";
+                }
 
 
                 $game = "<li class='list-group-item d-flex justify-content-between align-items-center'>" +
@@ -96,10 +115,6 @@ function drawEvents($events,$id) {
         }
 
 		$("#"+$id).append($game);
-		console.log("Event appended");
+	    $played = false;
 	}
-	
-	
-	
-	
 }

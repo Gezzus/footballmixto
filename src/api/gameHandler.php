@@ -25,6 +25,9 @@ if(isset($_GET['action'])) {
         case "changeStatus":
             changeStatus();
             break;
+        case "delete":
+            deleteGame();
+            break;
     }
 }
 
@@ -134,6 +137,16 @@ function changeStatus() {
     if(isset($_GET['id']) && isset($_GET['status'])) {
         if($game = GameAPI::putGameStatus($_GET['id'],$_GET['status'])) {
             echo json_encode(["status" => "success","game" => $game]);
+        } else {
+            echo json_encode(["status" => "failed"]);
+        }
+    }
+}
+
+function deleteGame() {
+    if(isset($_GET['id'])) {
+        if ($game = GameAPI::delete($_GET['id'])) {
+            echo json_encode(["status" => "success"]);
         } else {
             echo json_encode(["status" => "failed"]);
         }

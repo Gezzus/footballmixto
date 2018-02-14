@@ -54,13 +54,13 @@ function drawPlayer($playerId, $user, $location){
                     "<button onclick='transferPlayer("+$player.id+",2,"+location.hash.substr(1)+")'class='btn btn-primary btn-sm' >2</button><br>";
                 break;
             case "4":
-                $sideButtons =  "<button onclick='transferPlayer('"+$player.id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
-                    "<button onclick="+$player.id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
+                $sideButtons =  "<button onclick='transferPlayer("+$player.id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
+                    "<button onclick='transferPlayer("+$player.id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
 
                 break;
             case "5":
                 $sideButtons =  "<button onclick='transferPlayer("+$player.id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
-                    "<button onclick="+$player.id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
+                    "<button onclick='transferPlayer("+$player.id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
                 break; 
             }
             $lowerButtons = "<button class='btn btn-primary btn-sm' onclick='removePlayer("+$player.id+")' >Remove</button>";
@@ -94,16 +94,21 @@ function drawPlayer($playerId, $user, $location){
     } else {
 
         if($user.roleId === "2") { // ADMIN
-            $buttons = "<button style='float:right' onclick='transferPlayer("+$player.id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
+            $buttons = "<button onclick='transferPlayer("+$player.id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unassign</button>";
         } else if($player.id === $user.playerId) { // OWN PLAYER
-            $buttons = "<button style='float:right' onclick='transferPlayer("+$player.id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
+            $buttons = "<button onclick='removePlayer("+$player.id+")' class='btn btn-primary btn-sm' >Remove</button>";
         } else {
             $buttons = "";
         }
 
-        player = "<li class='list-group-item' id='player"+$player.id+"'>" +
-                        $player.nickName+$buttons+
-                 "</li>";
+        var player = "<li class='list-group-item' id='player"+$player.id+"'>" +
+            "<div class='row'>"+
+            "<div class='list-group-text'>" +
+            $player.nickName+
+            "</div>" +
+            $buttons+
+            "</div>"+
+            "</li>";
     }
 
     $("#"+$location).append(player);

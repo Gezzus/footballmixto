@@ -82,13 +82,42 @@ function drawEvent($event) {
 
 
     if($user.roleId == '2'){
-    	$buttons = "<a class='btn btn-primary btn-md' href='index.html'>Back</a>" +
-			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>" +
-			"<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",1)'>Mark as finished</button>" +
-			"<button class='btn btn-primary btn-md' onclick=''>Delete</button>";
-	} else {
-        $buttons = "<a class='btn btn-primary btn-md' href='index.html'>Back</a>" +
-			"<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>";
+    	switch($event.status){
+            default:
+    		case "0":
+				$buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                "<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>" +
+                "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",1)'>Mark as finished</button>" +
+				"<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",3)'>Hide event</button>" +
+                "<button class='btn btn-primary btn-md' onclick='deleteGame("+$event.id+")'>Delete</button>";
+				break;
+			case "1":
+                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                    "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",0)'>Mark as Unfinished</button>" +
+                    "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",3)'>Hide event</button>" +
+                    "<button class='btn btn-primary btn-md' onclick='deleteGame("+$event.id+")'>Delete</button>";
+				break;
+			case "3":
+                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                    "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",0)'>Make event public</button>" +
+                    "<button class='btn btn-primary btn-md' onclick='deleteGame("+$event.id+")'>Delete</button>";
+				break;
+        }
+    } else {
+        switch($event.status){
+			default:
+        	case "0":
+                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                    "<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>";
+                break;
+            case "1":
+                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>";
+                break;
+            case "3":
+                window.location.href="index.html";
+                break;
+        }
+
 	}
 
     $("#event-title").html($eventType);
@@ -146,13 +175,13 @@ function drawTeamless(event) {
                     "<button onclick='transferPlayer("+teamless[i].id+",2,"+location.hash.substr(1)+")'class='btn btn-primary btn-sm' >2</button><br>";
 				break;
 			case "4":
-                $sideButtons =  "<button onclick='transferPlayer('"+teamless[i].id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
-                    "<button onclick="+teamless[i].id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
+                $sideButtons =  "<button onclick='transferPlayer("+teamless[i].id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
+                    "<button onclick='transferPlayer("+teamless[i].id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
 
                 break;
 			case "5":
                 $sideButtons =  "<button onclick='transferPlayer("+teamless[i].id+",1,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm'>1</button><br>"+
-                    "<button onclick="+teamless[i].id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
+                    "<button onclick='transferPlayer("+teamless[i].id+",2,"+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >2</button><br>";
 				break;
         }
 
@@ -191,7 +220,6 @@ function drawTeamless(event) {
 function drawTeams(event) {
 
 	teams = event.teams;
-	console.log(teams);
     /* USER Buttons Chunk
     * It's purpose it's to set the appropriate buttons depending on logged in user */
     $user = getUser()
@@ -206,19 +234,24 @@ function drawTeams(event) {
 		$("#teams").append(team);
 		var title = "<h6>Team "+i+"</h6>";
 		$("#team"+i).append(title);
-		
+
 		for(j = 0; j < teams[i-1].players.length; j++) {
 
             if($user.roleId === "2") { // ADMIN
-                $buttons = "<button style='float:right' onclick='transferPlayer("+teams[i-1].players[j].id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
-            } else if(teams[i].players[j].id === $user.playerId) { // OWN PLAYER
-                $buttons = "<button style='float:right' onclick='transferPlayer("+teams[i-1].players[j].id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unasign</button>";
+                $buttons = "<button onclick='transferPlayer("+teams[i-1].players[j].id+","+null+","+location.hash.substr(1)+")' class='btn btn-primary btn-sm' >Unassign</button>";
+            } else if(teams[i-1].players[j].id === $user.playerId) { // OWN PLAYER
+                $buttons = "<button onclick='removePlayer("+teams[i-1].players[j].id+")' class='btn btn-primary btn-sm' >Remove</button>";
             } else {
                 $buttons = "";
             }
 
 			var player = "<li class='list-group-item' id='player"+teams[i-1].players[j].id+"'>" +
-							teams[i-1].players[j].nickName+$buttons+"" +
+							"<div class='row'>"+
+								"<div class='list-group-text'>" +
+								teams[i-1].players[j].nickName +
+								"</div>" +
+								$buttons+
+							"</div>"+
 							"</li>";
 			$("#team"+i).append(player);
 		}

@@ -114,7 +114,9 @@ class Game extends PersistentEntity implements Seriarizable {
     }
     
     public function delete() {
+        self::queryWithParameters("DELETE FROM pickPlayer WHERE gameId= ?", array($this->id));
         self::queryWithParameters("DELETE FROM game WHERE id = ?", array($this->id));
+        return true;
     }
     
     

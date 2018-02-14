@@ -91,14 +91,14 @@ class Player extends PersistentEntity implements Seriarizable {
     }
 
     public function getGames() {
-    /*    $dbGames = self::queryWithParameters("SELECT * FROM pickPlayer where playerId= ?",array($this->id));
-        $games = $dbGames->fetchAll();
-        var_dump($games);
-        for ($i = 0; $i < count($games); $i++){
-            $this->games->add($dbGames[$i]["gameId"]);
+        $dbGames = self::queryWithParameters("SELECT * FROM pickPlayer where playerId= ?",array($this->id));
+        for ($i = 0; $i < $dbGames->rowCount(); $i++){
+            $dbGame = $dbGames->fetch();
+            $game = Game::getById($dbGame['gameId']);
+            $this->games->add($game);
         }
-        var_dump($this->games);
-    */}
+        return $this->games->toArray();
+    }
 
 }
 
