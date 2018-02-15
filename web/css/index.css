@@ -36,7 +36,8 @@ h1.mt-4{
   background-position-y: -35rem;
   height: 70vh;
   min-height: 300px;
-  background: url('../img/frontpage.jpeg') center center no-repeat scroll;
+  background: black;
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
