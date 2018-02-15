@@ -83,7 +83,7 @@ function drawEvents($events,$id) {
                                         "<p class='card-text'>"+$events["games"][i]["date"]+"</p>" +
                                         "</div>" +
                                     "<div class='card-footer'>" +
-                                        "<a href='game#"+$events["games"][i]["id"]+"' class='btn btn-primary'>See event &raquo;</a>" +
+                                        "<a href='game.html#"+$events["games"][i]["id"]+"' class='btn btn-primary'>See event &raquo;</a>" +
                                         $buttons +
                                     "</div>" +
                                 "</div>" +
@@ -108,7 +108,7 @@ function drawEvents($events,$id) {
                 $game = "<li class='list-group-item d-flex justify-content-between align-items-center'>" +
                                 $eventType + " - " + $events["games"][i]["date"] +
                                  $participatedBadge +
-                                "<a href='game#"+$events["games"][i]["id"]+"' class='btn btn-primary' style='float:right' >See event &raquo;</a>" +
+                                "<a href='game.html#"+$events["games"][i]["id"]+"' class='btn btn-primary' style='float:right' >See event &raquo;</a>" +
 
                         "</li>";
                 break;

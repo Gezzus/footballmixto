@@ -21,7 +21,7 @@ function createGame($typeId, $date, $time){
 
         	  $(document).ready(function(){
         	  	 if($result.status == "success") {
-                window.location.href="game#"+$result.game.id;
+                window.location.href="game.html#"+$result.game.id;
                }
         	  })
           },

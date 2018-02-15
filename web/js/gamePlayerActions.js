@@ -33,10 +33,10 @@ function addSelfPlayer($gameId) {
                     })
                     return false;
                 } else if ($result.status == "success") {
-                    if(window.location.href === "game#"+$gameId){
+                    if(window.location.href === "game.html#"+$gameId){
                         drawPlayer($result.player.id, $user, "teamless");
                     } else {
-                        window.location.href = "game#"+$gameId;
+                        window.location.href = "game.html#"+$gameId;
                     }
                 } else {
                     $error = "<div class=\"alert alert-danger alert-dismissable\" >" +
