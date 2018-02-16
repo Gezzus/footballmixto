@@ -70,13 +70,31 @@ function addPlayer() {
             } else {
                 echo json_encode(["status" => "failed"]);
             }
-        } else if (isset($_GET['nickName']) && isset($_GET['gender'])) {
-            $player = PlayerAPI::get($_GET['nickname'], $_GET['genderId']);
-            $addition = GameAPI::addPlayer($_GET['id'], $player->getId());
-            if ($addition != null && !empty($addition)) {
-                echo json_encode(["status" => "success"]);
+        } else if (isset($_GET['nickName']) && isset($_GET['genderId'])) {
+            $player = PlayerAPI::get($_GET['nickName'], $_GET['genderId']);
+            if($player === null) {
+                $newPlayer = PlayerAPI::create($_GET['nickName'], $_GET['genderId'],"3");
+                if($newPlayer != null) {
+                    $addition = GameAPI::addPlayer($_GET['id'], $newPlayer->getId());
+                    if ($addition != null && !empty($addition)) {
+                        if($addition.status === "success"){
+                            echo json_encode(["status" => "success", "player" => $newPlayer->toArray()]);
+                        } else {
+                            echo json_encode(["status" => "failed"]);
+                        }
+                    } else {
+                        echo json_encode(["status" => "failed"]);
+                    }
+                } else {
+                    echo json_encode(["status" => "error"]);
+                }
             } else {
+                $addition = GameAPI::addPlayer($_GET['id'], $player->getId());
+                if ($addition != null && !empty($addition)) {
+                    echo json_encode(["status" => "success", "player" => $player->toArray()]);
+                } else {
                 echo json_encode(["status" => "failed"]);
+                }
             }
         } else {
             echo json_encode(["status" => "failed"]);//here

@@ -79,6 +79,17 @@ function drawEvent($event) {
             break;
     }
 
+    $outsiderBox = "<div class=\"col outsider-box\"\">\n" +
+        "                <h4>Add an outsider</h4>\n" +
+        "                <input  class=\"form-control\" id=\"event-add-player-name\" placeholder=\"Outsider nickname\">\n" +
+        "                <select  class=\"form-control\" id=\"event-add-player-gender\">\n" +
+        "                    <option value=\"1\">Female</option>\n" +
+        "                    <option value=\"2\">Male</option>\n" +
+        "                </select>\n" +
+        "                <button class='btn btn-primary btn-md' onclick='prepareAddPlayer("+$event.id+")'>Add</button>\n" +
+        "            </div>";
+
+    $("#outsider-box").html($outsiderBox);
 
 
     if($user.roleId == '2'){
@@ -86,7 +97,7 @@ function drawEvent($event) {
             default:
     		case "0":
 				$buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
-                "<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>" +
+                "<button class='btn btn-primary btn-md' onclick='addSelfPlayer(\"+$event.id+\")'>Join Event</button>" +
                 "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",1)'>Mark as finished</button>" +
 				"<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",3)'>Hide event</button>" +
                 "<button class='btn btn-primary btn-md' onclick='deleteGame("+$event.id+")'>Delete</button>";

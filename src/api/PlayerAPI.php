@@ -15,7 +15,8 @@ class PlayerAPI {
     }
     
     public static function get($nickName, $genderId) {
-        return Player::get($nickName, $genderId);
+        $player = Player::get($nickName, $genderId);
+        return $player;
     }
 
     public static function playerGames($id) {

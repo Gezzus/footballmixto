@@ -49,7 +49,8 @@ class Player extends PersistentEntity implements Seriarizable {
         $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
         if($dbPlayer->rowCount() == 1) {
             $playerData = $dbPlayer->fetch();
-            return new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
+            $player = new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
+            return $player;
         } else {
             return null;
         }

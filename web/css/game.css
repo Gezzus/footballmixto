@@ -16,6 +16,7 @@ h1.mt-4{
 .btn-primary:hover{
 	background-color:#1ab996!important;
 	border-color:#1ab996!important;
+    cursor: pointer;
 }
 
 .btn-primary{
@@ -48,7 +49,7 @@ h1.mt-4{
 }
 
 li.list-group-item {
-	background-color: #00940021!important;
+    background-color: #00940021 !important;
 }
 
 div.list-group-text {
@@ -61,7 +62,6 @@ div.list-group-text {
 
 li.list-group-item:hover {
 	background-color: #0094005c!important;
-	cursor: pointer;
 }
 
 div.col-sm-4 {
@@ -75,6 +75,15 @@ div.col-sm-4 {
   border-radius: 4px;
   margin-bottom: 10px;
 }
+
+.outsider-box {
+    float:right;
+    border: 1px solid #cccccc;
+    background: #f8f8f8;
+    padding: 10px;
+    border-radius: 4px;
+}
+
 .profile-img {
   height: 80px;
   width: 80px;
