@@ -80,11 +80,10 @@ function getPlayersAmount($id, $genderId){
                             default:
                             	console.log("DAFUQ");
                                 break;
-                            case "1":
-
+                            case "2":
                             	$("#event-counter-male").html($amountResult.amount);
                                 break;
-                            case "2":
+                            case "1":
 
                             	$("#event-counter-female").html($amountResult.amount);
                                 break;

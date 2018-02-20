@@ -1,5 +1,4 @@
 function prepareGame() {
-  console.log($("#newTypeId").val()+", "+$("#newDate").val()+", "+ $("#newTime").val())
   createGame($("#newTypeId").val(), $("#newDate").val(), $("#newTime").val());
 }
 
@@ -18,7 +17,6 @@ function createGame($typeId, $date, $time){
           success: function(result){
         	  console.log(result);
         	  var $result = JSON.parse(result);
-
         	  $(document).ready(function(){
         	  	 if($result.status == "success") {
                 window.location.href="game.html#"+$result.game.id;
