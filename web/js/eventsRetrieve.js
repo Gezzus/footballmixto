@@ -27,7 +27,9 @@ function drawEvents($events,$id) {
 	var $gamesResponse = getPlayerGames($user.playerId);
 	var $playedGames = $gamesResponse.games;
     console.log($playedGames);
-
+    if($playedGames == null){
+        $playedGames = [];
+    }
 	var $eventType;
 	var $eventImage;
     var $game;

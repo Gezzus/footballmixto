@@ -41,6 +41,22 @@ class Game extends PersistentEntity implements Seriarizable {
     public function toJson() {
         return json_encode($this->toArray());
     }
+
+
+    public function metaToArray(){
+        $return = [
+            "id" => $this->id,
+            "date" => $this->date,
+            "typeId" => $this->typeId,
+            "status" => $this->status
+        ];
+        return $return;
+    }
+
+    public function metaToJson(){
+        return json_encode($this->metaToArray());
+    }
+
     
     public static function getGameData($typeId) {
         $dbGameInfo = self::queryWithParameters("SELECT * FROM gameType LEFT JOIN genderByGameType on gameTypeId=id  WHERE id= ?", array($typeId));
@@ -78,14 +94,25 @@ class Game extends PersistentEntity implements Seriarizable {
             }   
         }
     }
-    
+
+    public static function getMetaById($id){
+        $dbGame = self::queryWithParameters("SELECT * FROM game WHERE id = ?", array($id));
+        if ($dbGame->rowCount() == 0) {
+            return null;
+        } else {
+            $dbGameRow = $dbGame->fetch();
+            $game = new Game($dbGameRow['id'], $dbGameRow['date'], $dbGameRow['typeId'], $dbGameRow['status'], $dbGameRow['doodleurl']);
+            return $game;
+        }
+    }
+
     public static function getById($id) {
         $dbGame = self::queryWithParameters("SELECT * FROM game WHERE id = ?", array($id));
         if($dbGame->rowCount() == 0){
             return null;
         } else {
             $dbGameRow = $dbGame->fetch();
-            $game = new Game($dbGameRow['id'], $dbGameRow['date'], $dbGameRow['typeId'], $dbGameRow['status'], $dbGameRow['doodleurl']); // TODO TEAMLESS
+            $game = new Game($dbGameRow['id'], $dbGameRow['date'], $dbGameRow['typeId'], $dbGameRow['status'], $dbGameRow['doodleurl']);
             $gameInfo = self::getGameData($dbGameRow['typeId']);
             for ($i = 0; $i < $gameInfo[0]['teamsAmount']; $i++) {
                 $teams[$i] = Team::getById($id, $i+1);
@@ -162,6 +189,12 @@ class Game extends PersistentEntity implements Seriarizable {
         $this->queryWithParameters("UPDATE game SET status=? WHERE id=?", array($status,$this->id));
         $this->status = $status;
         return $this;
+    }
+
+    public static function getPlayersAmount($id, $genderId){
+        $gameDbAmount = self::queryWithParameters("SELECT COUNT(id) as 'count' FROM pickPlayer LEFT JOIN player ON pickPlayer.playerId=player.id WHERE pickPlayer.gameId = ? AND player.genderId = ?", array($id, $genderId));
+        return ($gameDbAmount->fetch())['count'];
+
     }
 
 }

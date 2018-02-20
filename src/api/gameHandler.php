@@ -8,7 +8,14 @@ if(isset($_GET['action'])) {
         default:
             echo json_encode(["status" => "failed"]);
         case "retrieve":
-            retrieveGame();
+            switch ($_GET['subaction']) {
+                default:
+                    retrieveGame();
+                    break;
+                case "data":
+                    retrieveGameMeta();
+                    break;
+            }
             break;
         case "remove":
             removePlayer();
@@ -28,6 +35,9 @@ if(isset($_GET['action'])) {
         case "delete":
             deleteGame();
             break;
+        case "retrieveAmount":
+            retrieveAmount();
+            break;
     }
 }
 
@@ -41,6 +51,35 @@ function retrieveGame() {
         }
     } else {
         echo json_encode(["status" => "empty"]);
+    }
+}
+
+
+function retrieveAmount(){
+    if(isset($_GET['id']) && isset($_GET['genderId'])) {
+        $amount = GameAPI::getAmount($_GET['id'], $_GET['genderId']);
+        if($amount != null && (!empty($amount))) {
+            echo json_encode(["status" => "success", "amount" => $amount]);
+        } else {
+            echo json_encode(["status" => "failed"]);
+        }
+    } else {
+        echo json_encode(["status" => "empty"]);
+    }
+}
+
+function retrieveGameMeta()
+{
+    if (isset($_GET['id'])) {
+        $gameMeta = GameAPI::getMeta($_GET['id']);
+        //if($gameMeta != null && !(empty($game))) {
+        echo $gameMeta;
+        /*} else {
+            echo json_encode(["status" => "failed"]);
+        }
+    } else {
+        echo json_encode(["status" => "empty"]);
+    }*/
     }
 }
 

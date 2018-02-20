@@ -14,6 +14,24 @@ class GameAPI {
         }
     }
 
+    public static function getMeta($id) {
+        $game = Game::getById($id);
+        if($game != null) {
+            return $game->metaToJson();
+        } else {
+            return null;
+        }
+    }
+
+    public static function getAmount($id, $genderId) {
+        $amount = Game::getPlayersAmount($id, $genderId);
+        if($amount != null) {
+            return $amount;
+        } else {
+            return null;
+        }
+    }
+
     public static function create($type, $date, $time) {
         $datetime = $date." ".$time;
         $game = Game::create($datetime, $type, "NULL");

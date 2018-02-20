@@ -33,7 +33,7 @@ function addSelfPlayer($gameId) {
                     })
                     return false;
                 } else if ($result.status == "success") {
-                    if(window.location.href === "game.html#"+$gameId){
+                    if(window.location.pathname === "/web/game.html"){
                         drawPlayer($result.player.id, $user, "teamless");
                     } else {
                         window.location.href = "game.html#"+$gameId;
@@ -209,7 +209,6 @@ function putPlayerTeam($playerId, $teamId, $gameId) {
         dataType: "html",
         async: false,
         success: function(result){
-            console.log(result);
             try {
                 $result = JSON.parse(result)
             } catch(err) {

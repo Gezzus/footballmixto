@@ -2,10 +2,8 @@ function drawPlayer($playerId, $user, $location){
 
     $result = getPlayer($playerId);
     $player = $result.player;
-    console.log($result);
-    console.log($player);
-    $game = getGameById(location.hash.substr(1));
-    console.log($game);
+    $game = getMetaById(location.hash.substr(1));
+
 
     switch($player.levelId){
         case "1":
