@@ -15,7 +15,7 @@ function getGame($value){
           dataType: "html",
           async: false,
           success: function(result){
-        	  var $result = JSON.parse(result);
+              var $result = JSON.parse(result);
 
         	  $(document).ready(function(){
         	  	  drawEvent($result);
@@ -210,8 +210,6 @@ function drawTeamless(event) {
 function drawTeams(event) {
 
 	teams = event.teams;
-    /* USER Buttons Chunk
-    * It's purpose it's to set the appropriate buttons depending on logged in user */
     $user = getUser()
  	var $buttons;
 	for(i = 1; i < teams.length+1; i++) {
@@ -219,12 +217,11 @@ function drawTeams(event) {
 				   "<ul id='team"+i+"' class='list-group-item'>" +
 				   "</ul>" +
 				   "</div>";
-
 		$("#teams").append(team);
 		var title = "<h6>Team "+i+"</h6>";
 		$("#team"+i).append(title);
 
-		for(j = 1; j < teams[i-1].players.length; j++) {
+		for(j = 0; j < teams[i-1].players.length; j++) {
             drawPlayer(teams[i-1].players[j].id, $user, "team"+i);
             }
 	}
