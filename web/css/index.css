@@ -36,12 +36,14 @@ h1.mt-4{
   background-position-y: -35rem;
   height: 1vh;
   min-height: 300px;
-  background: black;
+    background-position-y: 38%;
+    background-position-x: 50%;
+    background-image: url(../img/Test.png);
+    -moz-background-size: auto;
+    background-repeat: no-repeat;
+    background-size: auto;
+    -o-background-size: auto;
 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
 }
 
 img.card-img-top {
