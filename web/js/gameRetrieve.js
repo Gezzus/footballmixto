@@ -151,6 +151,8 @@ function drawEvent($event) {
 
     $("#outsider-box").html($outsiderBox);
 
+    var randomizerBox = getRandomizerBox();
+    $("#randomizer-box").html(randomizerBox);
 
     if($user.roleId == '2'){
     	switch($event.status){
