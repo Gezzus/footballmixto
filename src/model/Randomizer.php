@@ -46,7 +46,7 @@ class Randomizer {
        		$result .= $loser->getNickName() . "\n";
        	}
        	
-       	$result = $result ? $result : 'No pepole to kick out!';
+       	$result = $result ? $result : 'No people to kick out!';
 
        	return trim($result, ',');
 	}
