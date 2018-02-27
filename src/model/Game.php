@@ -15,6 +15,7 @@ class Game extends PersistentEntity implements Seriarizable {
     private $teams;
     private $teamless;
     private $doodleUrl;
+    private $info = null;
 
     function __construct($id, $date, $typeId, $status, $doodleUrl) {
         $this->id = $id;
@@ -57,9 +58,19 @@ class Game extends PersistentEntity implements Seriarizable {
         return json_encode($this->metaToArray());
     }
 
+    public function getInfo() {
+        if (!$this->info) {
+            $this->info = self::getGameData($this->typeId);
+        }
+        return $this->info;
+    }
+
+    public function getTeamless() {
+        return $this->teamless;
+    }
     
     public static function getGameData($typeId) {
-        $dbGameInfo = self::queryWithParameters("SELECT * FROM gameType LEFT JOIN genderByGameType on gameTypeId=id  WHERE id= ?", array($typeId));
+        $dbGameInfo = self::queryWithParameters("SELECT * FROM gameType LEFT JOIN genderByGameType on gameTypeId = id  WHERE id= ?", array($typeId));
         if($dbGameInfo->rowCount() != 0) {
             $gameInfo = $dbGameInfo->fetchAll();
             return $gameInfo;
