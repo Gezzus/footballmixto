@@ -41,13 +41,12 @@ class Session implements Seriarizable {
 
     public function toArray() {
         $result = [
-            $id => $this->id
+            "id" => $this->id
         ];
         return $result;
     }
 
     public function toJson() {
-        
         return json_encode($this->toArray());
     }
 
