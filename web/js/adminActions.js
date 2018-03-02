@@ -1,31 +1,35 @@
-/*function changeGameStatus($id, $status){
-    //var $user = getUser();
+function adminConsole($context){
     $.ajax({
-        url: "/src/api/gameHandler.php",
-        type: "GET",
+        url: "/src/api/adminHandler.php",
+        type: "POST",
         data: {
-            "action" : "changeStatus",
-            "id": $id,
-            "status": $status
+            "context" : $context
         },
         dataType: "html",
         async: false,
         success: function(result){
             console.log(result);
             try {
-                $result = JSON.parse(result)
-                if($result.status === "success") {
+                $response = JSON.parse(result);
+                console.log($response);
+                if($response.status === "success") {
                     $error ="<div class=\"alert alert-success alert-dismissable\" >" +
                         "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
-                        "<strong>Hey!</strong> The game has been marked as finished" +
+                        "<strong>Success!</strong> Or something like that." +
                         "</div>";
-                    $("#event-info").append($error);
+                    $(document).ready(function() {
+                        $("#admin-console-info").append($error);
+                        $("#admin-console-result").append("<pre><code>"+JSON.stringify($response.message,null,4)+"</code></pre>");
+                    })
                 } else {
-                    $error ="<div class=\"alert alert-danger alert-dismissable\" >" +
+                    $error = "<div class=\"alert alert-danger alert-dismissable\" >" +
                         "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
-                        "<strong>Hey!</strong> The game could not be closed." +
+                        "<strong>Hey!</strong> Error." +
                         "</div>";
-                    $("#event-info").append($error);
+                    $(document).ready(function () {
+                        $("#admin-console-info").append($error);
+                        $("#admin-console-result").append($response.message);
+                    })
                 }
 
             } catch(err) {
@@ -33,7 +37,8 @@
                     "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>" +
                     "<strong>Hey!</strong> Shit hit the ceiling. Speak with Alessandro" +
                     "</div>";
-                $("#event-info").append($error);
+                $("#admin-console-info").append($error);
+                $("#admin-console-result").append($response.message);
             }
         },
         error: function(status,exception) {
@@ -41,5 +46,8 @@
             console.log(exception);
         }
     });
-}*/
+}
 
+function adminConsolePrepare() {
+    adminConsole($("#admin-console-context").val());
+}

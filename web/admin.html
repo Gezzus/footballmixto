@@ -51,24 +51,26 @@
     <!-- Page Content -->
     <!--<div class="container-body">-->
 
+
+
     <div class="row">
         <div class="col-sm">
-            <h2 class="mt-4">Randomizer</h2>
-            <div class="row" id="players">
-
-            </div>
-
+            <br>
+            <textarea class="form-control" id="admin-console-context"></textarea>
+            <button class="btn btn-primary" onclick="adminConsolePrepare()">Run</button>
         </div>
+    </div>
+
+    <div class="row" id="admin-console-info">
+
     </div>
 
     <div class="row">
         <div class="col-sm">
-            <h2 class="mt-4">Past events</h2>
             <div class="row">
-                <ul class="list-group" id="result">
+                <p id="admin-console-result">
 
-                </ul>
-
+                </p>
             </div>
 
         </div>
