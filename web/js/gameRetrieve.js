@@ -23,6 +23,8 @@ function getGame($value){
                   getPlayersAmount($value, "2");
         	  	  drawTeams($result);
             	  drawTeamless($result);
+                  $(".loading-container").remove();
+                  //$("loading-container").remove();
         	  })
           },
           error: function(status,exception) {
