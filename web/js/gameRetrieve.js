@@ -3,6 +3,22 @@ function getThisGame(){
 	getGame(gameId);
 }
 
+function reloadGame() {
+    $(document).ready(function() {
+        $(".loading-container").show();
+    })
+    $(document).ready(function() {
+        $("#teams").empty();
+        $("#teamless").empty();
+        $("#event-title").empty();
+        $("#event-date").empty();
+        $("#game-buttons").empty();
+        getThisGame();
+    });
+
+
+}
+
 function getGame($value){
     $.ajax({
           url: "/src/api/gameHandler.php", 
@@ -16,14 +32,14 @@ function getGame($value){
           async: false,
           success: function(result){
               var $result = JSON.parse(result);
-
+              console.log($result);
         	  $(document).ready(function(){
         	  	  drawEvent($result);
                   getPlayersAmount($value, "1");
                   getPlayersAmount($value, "2");
         	  	  drawTeams($result);
             	  drawTeamless($result);
-                  $(".loading-container").remove();
+                  $(".loading-container").hide();
                   //$("loading-container").remove();
         	  })
           },
@@ -158,20 +174,23 @@ function drawEvent($event) {
     	switch($event.status){
             default:
     		case "0":
-				$buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+				$buttons = "<button class='btn btn-primary btn-md' onclick='reloadGame()'><img width=\"15px\" height=\"15px\" src=\"img/reload.png\"></button>" +
+                    "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
                 "<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>" +
                 "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",1)'>Mark as finished</button>" +
 				"<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",3)'>Hide event</button>" +
                 "<button class='btn btn-primary btn-md' onclick='deleteGame("+$event.id+")'>Delete</button>";
 				break;
 			case "1":
-                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                $buttons = "<button class='btn btn-primary btn-md' onclick='reloadGame()'><img width=\"15px\" height=\"15px\" src=\"img/reload.png\"></button>" +
+                    "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
                     "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",0)'>Mark as Unfinished</button>" +
                     "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",3)'>Hide event</button>" +
                     "<button class='btn btn-primary btn-md' onclick='deleteGame("+$event.id+")'>Delete</button>";
 				break;
 			case "3":
-                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                $buttons = "<button class='btn btn-primary btn-md' onclick='reloadGame()'><img width=\"15px\" height=\"15px\" src=\"img/reload.png\"></button>" +
+                    "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
                     "<button class='btn btn-primary btn-md' onclick='changeGameStatus("+$event.id+",0)'>Make event public</button>" +
                     "<button class='btn btn-primary btn-md' onclick='deleteGame("+$event.id+")'>Delete</button>";
 				break;
@@ -180,11 +199,14 @@ function drawEvent($event) {
         switch($event.status){
 			default:
         	case "0":
-                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                $buttons = "<button class='btn btn-primary btn-md' onclick='reloadGame()'><img width=\"15px\" height=\"15px\" src=\"img/reload.png\"></button>" +
+                    "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
                     "<button class='btn btn-primary btn-md' onclick='addSelfPlayer("+$event.id+")'>Join Event</button>";
                 break;
             case "1":
-                $buttons = "<a class='btn btn-primary btn-md' href='events.html'>Back</a>";
+                $buttons = "<button class='btn btn-primary btn-md' onclick='reloadGame()'><img width=\"15px\" height=\"15px\" src=\"img/reload.png\"></button>" +
+                    "<a class='btn btn-primary btn-md' href='events.html'>Back</a>" +
+                    "";
                 break;
             case "3":
                 window.location.href="index.html";
