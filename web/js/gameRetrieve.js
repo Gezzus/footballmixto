@@ -6,16 +6,18 @@ function getThisGame(){
 function reloadGame() {
     $(document).ready(function() {
         $(".loading-container").show();
-    })
+
+    });
     $(document).ready(function() {
-        $("#teams").empty();
-        $("#teamless").empty();
+        //$("#teams").empty();
+        //$("#teamless").empty();
+        $('#teams').find('*').not('.loading-container').remove();
+        $('#teamless').find('*').not('.loading-container').remove();
         $("#event-title").empty();
         $("#event-date").empty();
         $("#game-buttons").empty();
-        getThisGame();
     });
-
+    getThisGame();
 
 }
 
