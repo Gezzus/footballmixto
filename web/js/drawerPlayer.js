@@ -75,7 +75,7 @@ function drawPlayer($playerId, $user, $location){
                     "<div class='business-card'>" +
                         "<div class='media'>" +
                             "<div class='media-left'>" +
-                                "<img class='media-object rounded-circle profile-img' src='http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'><br>" +
+                                "<img class='media-object rounded-circle profile-img' onerror=\"this.src='http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'\" src='attachments/"+$player.id+"'><br>" +
                                 "<center>"+$lowerButtons+"</center>" +
                                 "</div>" +
                             "<div class='media-body'>" +
