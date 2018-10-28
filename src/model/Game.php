@@ -153,7 +153,7 @@ class Game extends PersistentEntity implements Seriarizable {
         if($dbPickPlayer->rowCount() != 0) {
             return null;
         } else {
-            $this->queryWithParameters("INSERT INTO pickPlayer(gameId, playerId) VALUES(?, ?)", array($this->id, $playerId));
+            $this->queryWithParameters("INSERT INTO pickPlayer(gameId, playerId, timeStamp) VALUES(?, ?, NOW())", array($this->id, $playerId));
             $this->teamless->add($player);
             return $player;
         }
