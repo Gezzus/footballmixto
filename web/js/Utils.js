@@ -35,7 +35,7 @@ function UserUtils() {}
 
 UserUtils.getLoggedUser = function() {
   $.ajaxSetup({ async: false });
-  var user = $.getJSON('/index.php/api/user', {'action': 'get'});
+  var user = $.getJSON('/api/user', {'action': 'get'});
   $.ajaxSetup({ async: true });
   return user;
 }

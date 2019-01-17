@@ -69,7 +69,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
       $('form').submit(function() {
-        $.post("/index.php/api/admins/queries", $(this).serializeFormJSON(), function(result, status) { $('#admin-console-info').html('<pre><code>' + JSON.stringify(result.message,null,4) + '</code></pre>') }).fail(notifyError);
+        $.post("/api/admins/queries", $(this).serializeFormJSON(), function(result, status) { $('#admin-console-info').html('<pre><code>' + JSON.stringify(result.message,null,4) + '</code></pre>') }).fail(notifyError);
         return false;
       });
   });

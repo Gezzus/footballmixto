@@ -17,7 +17,7 @@ function refresh() {
 }
 
 function loadGame(id){
-    return $.getJSON('/index.php/api/events/' + id);
+    return $.getJSON('/api/events/' + id);
 }
 
 function getTotalsByGender(event, genders) {

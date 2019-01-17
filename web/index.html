@@ -43,7 +43,7 @@
                   <!-- <li class="nav-item"> <a class="nav-link" href="#events">Events</a> </li> -->
                   <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Profile</a> </li> -->
                   <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Admin</a> </li> -->
-                  <li class="nav-item"> <a class="nav-link" href="/index.php/api/logout">Logout</a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="/api/logout">Logout</a> </li>
               </ul>
           </div>
       </div>
@@ -162,7 +162,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" onclick="$.post('/index.php/api/events', $('form').serializeFormJSON(), function(result) { location.href = '/web/game.html#' + result.id; }).fail(notifyError); return false;" class="btn btn-primary" data-toggle="modal" data-target="#product_view">Create</button>
+          <button type="submit" onclick="$.post('/api/events', $('form').serializeFormJSON(), function(result) { location.href = '/web/game.html#' + result.id; }).fail(notifyError); return false;" class="btn btn-primary" data-toggle="modal" data-target="#product_view">Create</button>
         </div>
       </div>
     </div>

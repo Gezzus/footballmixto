@@ -22,5 +22,5 @@ function refresh() {
 }
 
 function loadEvents(status){
-    return $.getJSON({ url: "/index.php/api/events", data: { status: status }});
+    return $.getJSON({ url: "/api/events", data: { status: status }});
 }

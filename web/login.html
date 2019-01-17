@@ -33,7 +33,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
         $('form').submit(function() {
-          $.post("/index.php/api/login", $('form').serializeFormJSON(), function(result) { location.href = '/'; }).fail(notifyError);
+          $.post("/api/login", $('form').serializeFormJSON(), function(result) { location.href = '/'; }).fail(notifyError);
           return false;
         });
     });
