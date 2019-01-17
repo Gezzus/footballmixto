@@ -36,16 +36,10 @@ class Game extends PersistentEntity implements Seriarizable {
     public static function create($date, $typeId, $doodleUrl) {
         $gameInfo = GameType::getById($typeId);
         if($gameInfo == null) {
-            return null;
-        } else {
             self::queryWithParameters("INSERT INTO game(date, typeId, doodleurl, status) VALUES(?, ?, ?, 0)", array($date, $typeId, $doodleUrl));
-            $gameId = self::lastInsertId();
-            if($gameId != null){
-                return $gameId;
-            } else {
-                return null;
-            }
+            return Game::getById(self::lastInsertId());
         }
+        return null;
     }
 
     public static function getAllByStatus($status, $limit) {
