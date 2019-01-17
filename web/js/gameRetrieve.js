@@ -6,8 +6,8 @@ function refresh() {
   $.when(loadGame(gameId))
     .then(function(game) { game.totals = getTotalsByGender(game, context.genders); context.game = game }, notifyError)
     .then(UserUtils.getLoggedUser)
-    .then(function(user) { user.isAdmin = true; context.user = user }, notifyError)
-    // .then(function(user) { user.isAdmin = user.roleId == 2; context.user = user }, notifyError)
+    // .then(function(user) { user.isAdmin = true; context.user = user }, notifyError)
+    .then(function(user) { user.isAdmin = user.roleId == 2; context.user = user }, notifyError)
     .then(function() { context.playing = EventUtils.isPlayerAttending(context.user.playerId, context.game) }, notifyError)
     .then(function() {
       var source = document.getElementById("event-template").innerHTML;
