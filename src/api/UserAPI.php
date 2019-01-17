@@ -4,7 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/User.php";
 include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Session.php";
 
 class UserAPI {
-	
+
     public static function register($userName, $password, $nickName, $genderId, $skillId) {
         $user = User::create($userName, $password, $nickName, $genderId, $skillId);
         if(($user != null) && (null != ($user->getId()))) {
@@ -34,6 +34,3 @@ class UserAPI {
 	}
 
 }
-
-
-?>

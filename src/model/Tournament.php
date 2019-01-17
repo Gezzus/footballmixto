@@ -28,5 +28,3 @@ class Tournament extends PersistentEntity implements Seriarizable {
         // TODO: Implement toJson() method.
     }
 }
-
-?>

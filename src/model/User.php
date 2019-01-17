@@ -107,6 +107,3 @@ class User extends PersistentEntity implements Seriarizable {
     }
 
 }
-
-
-?>
