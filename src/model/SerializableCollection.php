@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
+namespace App\Model;
 
 class SerializableCollection implements Seriarizable {
 
@@ -13,20 +13,16 @@ class SerializableCollection implements Seriarizable {
     public function add($element) {
         array_push($this->collection, $element);
     }
-    
+
     public function remove($element) {
         $position = array_search($element, $this->collection);
         unset($this->collection[$position]);
     }
 
-    public function toJson() {
-        return json_encode($this->toArray());
-    }
-
-    public function toArray() {
+    public function jsonSerialize() {
         $return = array();
         foreach ($this->collection as $element) {
-            $return[] = $element->toArray();
+            $return[] = $element->jsonSerialize();
         }
         return $return;
     }

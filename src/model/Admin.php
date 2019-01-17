@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
+namespace App\Model;
 
 class Admin extends PersistentEntity {
     public static function runQuery($context) {

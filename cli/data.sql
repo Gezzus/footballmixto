@@ -1,7 +1,9 @@
-INSERT INTO gameType (type) VALUES ('5 vs 5 (1 field)');
-INSERT INTO gameType (type) VALUES ('5 vs 5 (2 fields)');
-INSERT INTO gameType (type) VALUES ('8 vs 8');
-INSERT INTO gameType (type) VALUES ('9 vs 9');
+use futbolmixto;
+
+INSERT INTO gameType (type, teamsAmount) VALUES ('5 vs 5 (1 field)', 2);
+INSERT INTO gameType (type, teamsAmount) VALUES ('5 vs 5 (2 fields)', 4);
+INSERT INTO gameType (type, teamsAmount) VALUES ('8 vs 8', 2);
+INSERT INTO gameType (type, teamsAmount) VALUES ('9 vs 9', 2);
 
 INSERT INTO gender (name, defaultColor) VALUES ('female', '#FFC0CB');
 INSERT INTO gender (name, defaultColor) VALUES ('male', '#ADD8E6');

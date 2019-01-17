@@ -1,157 +1,96 @@
-/*
- * Specific styles of signin component
- */
-/*
- * General styles
- */
-body, html {
-    height: 100%;
-    background-color: gray;
+body {
+  color: #7a7a7a;
+  background-image: url(../img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
 }
 
-.card-container.card {
-    max-width: 500px;
-    padding: 40px 40px;
-    position: relative;
-    z-index: 2;
+.form-control {
+  background: #fff;
+  box-shadow: none !important;
+  border-color: #e3e3e3;
 }
 
-
-.lgmHeader {
-    color: rgb(104, 145, 162);
-    font-size: 25px;
-    text-align: center;
+.form-control:focus {
+  border-color: #70c5c0;
 }
 
-.btn {
-    font-weight: 700;
-    height: 36px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
+.form-control, .btn {
+  border-radius: 2px;
 }
 
-/*
- * Card component
- */
-.card {
-    background-color: #F7F7F7;
-    /* just in case there no content*/
-    padding: 20px 25px 30px;
-    margin: 50px auto 25px;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+.login-form {
+  margin: auto;
 }
 
-.profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 15px auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+.login-form form {
+  border-radius: 2px;
+  background: #ececec;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 2em;
+  position: relative;
 }
 
-/*
- * Form styles
- */
-.profile-name-card {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0 0;
-    min-height: 1em;
+.login-form .avatar {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: -50px;
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  z-index: 9;
+  background: #70c5c0;
+  padding: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.reauth-email {
-    display: block;
-    color: #404040;
-    line-height: 2;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.login-form .avatar img {
+  width: 100%;
 }
 
-.form-signin #userName,
-.form-signin #password {
-    direction: ltr;
-    height: 44px;
-    font-size: 16px;
+.login-form input[type="checkbox"] {
+  margin-top: 2px;
 }
 
-.form-signin input[type=email],
-.form-signin input[type=password],
-.form-signin input[type=text],
-.form-signin button {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-    z-index: 1;
-    position: relative;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.login-form .btn {
+  font-size: 16px;
+  font-weight: bold;
+  background: #70c5c0;
+  border: none;
+  margin-bottom: 20px;
 }
 
-.form-signin .form-control:focus {
-    border-color: rgb(104, 145, 162);
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+.login-form .btn:hover, .login-form .btn:focus {
+  background: #50b8b3;
+  outline: none !important;
 }
 
-.btn.btn-signin {
-    /*background-color: #4d90fe; */
-    background-color: rgb(104, 145, 162);
-    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
-    padding: 0;
-    font-weight: 700;
-    font-size: 14px;
-    height: 36px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    -o-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -webkit-transition: all 0.218s;
-    transition: all 0.218s;
+.login-form a {
+  color: #fff;
+  text-decoration: underline;
 }
 
-.btn.btn-signin:hover,
-.btn.btn-signin:active,
-.btn.btn-signin:focus {
-    background-color: rgb(12, 97, 33);
+.login-form a:hover {
+  text-decoration: none;
 }
 
-.forgot-password {
-    color: rgb(104, 145, 162);
+.login-form form a {
+  color: #7a7a7a;
+  text-decoration: none;
 }
 
-.forgot-password:hover,
-.forgot-password:active,
-.forgot-password:focus{
-    color: rgb(12, 97, 33);
+.login-form form a:hover {
+  text-decoration: underline;
 }
 
 .ball {
     position: absolute;
-    top: 320px;
-    left: 190px;
-    height: 512px;
-    width: 512px;
-    z-index: 1;
+    /* top: 320px;
+    left: 190px; */
+    /* height: 512px;
+    width: 512px; */
+    z-index: -1;
 }

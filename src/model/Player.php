@@ -1,8 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Game.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/SerializableCollection.php";
+namespace App\Model;
 
 class Player extends PersistentEntity implements Seriarizable {
 
@@ -36,43 +34,35 @@ class Player extends PersistentEntity implements Seriarizable {
     }
 
     public static function getById($playerId){
-        $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE id = ?", array($playerId));
+        $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE id = ?", array(intval($playerId)));
         if($dbPlayer->rowCount() == 1) {
             $playerData = $dbPlayer->fetch();
             return new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
-        } else {
-            return null;
         }
+        return null;
     }
-    
-    public static function get($nickName, $genderId){
+
+    public static function getByNickNameAndGenderId($nickName, $genderId){
         $dbPlayer = self::queryWithParameters("SELECT * FROM player WHERE nickName = ? AND genderId = ?", array($nickName, $genderId));
         if($dbPlayer->rowCount() == 1) {
             $playerData = $dbPlayer->fetch();
             $player = new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
             return $player;
-        } else {
-            return null;
         }
-    }    
-    
+        return null;
+    }
+
     public static function delete($nickName){
         self::queryWithParameters("DELETE FROM player WHERE nickName = ?", array($nickName));
     }
 
-    public function toArray() {
-        $return = [
+    public function jsonSerialize() {
+        return [
             "id" => $this->id,
             "nickName" => $this->nickName,
             "genderId" => $this->genderId,
             "levelId" => $this->levelId
         ];
-        return $return;
-        
-    }
-
-    public function toJson() {
-       return json_encode($this->toArray());
     }
 
     public function getId() {
@@ -98,7 +88,7 @@ class Player extends PersistentEntity implements Seriarizable {
             $game = Game::getById($dbGame['gameId']);
             $this->games->add($game);
         }
-        return $this->games->toArray();
+        return $this->games->jsonSerialize();
     }
 
 }

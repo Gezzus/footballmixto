@@ -1,172 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>LGM Sports</title>
+    <title>LGM Sports - Events</title>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="./css/index.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/base.js"></script>
     <script type="text/javascript" src="js/userSession.js"></script>
     <script type="text/javascript" src="js/eventsRetrieve.js"></script>
     <script type="text/javascript" src="js/gamePlayerActions.js"></script>
-    <script type="text/javascript" src="/web/js/gameCreate.js"></script>
-    
-    <link href="css/events.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/gameCreate.js"></script>
     <script>validateUserSession("logedIn");</script>
     <script>getEvents(0,15,"events")</script>
     <script>getEvents(1,90,"oldEvents")</script>
-</head>
+  </head>
 
-<body>
+<body class="d-flex flex-column h-100">
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">LGM Sports</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto" id="navigationBar">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="events.html">Events</a>
-                    <span class="sr-only">(current)</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<!--<div class="container-sidebar">
+<!--   ignore: url('../img/frontpage.jpeg') center center no-repeat scroll;-->
+<!-- Header with Background Image -->
+<header class="frontpage">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+          <a class="navbar-brand" href="/">LGM Sports</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto" id="navigationBar">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="/">Home
+                          <span class="sr-only">(current)</span>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="events.html">Events</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+</header>
 
-</div>-->
-
-<div class="container">
+<main role="main">
+  <div class="container">
     <!-- Page Content -->
     <!--<div class="container-body">-->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#product_view">
-        Create new event &raquo;
-    </button>
-
-    <div class="row">
-        <div id="error">
-
-        </div>
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <div class="border-bottom border-gray d-flex justify-content-between align-items-center w-100">
+        <h4 class="pb-2 mb-0 ">Incoming Events</h4>
+        <small>
+          <a href="#" data-toggle="modal" data-target="#product_view">Create new</a>
+        </small>
+      </div>
+      <div id="events"></div>
     </div>
-    <div class="row">
-        <div class="col-sm">
-            <h2 class="mt-4">All incoming events</h2>
-            <div class="row" id="events">
-
-            </div>
-
-        </div>
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <div class="border-bottom border-gray d-flex justify-content-between align-items-center w-100">
+        <h4 class="pb-2 mb-0 ">Past Events</h4>
+      </div>
+      <div id="oldEvents"></div>
     </div>
 
-    <div class="row">
-        <div class="col-sm">
-            <h2 class="mt-4">Past events</h2>
-            <div class="row">
-                    <ul class="list-group" id="oldEvents">
-
-                    </ul>
-
-            </div>
-
-        </div>
-    </div>
-    <!--<div class="col-1-sm" style="float:right">
-
-
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Football 5 vs 5 (2 fields)
-                <span class="badge badge-primary badge-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Football 5 vs 5 (1 field)
-                <span class="badge badge-primary badge-pill">2</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Tennis 2 vs 2
-                <span class="badge badge-primary badge-pill">1</span>
-            </li>
-        </ul>
-
-    </div> -->
-</div>
-<!--</div>-->
-<!-- /.row -->
-
-
+  </div>
+</main>
 <!-- Footer -->
-<footer class="py-5 bg-dark">
+<footer class="footer navbar-fixed-bottom mt-auto py-3 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white">Made with ♥ by a bunch of guys.</p>
     </div>
     <!-- /.container -->
 </footer>
-
 </body>
+
+<script id="event-template" type="text/x-handlebars-template">
+  <div class="media text-muted pt-3">
+    <img class="bd-placeholder-img mr-2 rounded" src="{{img}}">
+    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <strong class="text-gray-dark">{{type}}</strong>
+        <span>
+          {{#if pending}}
+            {{#unless playing}}
+          <a href="#" onclick='addSelfPlayer({{id}})'>Join</a>
+          |
+            {{/unless}}
+          {{/if}}
+          <a href="game.html#{{id}}">Details</a>
+        </span>
+      </div>
+      <span class="d-block">{{date}}</span>{{#if played}}<span class="badge badge-primary">Played</span>{{/if}}
+    </div>
+  </div>
+</script>
 
 
 <div class="modal fade product_view" id="product_view">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Create a new event</h3>
-            </div>
-            <div class="modal-body">
-
-                <div class="row">
-                    <div class="col-md-12 product_content">
-                        <div class="col">
-                        <label class="">Type</label>
-                        <select class="form-control" id="newTypeId">
-                            <option value="2">Football - 5 vs 5 (2 fields)</option>
-                            <option value="1">Football - 5 vs 5 (1 field)</option>
-                            <option value="3">Tennis - 1 vs 1</option>
-                            <option value="4">Tennis - 2 vs 2</option>
-                        </select>
-                        </div>
-                        <div class="col">
-                            <label class="">Date</label>
-                            <input class="form-control" type="date" id="newDate">
-                        </div>
-                        <div class="col">
-                            <label class="">Time</label>
-                            <input class="form-control" type="time" id="newTime">
-                        </div>
-                        <div class="col">
-                            <button onClick="prepareGame()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
-                                Create
-                            </button>
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view">
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                </div>
-            </div>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Event</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body">
+          <form id="createGame">
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Type:</label>
+              <select class="form-control" name="typeId">
+                  <option value="2">Football - 5 vs 5 (2 fields)</option>
+                  <option value="1">Football - 5 vs 5 (1 field)</option>
+                  <option value="3">Tennis - 1 vs 1</option>
+                  <option value="4">Tennis - 2 vs 2</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Date:</label>
+              <input class="form-control" type="date" name="date" required="required">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Time:</label>
+              <input class="form-control" type="time" name="time" required="required">
+            </div>
+            <input type="hidden" name="action" value="createGame">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" onclick="$('form#createGame').submit();" class="btn btn-primary" data-toggle="modal" data-target="#product_view">Create</button>
+        </div>
+      </div>
     </div>
 </div>
-</div>
-
 </html>

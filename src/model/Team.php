@@ -1,7 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/SerializableCollection.php";
+namespace App\Model;
 
 class Team extends PersistentEntity implements Seriarizable {
 
@@ -16,17 +15,12 @@ class Team extends PersistentEntity implements Seriarizable {
         $this->players = new SerializableCollection();
     }
 
-    public function toArray() {
-        $return = [
+    public function jsonSerialize() {
+        return [
             "id" => $this->id,
             "name" => $this->name,
-            "players" => $this->players->toArray(),
+            "players" => $this->players->jsonSerialize(),
         ];
-        return $return;
-    }
-    
-    public function toJson() {
-        return json_encode($this->toArray());
     }
 
     public static function createTeam($name,$size) {
@@ -38,17 +32,6 @@ class Team extends PersistentEntity implements Seriarizable {
             return null;
         }
     }
-
-    /*public static function getPlayersData($gameId, $id) {
-        $dbPlayersInfo = self::queryWithParameters("SELECT playerId FROM pickPlayer LEFT JOIN player on teamId=? WHERE gameId= ?",array($id, $gameId));
-        if($dbPlayersInfo->rowCount() != 0) {
-            $playersInfo = $dbPlayersInfo->fetchAll();
-            return $playersInfo;
-        } else {
-            return null;
-        }
-    }*/
-
 
     public static function getById($gameId, $id) {
         $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE id= ?",array($id));
@@ -110,10 +93,10 @@ class Team extends PersistentEntity implements Seriarizable {
             self::queryWithParameters("UPDATE pickPlayer SET teamId=NULL WHERE playerId= ? AND gameId= ? ", array($playerId, $gameId));
             return array(["playerId" => $playerId, "teamId" => $teamId, "gameId" => $gameId]);
         } else {
-            self::queryWithParameters("UPDATE pickPlayer SET teamId=? WHERE playerId= ? AND gameId= ? ", array($teamId, $playerId, $gameId));  
+            self::queryWithParameters("UPDATE pickPlayer SET teamId=? WHERE playerId= ? AND gameId= ? ", array($teamId, $playerId, $gameId));
             return array(["playerId" => $playerId, "teamId" => $teamId, "gameId" => $gameId]);
         }
-        
+
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
+namespace App\Model;
 
 class Tournament extends PersistentEntity implements Seriarizable {
 
@@ -24,10 +24,9 @@ class Tournament extends PersistentEntity implements Seriarizable {
 		return $this;
 	}
 
-    public function toJson() {
+    public function jsonSerialize() {
         // TODO: Implement toJson() method.
     }
 }
 
 ?>
-

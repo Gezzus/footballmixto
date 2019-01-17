@@ -1,93 +1,16 @@
 
 body {
   padding-top: 54px;
-}
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
-}
-
-h1.mt-4{
-  text-shadow: 2px 2px black;
-  margin-top: 1rem!important;
-  font-weight: 400;
-}
-
-
-.btn-primary:hover{
-	background-color:#1ab996!important;
-	border-color:#1ab996!important;
-}
-
-.btn-primary{
-	background-color:#309881!important;
-	border-color:#309881!important;
-    margin:5px;
-}
-
-.badge{
-	background-color:#309881!important;
-	border-color:#309881!important;
-}
-
-.frontpage {
-  background-position-y: -35rem;
-  height: 1vh;
-  min-height: 300px;
-    background-position-y: 38%;
-    background-position-x: 50%;
-    background-image: url(../img/Test.png);
-    -moz-background-size: auto;
-    background-repeat: no-repeat;
-    background-size: auto;
-    -o-background-size: auto;
-
-}
-
-img.card-img-top {
-  height: 200px!important;
-}
-
-.event-list {
-  float:right;
-  position: absolute!important;
-  left:80%;
-}
-.card {
-  height: 100%;
-}
-
-.container-sidebar {
-  float:right;
-}
-
-.container {
-    max-width: 940px;
-    min-width: 940px;
-}
-
-
-.modal {
-    text-align: center;
-    padding: 0!important;
-}
-
-.modal:before {
-    content: '';
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-    margin-right: -4px; /* Adjusts for spacing */
-}
-
-.modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
-}
-
-.modal-content {
-    width:150%;
+  background-image: url(../img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  /* opacity: 0.5; */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }

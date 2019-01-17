@@ -1,9 +1,6 @@
 <?php
 
-
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/PersistentEntity.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Seriarizable.php";
-include_once $_SERVER['DOCUMENT_ROOT'] . "/src/model/Player.php";
+namespace App\Model;
 
 class User extends PersistentEntity implements Seriarizable {
 
@@ -17,7 +14,7 @@ class User extends PersistentEntity implements Seriarizable {
      */
     private $player;
 
-    
+
     public function __construct($id, $userName, $password, $roleId, $player) {
         $this->id = $id;
         $this->userName = $userName;
@@ -80,31 +77,26 @@ class User extends PersistentEntity implements Seriarizable {
         }
     }
 
-    public function toArray() {
-        $return = [
+    public function jsonSerialize() {
+        return [
             "id" => $this->id,
             "userName" => $this->userName,
             "password" => $this->password,
             "player" => $this->player->toJson(),
         ];
-        return $return;
-    }
-
-    public function toJson() {
-        return json_encode($this->toArray());    
     }
 
     public function getUserName() {
         return $this->userName;
     }
-    
+
     public function getId() {
         return $this->id;
     }
-    
+
     public function getRoleId() {
         return $this->roleId;
-    } 
+    }
 
     public function getPlayerId(){
         return $this->player->getId();

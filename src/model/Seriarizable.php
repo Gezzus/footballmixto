@@ -1,10 +1,5 @@
 <?php
 
-interface Seriarizable {
+namespace App\Model;
 
-    public function toJson();
-    public function toArray();
-
-}
-
-?>
+interface Seriarizable extends \JsonSerializable {}
