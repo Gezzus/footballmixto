@@ -14,7 +14,7 @@ class AuthenticationRouter implements Router {
     $app->post('/api/login', function (Request $request, Response $response) {
       $user = \App\Model\User::getUser($request->getParam('userName'), $request->getParam('password'));
       if ($user) {
-        Session::getInstance()->logIn($user->getId());
+        Session::getInstance()->logIn($user, $request->getParam('rememberMe'));
         return $response->withJson(['status' => 'success']);
       }
       throw new \Exception('The credentials provided are incorrect.');
@@ -29,14 +29,14 @@ class AuthenticationRouter implements Router {
         $request->getParam('skillId')
       );
       if ($user && $user->getId()) {
-        Session::getInstance()->logIn($user->getId());
+        Session::getInstance()->logIn($user->getId(), false);
         return $response->withJson([
           "username" => $user->getUserName(),
           "roleId" => $user->getRoleId(),
           "playerId" => $user->getPlayerId()
         ]);
       }
-      throw new \Exception();
+      throw new \Exception('Oops there was an error! Please retry.');
     });
 
   }

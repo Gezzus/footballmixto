@@ -106,4 +106,8 @@ class User extends PersistentEntity implements Seriarizable {
         $this->userName = $userName;
     }
 
+    public function getToken() {
+      return hash('sha256', $this->userName . '&' . $this->password . '&' . $this->roleId . '&' . $this->playerId);
+    }
+
 }

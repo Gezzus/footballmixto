@@ -39,7 +39,6 @@ class Team extends PersistentEntity implements Seriarizable {
             $teamData = $dbTeam->fetch();
             $team = new Team($teamData["id"], $teamData["name"]);
             $team->getPlayers($gameId);
-            #var_dump($team);
             return $team;
         } else {
             return null;

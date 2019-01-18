@@ -42,30 +42,47 @@ class Session {
     }
 
     function __unset($name) {
-        unset( $_SESSION[$name] );
+        unset($_SESSION[$name]);
     }
 
     function destroy() {
         if ($this->sessionState == self::SESSION_STARTED) {
             $this->sessionState = !session_destroy();
-            unset( $_SESSION );
+            setcookie("member_login", '', time() - 3600, '/');
+            setcookie("access_token", '', time() - 3600, '/');
+            unset($_SESSION);
             return !$this->sessionState;
         }
         return false;
     }
 
     function hasLoggedInUser() {
-      return isset($this->userId);
+        $this->attemptAutoLogin();
+        return isset($this->userId);
     }
 
-    function logIn($userId) {
-      $this->userId = $userId;
+    function logIn($user, $useCookie) {
+        setcookie("member_login", '', time() - 3600, '/');
+        setcookie("access_token", '', time() - 3600, '/');
+        $this->userId = $user->getId();
+        if ($useCookie) {
+            $cookie_expiration_time = time() + (30 * 24 * 60 * 60);
+            setcookie("member_login", $user->getId(), $cookie_expiration_time, '/');
+            setcookie("access_token", $user->getToken(), $cookie_expiration_time, '/');
+        }
     }
 
     function getLoggedUser() {
-      if ($this->hasLoggedInUser()) {
-        return \App\Model\User::getById($this->userId);
-      }
-      return null;
+        if ($this->hasLoggedInUser()) {
+            return \App\Model\User::getById($this->userId);
+        }
+        return null;
+    }
+
+    private function attemptAutoLogin() {
+         $user = \App\Model\User::getById($_COOKIE['member_login']);
+         if ($user && $user->getToken() === $_COOKIE['access_token']) {
+            $this->logIn($user, true);
+         }
     }
 }
