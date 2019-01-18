@@ -4,6 +4,7 @@ function refresh() {
   var context = {};
   $.when(loadEvents(0))
     .then(function(events) { context.events = events }, notifyError)
+    .then($.when(loadEvents(1)).then(function(pastEvents) { context.pastEvents = pastEvents }, notifyError))
     .then(UserUtils.getLoggedUser)
     // .then(function(user) { user.isAdmin = true; context.user = user }, notifyError)
     .then(function(user) { user.isAdmin = user.roleId == 2; context.user = user }, notifyError)
@@ -19,8 +20,4 @@ function refresh() {
       var template = Handlebars.compile(source);
       $('#body').html(template(context));
     });
-}
-
-function loadEvents(status){
-    return $.getJSON({ url: "/api/events", data: { status: status }});
 }

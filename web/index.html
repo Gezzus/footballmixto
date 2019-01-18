@@ -20,8 +20,8 @@
     <!-- Custom styles for this template -->
     <script type="text/javascript" src="/web/js/Utils.js"></script>
     <script type="text/javascript" src="/web/js/base.js"></script>
-    <script type="text/javascript" src="/web/js/eventsRetrieve.js"></script>
-    <script type="text/javascript" src="/web/js/gamePlayerActions.js"></script>
+    <script type="text/javascript" src="/web/js/actions.js"></script>
+    <script type="text/javascript" src="/web/js/index.js"></script>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -39,8 +39,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto" id="navigationBar">
-                  <li class="nav-item"> <a class="nav-link" href="#">Home </a> </li>
-                  <!-- <li class="nav-item"> <a class="nav-link" href="#events">Events</a> </li> -->
+                  <li class="nav-item active"> <a class="nav-link" href="/web/index.html">Home </a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="/web/events.html">Events</a> </li>
                   <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Profile</a> </li> -->
                   <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Admin</a> </li> -->
                   <li class="nav-item"> <a class="nav-link" href="/api/logout">Logout</a> </li>
@@ -81,18 +81,15 @@
       <div>
         {{#each events}}
         <div class="media text-muted pt-3">
-          <img class="bd-placeholder-img mr-2 rounded" src="{{img}}">
-          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+          <div class="media-body pb-3 mb-0 lh-125 border-bottom border-gray">
             <div class="d-flex justify-content-between align-items-center w-100">
-              <strong class="text-gray-dark"><a href="game.html#{{id}}">{{type.name}}</a></strong>
+              <span class="text-gray-dark"><a href="game.html#{{id}}">{{type.name}}</a></span>
               <span>
                 {{#if playing}}
                 <a href="#" onclick="removeSelfPlayer({{id}}).then(refresh).fail(notifyError); return false;">Leave</a>
                 {{else}}
                 <a href="#" onclick="addSelfPlayer({{id}}).then(function(result) { location.href = '/web/game.html#' + result.id; }).fail(notifyError); return false;">Join</a>
                 {{/if}}
-                |
-                <a href="game.html#{{id}}">Details</a>
               </span>
             </div>
             <span class="d-block">{{date}}</span>
@@ -158,7 +155,6 @@
               <label for="message-text" class="col-form-label">Time:</label>
               <input class="form-control" type="time" name="time" required="required" value="19:00">
             </div>
-            <input type="hidden" name="action" value="createGame">
           </form>
         </div>
         <div class="modal-footer">

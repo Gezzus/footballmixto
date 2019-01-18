@@ -6,25 +6,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>LGM Sports - Events</title>
+    <title>LGM Sports - Home</title>
     <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="./css/index.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" ></script>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <link href="/web/css/index.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <script type="text/javascript" src="js/base.js"></script>
-    <script type="text/javascript" src="js/userSession.js"></script>
-    <script type="text/javascript" src="js/eventsRetrieve.js"></script>
-    <script type="text/javascript" src="js/gamePlayerActions.js"></script>
-    <script type="text/javascript" src="js/gameCreate.js"></script>
-    <script>validateUserSession("logedIn");</script>
-    <script>getEvents(0,15,"events")</script>
-    <script>getEvents(1,90,"oldEvents")</script>
-  </head>
+    <script type="text/javascript" src="/web/js/Utils.js"></script>
+    <script type="text/javascript" src="/web/js/base.js"></script>
+    <script type="text/javascript" src="/web/js/actions.js"></script>
+    <script type="text/javascript" src="/web/js/events.js"></script>
+</head>
 
 <body class="d-flex flex-column h-100">
 
@@ -41,41 +39,26 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto" id="navigationBar">
-                  <li class="nav-item active">
-                      <a class="nav-link" href="/">Home
-                          <span class="sr-only">(current)</span>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="events.html">Events</a>
-                  </li>
+                  <li class="nav-item"> <a class="nav-link" href="/web/index.html">Home </a> </li>
+                  <li class="nav-item active"> <a class="nav-link" href="/web/events.html">Events</a> </li>
+                  <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Profile</a> </li> -->
+                  <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Admin</a> </li> -->
+                  <li class="nav-item"> <a class="nav-link" href="/api/logout">Logout</a> </li>
               </ul>
           </div>
       </div>
   </nav>
 </header>
 
+<!--<div class="container-sidebar">
+
+</div>-->
 <main role="main">
   <div class="container">
     <!-- Page Content -->
-    <!--<div class="container-body">-->
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
-      <div class="border-bottom border-gray d-flex justify-content-between align-items-center w-100">
-        <h4 class="pb-2 mb-0 ">Incoming Events</h4>
-        <small>
-          <a href="#" data-toggle="modal" data-target="#product_view">Create new</a>
-        </small>
-      </div>
-      <div id="events"></div>
-    </div>
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
-      <div class="border-bottom border-gray d-flex justify-content-between align-items-center w-100">
-        <h4 class="pb-2 mb-0 ">Past Events</h4>
-      </div>
-      <div id="oldEvents"></div>
-    </div>
+    <div id="body"></div>
 
-  </div>
+
 </main>
 <!-- Footer -->
 <footer class="footer navbar-fixed-bottom mt-auto py-3 bg-dark">
@@ -86,63 +69,44 @@
 </footer>
 </body>
 
-<script id="event-template" type="text/x-handlebars-template">
-  <div class="media text-muted pt-3">
-    <img class="bd-placeholder-img mr-2 rounded" src="{{img}}">
-    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-      <div class="d-flex justify-content-between align-items-center w-100">
-        <strong class="text-gray-dark">{{type}}</strong>
-        <span>
-          {{#if pending}}
-            {{#unless playing}}
-          <a href="#" onclick='addSelfPlayer({{id}})'>Join</a>
-          |
-            {{/unless}}
-          {{/if}}
-          <a href="game.html#{{id}}">Details</a>
-        </span>
+<script id="home-template" type="text/x-handlebars-template">
+  <div class="row py-3">
+    <div class="col-lg-6 col-sm-12">
+      <div class="card w-100 mb-3">
+        <div class="card-body">
+          <h4 class="card-title">Incoming events</h4>
+          <div>
+            {{#each events}}
+            <div class="pb-2">
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <a href="game.html#{{id}}">{{type.name}}</a><small class="d-block text-muted">{{date}}</small>
+              </div>
+            </div>
+            {{else}}
+            <small class="mt-4" style="color: #95A3B3;"><strong>We couldn't find any events ;(</strong></small>
+            {{/each}}
+          </div>
+        </div>
       </div>
-      <span class="d-block">{{date}}</span>{{#if played}}<span class="badge badge-primary">Played</span>{{/if}}
+    </div>
+    <div class="col-lg-6 col-sm-12">
+      <div class="card w-100 mb-3">
+        <div class="card-body">
+          <h4 class="card-title">Past events</h4>
+          <div>
+            {{#each pastEvents}}
+            <div class="pb-2">
+              <div class="d-flex justify-content-between align-items-center w-100">
+                <a href="game.html#{{id}}">{{type.name}}</a><small class="d-block text-muted">{{date}}</small>
+              </div>
+            </div>
+            {{else}}
+            <small class="mt-4" style="color: #95A3B3;"><strong>We couldn't find any events ;(</strong></small>
+            {{/each}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </script>
-
-
-<div class="modal fade product_view" id="product_view">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New Event</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="createGame">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Type:</label>
-              <select class="form-control" name="typeId">
-                  <option value="2">Football - 5 vs 5 (2 fields)</option>
-                  <option value="1">Football - 5 vs 5 (1 field)</option>
-                  <option value="3">Tennis - 1 vs 1</option>
-                  <option value="4">Tennis - 2 vs 2</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Date:</label>
-              <input class="form-control" type="date" name="date" required="required">
-            </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Time:</label>
-              <input class="form-control" type="time" name="time" required="required">
-            </div>
-            <input type="hidden" name="action" value="createGame">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" onclick="$('form#createGame').submit();" class="btn btn-primary" data-toggle="modal" data-target="#product_view">Create</button>
-        </div>
-      </div>
-    </div>
-</div>
 </html>

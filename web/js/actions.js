@@ -1,3 +1,10 @@
+/******************************************************************************/
+// Event Actions
+
+function loadEvents(status){
+    return $.getJSON({ url: "/api/events", data: { status: status }});
+}
+
 function addSelfPlayer(eventId) {
   return UserUtils.getLoggedUser().then(function (user) {
     return $.post("/api/events/" + eventId + "/players", {id: user.playerId} );
@@ -25,4 +32,12 @@ function removePlayer(eventId, playerId) {
 
 function transferPlayer(eventId, playerId, teamId) {
     return $.put("/api/events/" + eventId + "/players/" + playerId, { teamId: teamId } );
+}
+
+function changeGameStatus(id, status){
+    return $.put('/api/events/' + id, {status: status});
+}
+
+function deleteGame(id) {
+  return $.delete('/api/events/' + id);
 }

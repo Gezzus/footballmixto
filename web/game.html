@@ -20,36 +20,32 @@
     <!-- Custom styles for this template -->
     <script type="text/javascript" src="/web/js/Utils.js"></script>
     <script type="text/javascript" src="/web/js/base.js"></script>
-    <script type="text/javascript" src="/web/js/gameRetrieve.js"></script>
-    <script type="text/javascript" src="/web/js/userActions.js"></script>
-    <script type="text/javascript" src="/web/js/gamePlayerActions.js"></script>
+    <script type="text/javascript" src="/web/js/actions.js"></script>
+    <script type="text/javascript" src="/web/js/game.js"></script>
 </head>
 
 <body class="d-flex flex-column h-100">
 
-<header class="frontpage">
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-          <a class="navbar-brand" href="/">LGM Sports</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ml-auto" id="navigationBar">
-                  <li class="nav-item active">
-                      <a class="nav-link" href="/">Home
-                          <span class="sr-only">(current)</span>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="events.html">Events</a>
-                  </li>
-              </ul>
-          </div>
-      </div>
-  </nav>
-</header>
+  <header class="frontpage">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">LGM Sports</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" id="navigationBar">
+                    <li class="nav-item"> <a class="nav-link" href="/web/index.html">Home </a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="/web/events.html">Events</a> </li>
+                    <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Profile</a> </li> -->
+                    <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Admin</a> </li> -->
+                    <li class="nav-item"> <a class="nav-link" href="/api/logout">Logout</a> </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  </header>
 <!-- Main -->
 <main role="main">
   <div id="body" class="container my-3">
@@ -127,7 +123,8 @@
       </div>
     </div>
   </div>
-<div class="col-lg-4 col-sm-12 mb-3">
+  {{#ifEq game.status 0}}
+  <div class="col-lg-4 col-sm-12 mb-3">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Add an outsider</h5>
@@ -144,7 +141,7 @@
         <div class="text-center"><a href="#{{game.id}}" onclick="addExtra({{game.id}}, addextra).always(refresh)" class="card-link">Add</a></div>
       </div>
     </div>
-    </div>
+    </div>{{/ifEq}}
     <div class="col-lg-4 col-sm-12 mb-3">
     <div class="card">
       <div class="card-body">
@@ -156,6 +153,7 @@
           {{#ifEq genderId ../id}}
           <li class="list-group-item py-1">
             <span class="align-middle">{{nickName}}</span>
+            {{#ifEq ../../game.status 0}}
             {{#if ../../user.isAdmin}}
             <div class="btn-group btn-group-sm float-right" role="group" aria-label="First group">
               {{#each ../../game.teams}}
@@ -164,6 +162,7 @@
               <button type="button" class="btn btn-secondary" onclick="removePlayer({{../../game.id}},{{id}}).always(refresh)">Remove</button>
             </div>
             {{/if}}
+            {{/ifEq}}
           </li>
           {{/ifEq}}
           {{/each}}
@@ -173,28 +172,34 @@
     </div>
     </div>
 
-<div class="col-lg-4 col-sm-12 mb-3">
+<div class="col-lg-8 col-sm-12 mb-3">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Teams</h5>
-        <ul class="list-group mb-3">
+        <div class="row">
           {{#each game.teams}}
-          <li class="list-group-item py-1 list-group-item-secondary">{{name}}</li>
-          {{#each players}}
-          <li class="list-group-item py-1">
-            <span class="align-middle">{{nickName}}</span>
-            {{#if ../../user.isAdmin}}
-            <div class="btn-group btn-group-sm float-right" role="group" aria-label="First group">
-              {{#each ../../game.teams}}
-              <button type="button" class="btn btn-primary {{#ifEq id ../../id}} disabled {{/ifEq}}" onclick="transferPlayer({{../../../game.id}},{{../id}},{{id}}).always(refresh)">{{id}}</button>
+          <div class="col-lg-6 col-sm-12">
+            <ul class="list-group mb-3">
+              <li class="list-group-item py-1 list-group-item-secondary">{{name}}</li>
+              {{#each players}}
+              <li class="list-group-item py-1">
+                <span class="align-middle">{{nickName}}</span>
+                {{#ifEq ../../game.status 0}}
+                {{#if ../../user.isAdmin}}
+                <div class="btn-group btn-group-sm float-right" role="group" aria-label="First group">
+                  {{#each ../../game.teams}}
+                  <button type="button" class="btn btn-primary {{#ifEq id ../../id}} disabled {{/ifEq}}" onclick="transferPlayer({{../../../game.id}},{{../id}},{{id}}).always(refresh)">{{id}}</button>
+                  {{/each}}
+                  <button type="button" class="btn btn-secondary" onclick="transferPlayer({{../../game.id}},{{id}},null).always(refresh)">Bench</button>
+                </div>
+                {{/if}}
+                {{/ifEq}}
+              </li>
               {{/each}}
-              <button type="button" class="btn btn-secondary" onclick="transferPlayer({{../../game.id}},{{id}},null).always(refresh)">Bench</button>
+              </ul>
             </div>
-            {{/if}}
-          </li>
           {{/each}}
-          {{/each}}
-        </ul>
+        </div>
       </div>
     </div>
     </div>
