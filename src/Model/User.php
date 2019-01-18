@@ -26,19 +26,19 @@ class User extends PersistentEntity implements Seriarizable {
     public static function create($userName, $password, $nickName, $genderId, $skillId) {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ?", array($userName));
         if ($dbUser->rowCount() == 0) {
-            $dbPlayer = Player::get($nickName, $genderId);
+            $dbPlayer = Player::getByNickNameAndGenderId($nickName, $genderId);
             if($dbPlayer != null) {
                 return self::createUserIfNeeded($userName, $password, $dbPlayer->getId());
             } else {
+              try {
                 $player = Player::create($nickName, $genderId, $skillId);
-                if ($player != null) {
-                    return self::createUser($userName, $password, $player->getId());
-                } else {
-                    return null;
-                }
+                return self::createUser($userName, $password, $player->getId());
+              } catch (\Exception $e) {
+                throw new \Exception("Nickname already in use. Please, choose another one!", 1);
+              }
             }
         } else {
-            return null;
+            throw new \Exception("Username already in use. Please, choose another one!", 1);
         }
     }
 
@@ -47,7 +47,7 @@ class User extends PersistentEntity implements Seriarizable {
         if ($userExistsCheck->rowCount() == 0) {
             return self::createUser($userName, $password, $playerId);
         } else {
-            return null;
+            throw new \Exception("Nickname already in use. Please, choose another one!", 1);
         }
     }
 
