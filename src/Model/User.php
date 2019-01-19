@@ -27,13 +27,14 @@ class User extends PersistentEntity implements Seriarizable {
         $dbUser = self::queryWithParameters("SELECT * FROM user WHERE userName = ?", array($userName));
         if ($dbUser->rowCount() == 0) {
             $dbPlayer = Player::getByNickNameAndGenderId($nickName, $genderId);
-            if($dbPlayer != null) {
+            if($dbPlayer) {
                 return self::createUserIfNeeded($userName, $password, $dbPlayer->getId());
             } else {
               try {
                 $player = Player::create($nickName, $genderId, $skillId);
                 return self::createUser($userName, $password, $player->getId());
               } catch (\Exception $e) {
+                Player::delete($nickName);
                 throw new \Exception("Nickname already in use. Please, choose another one!", 1);
               }
             }
