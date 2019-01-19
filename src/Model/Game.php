@@ -36,7 +36,11 @@ class Game extends PersistentEntity implements Seriarizable {
     public static function create($date, $typeId, $doodleUrl) {
         $gameInfo = GameType::getById($typeId);
         if($gameInfo) {
-            self::queryWithParameters("INSERT INTO game(date, typeId, doodleurl, status) VALUES(?, ?, ?, 0)", array($date, $typeId, $doodleUrl));
+            try {
+              self::queryWithParameters("INSERT INTO game(date, typeId, doodleurl, status) VALUES(?, ?, ?, 0)", array($date, $typeId, $doodleUrl));
+            } catch (\Exception $e) {
+              throw new \Exception("There's alreay another game at that time", 1);
+            }
             return Game::getById(self::lastInsertId());
         }
         return null;
@@ -69,6 +73,15 @@ class Game extends PersistentEntity implements Seriarizable {
                 for ($i = 0; $i < count($gamePlayers); $i++) {
                     $player = Player::getById($gamePlayers[$i]["playerId"]);
                     $game->teamless->add($player);
+                }
+            }
+
+            $losersTeam = Team::getById($id, 5);
+            if($losersTeam != null) {
+                $players = $losersTeam->getPlayers();
+                for ($i = 0; $i < $players->size(); $i++) {
+                    $player = $players->get($i);
+                    $game->teamless->add(new Player($player->getId(), $player->getNickName()));
                 }
             }
             return $game;
