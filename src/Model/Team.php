@@ -38,7 +38,7 @@ class Team extends PersistentEntity implements Seriarizable {
         if($dbTeam->rowCount() == 1) {
             $teamData = $dbTeam->fetch();
             $team = new Team($teamData["id"], $teamData["name"]);
-            $team->getPlayers($gameId);
+            $team->loadPlayers($gameId);
             return $team;
         } else {
             return null;
@@ -53,8 +53,11 @@ class Team extends PersistentEntity implements Seriarizable {
         return $this->id;
     }
 
+    public function getPlayers() {
+      return $this->players;
+    }
 
-    public function getPlayers($gameId) {
+    private function loadPlayers($gameId) {
         $dbTeam = $this->queryWithParameters("SELECT * FROM pickPlayer WHERE gameId = ? AND teamId = ?", array($gameId, $this->id));
         if($dbTeam->rowCount() != 0) {
             for ($i=0; $i < $dbTeam->rowCount(); $i++) {
