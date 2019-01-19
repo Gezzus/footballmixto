@@ -112,36 +112,41 @@
         <h5 class="card-title">Current attendants</h5>
         <ul class="list-group mb-3">
           {{#each genders}}
-          <li class="list-group-item py-1">
-            <div class="text-center">{{name}}</div>
-            <div class="progress mb-1">
-              <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{lookup (lookup ../game.totals id) 'percentage'}}%;" aria-valuenow="{{lookup (lookup ../game.totals id) 'count'}}" aria-valuemin="0" aria-valuemax="{{lookup (lookup ../game.totals id) 'max'}}">{{lookup (lookup ../game.totals id) 'count'}}</div>
-            </div>
+          <li class="list-group-item d-flex justify-content-between align-items-center py-2">
+            <span class="text-center">{{name}}</span>
+            <span class="progress w-75">
+              <span class="progress-bar progress-bar-striped" role="progressbar" style="width: {{lookup (lookup ../game.totals id) 'percentage'}}%;" aria-valuenow="{{lookup (lookup ../game.totals id) 'count'}}" aria-valuemin="0" aria-valuemax="{{lookup (lookup ../game.totals id) 'max'}}">{{lookup (lookup ../game.totals id) 'count'}}</span>
+            </span>
           </li>
           {{/each}}
         </ul>
+        {{#if user.isAdmin}}{{#ifEq game.status 1}}{{else}}
+        <div class="text-center"><a href="#{{game.id}}" onclick='preselectPlayers({{json game}}).always(refresh)' class="card-link">Preselect</a></div>
+        {{/ifEq}}{{/if}}
       </div>
     </div>
   </div>
-  {{#ifEq game.status 0}}
   <div class="col-lg-4 col-sm-12 mb-3">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Add an outsider</h5>
         <form id="addextra">
           <div class="form-group">
-            <input class="form-control mb-2" type="text" name="nickName" required="required" placeholder="Nickname">
-            <select class="form-control" name="genderId">
+            <input class="form-control mb-2" type="text" name="nickName" required="required" placeholder="Nickname" {{#ifEq game.status 1}}disabled{{/ifEq}}>
+            <select class="form-control" name="genderId" {{#ifEq game.status 1}}disabled{{/ifEq}}>
                 {{#each genders}}
                 <option value="{{id}}">{{name}}</option>
                 {{/each}}
             </select>
           </div>
         </form>
+        {{#ifEq game.status 1}}
+        {{else}}
         <div class="text-center"><a href="#{{game.id}}" onclick="addExtra({{game.id}}, addextra).always(refresh)" class="card-link">Add</a></div>
+        {{/ifEq}}
       </div>
     </div>
-    </div>{{/ifEq}}
+    </div>
     <div class="col-lg-4 col-sm-12 mb-3">
     <div class="card">
       <div class="card-body">
@@ -166,6 +171,14 @@
           </li>
           {{/ifEq}}
           {{/each}}
+          {{/each}}
+          <li class="list-group-item py-1 list-group-item-secondary">Next week players</li>
+          {{#each game.teamless}}
+          {{#unless genderId}}
+          <li class="list-group-item py-1">
+            <span class="align-middle">{{nickName}}</span>
+          </li>
+          {{/unless}}
           {{/each}}
         </ul>
       </div>

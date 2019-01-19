@@ -46,6 +46,18 @@ Handlebars.registerHelper('ifEq', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
 
+Handlebars.registerHelper('ifGt', function(arg1, arg2, options) {
+  return (arg1 > arg2) ? options.fn(this) : options.inverse(this);
+});
+
+Handlebars.registerHelper('ifLt', function(arg1, arg2, options) {
+  return (arg1 < arg2) ? options.fn(this) : options.inverse(this);
+});
+
 Handlebars.registerHelper('next_day', function(dayINeed) {
   return moment().add(1, 'weeks').isoWeekday(dayINeed).format('Y-MM-DD');
+});
+
+Handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context);
 });
