@@ -21,6 +21,9 @@ class AuthenticationRouter implements Router {
     });
 
     $app->post('/api/signup', function (Request $request, Response $response) {
+      if ($request->getParam('code') !== 'quesitos2019') {
+        throw new \Exception("You need a valide code");
+      }
       $user = \App\Model\User::create(
         $request->getParam('userName'),
         $request->getParam('password'),
