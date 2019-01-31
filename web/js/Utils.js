@@ -36,6 +36,7 @@ function UserUtils() {}
 UserUtils.getLoggedUser = function() {
   $.ajaxSetup({ async: false });
   var user = $.getJSON('/api/user', {'action': 'get'});
+  user.fail(function() { window.location.href = "/"; });
   $.ajaxSetup({ async: true });
   return user;
 }
