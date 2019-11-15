@@ -24,7 +24,7 @@ function addPlayer(eventId, playerId) {
 function preselectPlayers(event) {
   $.ajaxSetup({ async: false });
 
-  var genders = [ {id: 2, name: 'Male'}, {id: 1, name: 'Female'} ];
+  var genders = [ {id: 2, name: 'Hombre'}, {id: 1, name: 'Mujer'} ];
   var totals = getTotalsByGender(event, genders);
   for (var i = 0; i < genders.length; i++) {
     if (totals[genders[i].id].count > totals[genders[i].id].max) {

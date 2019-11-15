@@ -48,10 +48,10 @@ class GameType extends PersistentEntity implements Seriarizable {
 
     private function getName($id) {
       $namesById = [
-        1 => "Football 5 vs 5 (One field)",
-        2 => "Football 5 vs 5 (Two fields)",
-        3 => "Tennis 1 vs 1",
-        4 => "Tennis 2 vs 2"
+        1 => "Fútbol 5 vs 5 (una cancha)",
+        2 => "Fútbol 5 vs 5 (dos cancha)",
+        3 => "Tenis 1 vs 1",
+        4 => "Tenis 2 vs 2"
       ];
       return $namesById[$id];
     }

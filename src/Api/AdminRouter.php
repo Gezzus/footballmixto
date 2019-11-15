@@ -12,7 +12,8 @@ class AdminRouter implements Router {
   function loadRoutes(\Slim\App $app) {
 
     $app->post('/api/admins/queries', function (Request $request, Response $response) {
-      if (\App\Session::getInstance()->getLoggedUser()->getUserName() === 'Alessandro') {
+      $user = \App\Session::getInstance()->getLoggedUser()->getUserName();
+      if ($user === 'Alessandro' || $user === 'pablo.angelani') {
         return $response->withJson(["status" => "success", "message" => \App\Model\Admin::runQuery($request->getParam('context'))]);
       }
       throw new \Exception("Missing user, please sign in again", 1);

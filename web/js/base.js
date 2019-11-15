@@ -61,3 +61,15 @@ Handlebars.registerHelper('next_day', function(dayINeed) {
 Handlebars.registerHelper('json', function(context) {
     return JSON.stringify(context);
 });
+
+Handlebars.registerHelper('sum', function(arg1, arg2) {
+  return Number(arg1) + Number(arg2);
+});
+
+Handlebars.registerHelper('dateFormat', function(date) {
+  moment.updateLocale('en', {
+    weekdaysShort : 'Dom_Lun_Mar_Mie_Jue_Vie_Sab'.split('_'),
+    monthsShort : 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_')}
+  );
+  return moment(date).format("MMM DD - HH:MM") + "hs";
+});

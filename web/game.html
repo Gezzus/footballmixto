@@ -20,10 +20,10 @@
     <link href="/web/css/index.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <script type="text/javascript" src="/web/js/Utils.js?v1"></script>
-    <script type="text/javascript" src="/web/js/base.js?v1"></script>
-    <script type="text/javascript" src="/web/js/actions.js"></script>
-    <script type="text/javascript" src="/web/js/game.js"></script>
+    <script type="text/javascript" src="/web/js/Utils.js?v2"></script>
+    <script type="text/javascript" src="/web/js/base.js?v2"></script>
+    <script type="text/javascript" src="/web/js/actions.js?v2"></script>
+    <script type="text/javascript" src="/web/js/game.js?v2"></script>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -38,11 +38,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto" id="navigationBar">
-                    <li class="nav-item"> <a class="nav-link" href="/web/index.html">Home </a> </li>
-                    <li class="nav-item"> <a class="nav-link" href="/web/events.html">Events</a> </li>
-                    <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Profile</a> </li> -->
-                    <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Admin</a> </li> -->
-                    <li class="nav-item"> <a class="nav-link" href="/api/logout">Logout</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="/web/index.html">Inicio</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="/web/events.html">Eventos</a> </li>
+                    <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Perfil</a> </li> -->
+                    <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Administrador</a> </li> -->
+                    <li class="nav-item"> <a class="nav-link" href="/api/logout">Cerrar sesión</a> </li>
                 </ul>
             </div>
         </div>
@@ -56,85 +56,86 @@
 <!-- Footer -->
 <footer class="footer navbar-fixed-bottom mt-auto py-3 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Made with ♥ by a bunch of guys.</p>
+        <p class="m-0 text-center text-white">Hecho con ♥ por un grupo de personas.</p>
     </div>
     <!-- /.container -->
 </footer>
 </body>
 
 <script id="event-template" type="text/x-handlebars-template">
-  <div class="card w-100 mb-3">
+  <div class="card border-light w-100 mb-3">
+    <h2 class="card-header">{{game.type.name}}</h2>
     <div class="card-body">
-      <h2 class="card-title">{{game.type.name}}</h2>
-      <p class="card-text">{{game.date}}</p>
+      <p class="card-text"><strong>Fecha:</strong> {{dateFormat game.date}}</p>
     </div>
   </div>
   <div class="row mb-3">
       <div class="col-lg-4 col-sm-12 mb-3">
-      <div class="card">
+      <div class="card border-light">
+        <h5 class="card-header">Acciones</h5>
         <div class="card-body">
-          <h5 class="card-title">Actions</h5>
-          <ul class="list-group mb-3">
+          <div class="btn-group-vertical w-100 shadow-sm">
             {{#ifEq game.status 0}}
-            <li class="list-group-item py-2">
+            <a class="btn border text-primary btn-lg"
               {{#if playing}}
-              <div class="text-center"><a href="#{{game.id}}" onclick="removePlayer({{game.id}}, {{user.playerId}}).always(refresh)" class="card-link">Leave</a></div>
+              href="#{{game.id}}" onclick="removePlayer({{game.id}}, {{user.playerId}}).always(refresh)" class="card-link">Abandonar</a>
               {{else}}
-              <div class="text-center"><a href="#{{game.id}}" onclick="addPlayer({{game.id}}, {{user.playerId}}).always(refresh)" class="card-link">Join</a></div>
+              href="#{{game.id}}" onclick="addPlayer({{game.id}}, {{user.playerId}}).always(refresh)" class="card-link">Participar</a>
               {{/if}}
-            </li>
+            </a>
             {{else}}
             {{#unless user.isAdmin}}
-            <li class="list-group-item py-2"> <div class="text-center"><a class="card-link" disabled>No actions available</a></div> </li>
+            <a class="btn border text-primary btn-lg" class="card-link" disabled>Sin acciones disponibles</a>
             {{/unless}}
             {{/ifEq}}
             {{#if user.isAdmin}}
             {{#ifEq game.status 0}}
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 1).always(refresh)" class="card-link">Mark as finished</a></div> </li>
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 3).always(refresh)" class="card-link">Hide event</a></div></li>
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="deleteGame('{{game.id}}').always(function(result) { location.href = '/' })" class="card-link">Delete</a></div></li>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 1).always(refresh)" class="card-link">Finalizar</a>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 3).always(refresh)" class="card-link">Ocultar</a>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="deleteGame('{{game.id}}').always(function(result) { location.href = '/' })" class="card-link">Eliminar</a>
             {{/ifEq}}
             {{#ifEq game.status 1}}
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 0).always(refresh)" class="card-link">Mark as unfinished</a></div> </li>
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 3).always(refresh)" class="card-link">Hide event</a></div></li>
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="deleteGame('{{game.id}}').always(function(result) { location.href = '/' })" class="card-link">Delete</a></div></li>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 0).always(refresh)" class="card-link">Reiniciar</a>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 3).always(refresh)" class="card-link">Ocultar</a>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="deleteGame('{{game.id}}').always(function(result) { location.href = '/' })" class="card-link">Eliminar</a>
             {{/ifEq}}
             {{#ifEq game.status 3}}
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 0).always(refresh)" class="card-link">Reset event</a></div></li>
-            <li class="list-group-item py-2"> <div class="text-center"><a href="#{{game.id}}" onclick="deleteGame('{{game.id}}').always(function(result) { location.href = '/' })" class="card-link">Delete</a></div></li>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 0).always(refresh)" class="card-link">Reiniciar</a>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="deleteGame('{{game.id}}').always(function(result) { location.href = '/' })" class="card-link">Eliminar</a>
             {{/ifEq}}
             {{/if}}
-          </ul>
+          </div>
         </div>
       </div>
       </div>
-<div class="col-lg-4 col-sm-12 mb-3">
-    <div class="card">
+  <div class="{{#if user.isAdmin}}col-lg-4{{else}}col-lg-8{{/if}} col-sm-12 mb-3">
+    <div class="card border-light">
+      <h5 class="card-header">Participantes</h5>
       <div class="card-body">
-        <h5 class="card-title">Current attendants</h5>
-        <ul class="list-group mb-3">
+        <ul class="list-group mb-3 shadow-sm">
           {{#each genders}}
           <li class="list-group-item d-flex justify-content-between align-items-center py-2">
             <span class="text-center">{{name}}</span>
-            <span class="progress w-75">
+            <span class="progress" style="width:{{#if ../user.isAdmin}}72{{else}}80{{/if}}%">
               <span class="progress-bar progress-bar-striped" role="progressbar" style="width: {{lookup (lookup ../game.totals id) 'percentage'}}%;" aria-valuenow="{{lookup (lookup ../game.totals id) 'count'}}" aria-valuemin="0" aria-valuemax="{{lookup (lookup ../game.totals id) 'max'}}">{{lookup (lookup ../game.totals id) 'count'}}</span>
             </span>
           </li>
           {{/each}}
         </ul>
         {{#if user.isAdmin}}{{#ifEq game.status 1}}{{else}}
-        <div class="text-center"><a href="#{{game.id}}" onclick='preselectPlayers({{json game}}).always(refresh)' class="card-link">Preselect</a></div>
+        <a class="btn text-primary btn-lg w-100" href="#{{game.id}}" onclick='preselectPlayers({{json game}}).always(refresh)' class="card-link">Preseleccionar</a>
         {{/ifEq}}{{/if}}
       </div>
     </div>
   </div>
+  {{#if user.isAdmin}}
   <div class="col-lg-4 col-sm-12 mb-3">
-    <div class="card">
+    <div class="card border-light">
+      <h5 class="card-header">Agregar externo</h5>
       <div class="card-body">
-        <h5 class="card-title">Add an outsider</h5>
         <form id="addextra">
           <div class="form-group">
-            <input class="form-control mb-2" type="text" name="nickName" required="required" placeholder="Nickname" {{#ifEq game.status 1}}disabled{{/ifEq}}>
+            <input class="form-control mb-2" type="text" name="nickName" required="required" placeholder="Apodo" {{#ifEq game.status 1}}disabled{{/ifEq}}>
             <select class="form-control" name="genderId" {{#ifEq game.status 1}}disabled{{/ifEq}}>
                 {{#each genders}}
                 <option value="{{id}}">{{name}}</option>
@@ -144,74 +145,84 @@
         </form>
         {{#ifEq game.status 1}}
         {{else}}
-        <div class="text-center"><a href="#{{game.id}}" onclick="addExtra({{game.id}}, addextra).always(refresh)" class="card-link">Add</a></div>
+        <a class="btn text-primary btn-lg w-100" href="#{{game.id}}" onclick="addExtra({{game.id}}, addextra).always(refresh)" class="card-link">Agregar</a>
         {{/ifEq}}
       </div>
     </div>
     </div>
+    {{/if}}
     <div class="col-lg-4 col-sm-12 mb-3">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Bench</h5>
-        <ul class="list-group mb-3">
+      <div class="card border-light">
+        <h5 class="card-header">Banco</h5>
+        <div class="card-body">
           {{#each genders}}
-          <li class="list-group-item py-1 list-group-item-secondary">{{name}}</li>
+          <div class="list-group-item py-2 list-group-item-secondary bg-dark text-light">{{name}}</div>
           {{#each ../game.teamless}}
           {{#ifEq genderId ../id}}
-          <li class="list-group-item py-1">
-            <span class="align-middle">{{nickName}}</span>
-            {{#ifEq ../../game.status 0}}
-            {{#if ../../user.isAdmin}}
-            <div class="btn-group btn-group-sm float-right" role="group" aria-label="First group">
-              {{#each ../../game.teams}}
-              <button type="button" class="btn btn-primary" onclick="transferPlayer({{../../../game.id}},{{../id}},{{id}}).always(refresh)">{{id}}</button>
-              {{/each}}
-              <button type="button" class="btn btn-secondary" onclick="removePlayer({{../../game.id}},{{id}}).always(refresh)">Remove</button>
+          <div class="list-group-item p-0">
+            <div class="input-group">
+              <span class="form-control border-0">{{nickName}}</span>
+              {{#ifEq ../../game.status 0}}
+              {{#if ../../user.isAdmin}}
+              <div class="input-group-prepend" role="group" aria-label="First group">
+                {{#each ../../game.teams}}
+                <button type="button" class="input-group-text border-top-0 border-bottom-0 btn btn-primary" onclick="transferPlayer({{../../../game.id}},{{../id}},{{id}}).always(refresh)">{{id}}</button>
+                {{/each}}
+                <button type="button" class="input-group-text border-top-0 border-bottom-0 btn btn-secondary" onclick="removePlayer({{../../game.id}},{{id}}).always(refresh)">&times;</button>
+              </div>
+              {{/if}}
+              {{/ifEq}}
             </div>
-            {{/if}}
-            {{/ifEq}}
-          </li>
+          </div>
           {{/ifEq}}
           {{/each}}
           {{/each}}
-          <li class="list-group-item py-1 list-group-item-secondary">Next week players</li>
+          <div class="list-group-item py-2 list-group-item-secondary bg-dark text-light">Próxima semana</div>
           {{#each game.teamless}}
           {{#unless genderId}}
-          <li class="list-group-item py-1">
-            <span class="align-middle">{{nickName}}</span>
-          </li>
+            <div class="list-group-item p-0">
+            <div class="input-group">
+              <span class="form-control border-0">{{nickName}}</span>
+              {{#ifEq ../game.status 0}}
+              {{#if ../user.isAdmin}}
+              <div class="input-group-prepend" role="group" aria-label="First group">
+                <button type="button" class="input-group-text border-top-0 border-bottom-0 btn btn-secondary" onclick="transferPlayer({{../game.id}},{{id}},null).always(refresh)">&times;</button>
+              </div>
+              {{/if}}
+              {{/ifEq}}
+            </div>
+            </div>
           {{/unless}}
           {{/each}}
-        </ul>
+        </div>
       </div>
-    </div>
     </div>
 
 <div class="col-lg-8 col-sm-12 mb-3">
-    <div class="card">
+    <div class="card border-light">
+      <h5 class="card-header">Equipos</h5>
       <div class="card-body">
-        <h5 class="card-title">Teams</h5>
         <div class="row">
           {{#each game.teams}}
-          <div class="col-lg-6 col-sm-12">
-            <ul class="list-group mb-3">
-              <li class="list-group-item py-1 list-group-item-secondary">{{name}}</li>
-              {{#each players}}
-              <li class="list-group-item py-1">
-                <span class="align-middle">{{nickName}}</span>
+          <div class="col-lg-6 col-sm-12 mb-3">
+            <div class="list-group-item py-2 list-group-item-secondary bg-dark text-light">Equipo {{sum 1 @index}}</div>
+            {{#each players}}
+            <div class="list-group-item p-0">
+              <div class="input-group">
+                <span class="form-control border-0">{{nickName}}</span>
                 {{#ifEq ../../game.status 0}}
                 {{#if ../../user.isAdmin}}
-                <div class="btn-group btn-group-sm float-right" role="group" aria-label="First group">
+                <div class="input-group-prepend" role="group" aria-label="First group">
                   {{#each ../../game.teams}}
-                  <button type="button" class="btn btn-primary {{#ifEq id ../../id}} disabled {{/ifEq}}" onclick="transferPlayer({{../../../game.id}},{{../id}},{{id}}).always(refresh)">{{id}}</button>
+                  <button type="button" class="input-group-text border-top-0 border-bottom-0 btn btn-primary {{#ifEq id ../../id}}active{{/ifEq}}" onclick="transferPlayer({{../../../game.id}},{{../id}},{{id}}).always(refresh)">{{id}}</button>
                   {{/each}}
-                  <button type="button" class="btn btn-secondary" onclick="transferPlayer({{../../game.id}},{{id}},null).always(refresh)">Bench</button>
+                  <button type="button" class="input-group-text border-top-0 border-bottom-0 btn btn-secondary" onclick="transferPlayer({{../../game.id}},{{id}},null).always(refresh)">&times;</button>
                 </div>
                 {{/if}}
                 {{/ifEq}}
-              </li>
-              {{/each}}
-              </ul>
+              </div>
+            </div>
+            {{/each}}
             </div>
           {{/each}}
         </div>

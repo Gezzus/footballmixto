@@ -20,10 +20,10 @@
     <link href="/web/css/index.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <script type="text/javascript" src="/web/js/Utils.js?v1"></script>
-    <script type="text/javascript" src="/web/js/base.js?v1"></script>
-    <script type="text/javascript" src="/web/js/actions.js"></script>
-    <script type="text/javascript" src="/web/js/events.js"></script>
+    <script type="text/javascript" src="/web/js/Utils.js?v2"></script>
+    <script type="text/javascript" src="/web/js/base.js?v2"></script>
+    <script type="text/javascript" src="/web/js/actions.js?v2"></script>
+    <script type="text/javascript" src="/web/js/events.js?v2"></script>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -41,11 +41,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto" id="navigationBar">
-                  <li class="nav-item"> <a class="nav-link" href="/web/index.html">Home </a> </li>
-                  <li class="nav-item active"> <a class="nav-link" href="/web/events.html">Events</a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="/web/index.html">Inicio </a> </li>
+                  <li class="nav-item active"> <a class="nav-link" href="/web/events.html">Eventos</a> </li>
                   <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Profile</a> </li> -->
                   <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Admin</a> </li> -->
-                  <li class="nav-item"> <a class="nav-link" href="/api/logout">Logout</a> </li>
+                  <li class="nav-item"> <a class="nav-link" href="/api/logout">Cerrar sesión</a> </li>
               </ul>
           </div>
       </div>
@@ -65,7 +65,7 @@
 <!-- Footer -->
 <footer class="footer navbar-fixed-bottom mt-auto py-3 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Made with ♥ by a bunch of guys.</p>
+        <p class="m-0 text-center text-white">Hecho con ♥ por un grupo de personas.</p>
     </div>
     <!-- /.container -->
 </footer>
@@ -74,9 +74,9 @@
 <script id="home-template" type="text/x-handlebars-template">
   <div class="row py-3">
     <div class="col-lg-6 col-sm-12">
-      <div class="card w-100 mb-3">
+      <div class="card bg-light w-100 mb-3">
         <div class="card-body">
-          <h4 class="card-title">Incoming events</h4>
+          <h4 class="card-title">Próximos eventos</h4>
           <div>
             {{#each events}}
             <div class="pb-2">
@@ -92,9 +92,9 @@
       </div>
     </div>
     <div class="col-lg-6 col-sm-12">
-      <div class="card w-100 mb-3">
+      <div class="card bg-light w-100 mb-3">
         <div class="card-body">
-          <h4 class="card-title">Past events</h4>
+          <h4 class="card-title">Eventos pasados</h4>
           <div>
             {{#each pastEvents}}
             <div class="pb-2">

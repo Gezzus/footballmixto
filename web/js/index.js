@@ -17,5 +17,13 @@ function refresh() {
       var source = document.getElementById("home-template").innerHTML;
       var template = Handlebars.compile(source);
       $('#body').html(template(context));
+      var currentSlide = Math.floor(Math.random() * ($('.carousel-item').length - 1 + 1));
+      $('.carousel-item').each(function(index){
+        if (currentSlide == index) {
+          $(this).addClass('active');
+        } else {
+          $(this).removeClass('active');
+        }
+      });
     });
 }

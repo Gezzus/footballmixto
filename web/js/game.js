@@ -2,7 +2,7 @@ $(document).ready(function() { refresh(); });
 
 function refresh() {
   var gameId = location.hash.substr(1);
-  var context = { genders: [ {id: 2, name: 'Male'}, {id: 1, name: 'Female'} ] };
+  var context = { genders: [ {id: 2, name: 'Hombres'}, {id: 1, name: 'Mujeres'} ] };
   $.when(loadGame(gameId))
     .then(function(game) { game.totals = getTotalsByGender(game, context.genders); context.game = game }, notifyError)
     .then(UserUtils.getLoggedUser)
