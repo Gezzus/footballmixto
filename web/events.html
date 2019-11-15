@@ -41,10 +41,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ml-auto" id="navigationBar">
-                  <li class="nav-item"> <a class="nav-link" href="/web/index.html">Inicio </a> </li>
-                  <li class="nav-item active"> <a class="nav-link" href="/web/events.html">Eventos</a> </li>
-                  <!-- <li class="nav-item"> <a class="nav-link" href="#profile">Profile</a> </li> -->
-                  <!-- <li class="nav-item"> <a class="nav-link" href="#admin">Admin</a> </li> -->
+                  <li class="nav-item"> <a class="nav-link" href="/web/home">Inicio</a></li>
+                  <li class="nav-item active"> <a class="nav-link" href="/web/events">Eventos</a> </li>
                   <li class="nav-item"> <a class="nav-link" href="/api/logout">Cerrar sesión</a> </li>
               </ul>
           </div>
@@ -81,7 +79,7 @@
             {{#each events}}
             <div class="pb-2">
               <div class="d-flex justify-content-between align-items-center w-100">
-                <a href="game.html#{{id}}">{{type.name}}</a><small class="d-block text-muted">{{date}}</small>
+                <a href="game#{{id}}">{{type.name}}</a><small class="d-block text-muted">{{date}}</small>
               </div>
             </div>
             {{else}}
@@ -99,7 +97,7 @@
             {{#each pastEvents}}
             <div class="pb-2">
               <div class="d-flex justify-content-between align-items-center w-100">
-                <a href="game.html#{{id}}">{{type.name}}</a><small class="d-block text-muted">{{date}}</small>
+                <a href="game#{{id}}">{{type.name}}</a><small class="d-block text-muted">{{date}}</small>
               </div>
             </div>
             {{else}}
