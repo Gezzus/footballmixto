@@ -13,6 +13,10 @@ function refresh() {
         event.playing = EventUtils.isPlayerAttending(context.user.playerId, event);
       }
     }, notifyError)
+    .then(loadInmunities)
+    .then(function(inmunities) {
+      context.inmunities = inmunities;
+    })
     .then(function() {
       var source = document.getElementById("home-template").innerHTML;
       var template = Handlebars.compile(source);

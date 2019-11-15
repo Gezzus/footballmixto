@@ -44,6 +44,7 @@ CREATE TABLE player (
     id INT NOT NULL AUTO_INCREMENT,
     nickName VARCHAR(191) DEFAULT NULL,
     genderId INT DEFAULT NULL,
+    hasInmunity TINYINT DEFAULT 0,
     levelId INT DEFAULT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (genderId) REFERENCES gender(id),

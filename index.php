@@ -98,6 +98,7 @@ $app->get('/api/logout', function (Request $request, Response $response) {
 
 // API Authentication
 (new \App\Api\AuthenticationRouter())->loadRoutes($app);
+(new \App\Api\PlayerRouter())->loadRoutes($app);
 (new \App\Api\UserRouter())->loadRoutes($app);
 (new \App\Api\EventRouter())->loadRoutes($app);
 (new \App\Api\AdminRouter())->loadRoutes($app);

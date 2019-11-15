@@ -12,6 +12,9 @@ class UserRouter implements Router {
   function loadRoutes(\Slim\App $app) {
 
     $app->get('/api/user', function (Request $request, Response $response) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       if($user = \App\Model\User::getById(Session::getInstance()->userId)) {
         return $response->withJson([
           "username" => $user->getUserName(),

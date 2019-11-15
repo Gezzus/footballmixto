@@ -88,7 +88,7 @@
             {{/ifEq}}
             {{#if user.isAdmin}}
             {{#ifEq game.status 0}}
-            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 1).always(refresh)" class="card-link">Finalizar</a>
+            <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="endGame({{json game}}).always(refresh)" class="card-link">Finalizar</a>
             <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="changeGameStatus('{{game.id}}', 3).always(refresh)" class="card-link">Ocultar</a>
             <a class="btn border text-primary btn-lg" href="#{{game.id}}" onclick="deleteGame('{{game.id}}').always(function(result) { location.href = '/' })" class="card-link">Eliminar</a>
             {{/ifEq}}
@@ -175,7 +175,7 @@
           {{/ifEq}}
           {{/each}}
           {{/each}}
-          <div class="list-group-item py-2 list-group-item-secondary bg-dark text-light">Próxima semana</div>
+          <div class="list-group-item py-2 list-group-item-secondary bg-dark text-light">Seguí participando</div>
           {{#each game.teamless}}
           {{#unless genderId}}
             <div class="list-group-item p-0">
@@ -184,7 +184,7 @@
               {{#ifEq ../game.status 0}}
               {{#if ../user.isAdmin}}
               <div class="input-group-prepend" role="group" aria-label="First group">
-                <button type="button" class="input-group-text border-top-0 border-bottom-0 btn btn-secondary" onclick="transferPlayer({{../game.id}},{{id}},null).always(refresh)">&times;</button>
+                <button type="button" class="input-group-text border-top-0 border-bottom-0 btn btn-secondary" onclick="removeInmunity({{../game.id}}, {{id}}).always(refresh)">&times;</button>
               </div>
               {{/if}}
               {{/ifEq}}

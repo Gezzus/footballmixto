@@ -25,7 +25,7 @@ class Team extends PersistentEntity implements Seriarizable {
 
     public static function createTeam($name,$size) {
         $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE name = ? AND size = ?", array($name, $size));
-        if($dbTeam->rowCount() == 0) {
+        if ($dbTeam->rowCount() == 0) {
             self::queryWithParameters("INSERT INTO team (name, size) VALUES(?, ?)", array($name, $size));
         return(self::getTeam(self::lastInsertId()));
         } else {
@@ -35,7 +35,7 @@ class Team extends PersistentEntity implements Seriarizable {
 
     public static function getById($gameId, $id) {
         $dbTeam = self::queryWithParameters("SELECT * FROM team WHERE id= ?",array($id));
-        if($dbTeam->rowCount() == 1) {
+        if ($dbTeam->rowCount() == 1) {
             $teamData = $dbTeam->fetch();
             $team = new Team($teamData["id"], $teamData["name"]);
             $team->loadPlayers($gameId);
@@ -59,12 +59,12 @@ class Team extends PersistentEntity implements Seriarizable {
 
     private function loadPlayers($gameId) {
         $dbTeam = $this->queryWithParameters("SELECT * FROM pickPlayer WHERE gameId = ? AND teamId = ?", array($gameId, $this->id));
-        if($dbTeam->rowCount() != 0) {
+        if ($dbTeam->rowCount() != 0) {
             for ($i=0; $i < $dbTeam->rowCount(); $i++) {
                 $teamData = $dbTeam->fetch();
                 $dbPlayer = $this->queryWithParameters("SELECT * FROM player WHERE id = ?", array($teamData["playerId"]));
                 $playerData = $dbPlayer->fetch();
-                $player = new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"]);
+                $player = new Player($playerData["id"], $playerData["nickName"], $playerData["genderId"], $playerData["levelId"], $playerData["hasInmunity"]);
                 $this->players->add($player);
             }
         } else {
@@ -91,7 +91,7 @@ class Team extends PersistentEntity implements Seriarizable {
 
     public static function transferPlayerWithId($playerId, $teamId, $gameId) {
         $player = Player::getById($playerId);
-        if($teamId == null) {
+        if ($teamId == null) {
             self::queryWithParameters("UPDATE pickPlayer SET teamId=NULL WHERE playerId= ? AND gameId= ? ", array($playerId, $gameId));
             return array(["playerId" => $playerId, "teamId" => $teamId, "gameId" => $gameId]);
         } else {

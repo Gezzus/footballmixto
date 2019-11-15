@@ -12,16 +12,25 @@ class EventRouter implements Router {
   function loadRoutes(\Slim\App $app) {
 
     $app->get('/api/events', function (Request $request, Response $response) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $events = \App\Model\Game::getAllByStatus($request->getParam('status'), $request->getParam('amount'));
       return $response->withJson($events);
     });
 
     $app->get('/api/events/{id}', function (Request $request, Response $response, $args) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $event = \App\Model\Game::getById($args['id']);
       return $response->withJson($event);
     });
 
     $app->post('/api/events', function (Request $request, Response $response, $args) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $event = \App\Model\Game::create($request->getParam('date') . ' ' . $request->getParam('time'), $request->getParam('typeId'), '');
       if($event) {
           return $response->withJson($event);
@@ -30,6 +39,9 @@ class EventRouter implements Router {
     });
 
     $app->put('/api/events/{eventId}', function (Request $request, Response $response, $args) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $event = \App\Model\Game::getById($args['eventId']);
       if ($event) {
         $event->putStatus($request->getParam('status'));
@@ -38,6 +50,9 @@ class EventRouter implements Router {
     });
 
     $app->delete('/api/events/{eventId}', function (Request $request, Response $response, $args) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $event = \App\Model\Game::getById($args['eventId']);
       if ($event) {
         $event->delete();
@@ -46,6 +61,9 @@ class EventRouter implements Router {
     });
 
     $app->post('/api/events/{eventId}/players', function (Request $request, Response $response, $args) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $event = \App\Model\Game::getById($args['eventId']);
       $playerId = $request->getParam('id');
       if (!$playerId && $request->getParam('nickName') && $request->getParam('genderId')) {
@@ -62,6 +80,9 @@ class EventRouter implements Router {
     });
 
     $app->put('/api/events/{eventId}/players/{playerId}', function (Request $request, Response $response, $args) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $event = \App\Model\Game::getById($args['eventId']);
       if ($event) {
         $team = $event->getTeam($request->getParam('teamId'));
@@ -71,6 +92,9 @@ class EventRouter implements Router {
     });
 
     $app->delete('/api/events/{eventId}/players/{playerId}', function (Request $request, Response $response, $args) {
+      if (!Session::getInstance()->hasLoggedInUser()) {
+        return $response->withStatus(401);
+      }
       $event = \App\Model\Game::getById($args['eventId']);
       $event->removePlayer($args['playerId']);
       return $response->withJson($event);
