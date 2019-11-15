@@ -71,5 +71,5 @@ Handlebars.registerHelper('dateFormat', function(date) {
     weekdaysShort : 'Dom_Lun_Mar_Mie_Jue_Vie_Sab'.split('_'),
     monthsShort : 'Ene_Feb_Mar_Abr_May_Jun_Jul_Ago_Sep_Oct_Nov_Dic'.split('_')}
   );
-  return moment(date).format("MMM DD - HH:MM") + "hs";
+  return moment(date).format("MMM DD - HH:mm") + "hs";
 });
