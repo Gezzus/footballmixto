@@ -50,7 +50,7 @@ class GameType extends PersistentEntity implements Seriarizable {
       $namesById = [
         1 => "Fútbol 5 vs 5 (una cancha)",
         2 => "Fútbol 5 vs 5 (dos canchas)",
-        10 => "Fútbol 5 vs 5 (trés canchas)",
+        10 => "Fútbol 5 vs 5 (tres canchas)",
         3 => "Tenis 1 vs 1",
         4 => "Tenis 2 vs 2"
       ];
