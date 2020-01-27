@@ -63,12 +63,12 @@ class Game extends PersistentEntity implements Seriarizable {
             $dbGameRow = $dbGame->fetch();
             $gameType = GameType::getById($dbGameRow['typeId']);
             $game = new Game($dbGameRow['id'], $dbGameRow['date'], $gameType, $dbGameRow['status'], $dbGameRow['doodleurl']);
+            $offset = 1;
             for ($i = 0; $i < $gameType->getTeamsAmount(); $i++) {
                 if ($i == 4) {
-                    $i++;
+                    $offset++;
                 }
-                $teams[$i] = Team::getById($id, $i+1);
-                $game->teams->add($teams[$i]);
+                $game->teams->add(Team::getById($id, $i + $offset));
             }
 
             $gamePlayers = self::getGameTeamless($id);
